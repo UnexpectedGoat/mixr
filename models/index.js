@@ -1,3 +1,6 @@
+// TODO: create a model.js
+// TODO: create a pantry.js
+// TODO: create a 
 'use strict';
 
 const fs = require('fs');
