@@ -5,6 +5,8 @@ var router = express.Router();
 
 var db = require("../models");
 
+const axios = require('axios');
+
 const apiTest = {
   "idDrink": "11007",
   "strDrink": "Margarita",
@@ -36,6 +38,18 @@ router.get("/", function(req, res) {
     // res.render("index", hbsObject)
   // });
   res.render("index", apiTest)
+});
+
+router.get("/api/cocktaildb/:query", function(req, res) {
+  //query is ingridient
+  axios.get('https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i='+query)
+  .then(function (response) {
+    res.json(response.data)
+    console.log(response);
+  })
+  .catch(function (error) {
+    throw error
+  })
 });
   // TODO: get cocktails from cocktailDB with axios call
 router.post("/cocktails/create", function(req, res) {
