@@ -1,0 +1,23 @@
+
+video {
+    object-fit: cover;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+  } 
+
+.viewport-header {
+    position: relative;
+    padding-top: 2rem;
+    height: auto;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  
