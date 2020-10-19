@@ -1,20 +1,17 @@
 var express = require("express");
-
-
-var db = require("./models");
-
+var db = require("./models")
 var app = express();
 
 app.use(express.static("public"));
-
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-var exphbs = require("express-handlebars");
+//handlebars
+const handlebars = require("express-handlebars");
 
-app.engine("handlebars", exphbs({
-  defaultLayout: "main"
+app.engine(handlebars({
+  defaultLayout: "index",
+  layoutsDir: `$(_dirname)/views/layouts`,
 }));
 app.set("view engine", "handlebars");
 

@@ -1,3 +1,5 @@
+/node_modules
+/MOCK
 # Logs
 logs
 *.log
