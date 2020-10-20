@@ -19,9 +19,13 @@
   },
   "homepage": "https://github.com/UnexpectedGoat/mixr#readme",
   "dependencies": {
+    "axios": "^0.20.0",
+    "blueimp-file-upload": "^10.31.0",
+    "cloudinary-jquery-file-upload": "^2.11.3",
     "express": "^4.17.1",
     "express-handlebars": "^5.1.0",
     "mysql2": "^2.2.5",
+    "nodemon": "^2.0.6",
     "sequelize": "^6.3.5"
   }
 }
