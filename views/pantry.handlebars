@@ -1,10 +1,16 @@
+{{!-- all styling is far game for this, all placeholder --}}
 <div class="container">
     <div class="row">
         <div class="col s-12">
             <ul class="collection">
+                {{!-- handlebars logic that loops over each obejct in pantry passed in via mixr_controller route /pantry --}}
                 {{#each pantry}}
+                    {{!-- for each item, build an li item --}}
+                    {{!-- will probably need to add an id, that way we can use it to delete later --}}
                     <li class="collection-item">
                         {{ingredient}} 
+                        {{!-- hook this button up with an ajax call that passes in the id to a delete route in mixr --}}
+                        {{!-- used to remove the pantry item from that table --}}
                         <a><i class="material-icons right">delete</i></a>
                     </li>
                 {{/each}}

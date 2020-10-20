@@ -87,7 +87,10 @@ const drinkTest = [{
 // TODO: route for getting drinks in favorites
 // TODO: route for deleting items from pantry
 // TODO: route for creating your own cocktail to favorites
+
+// updated the route to drinks
 router.get("/drinks", function(req, res) {
+  // TODO: will update to either the drink api call, or the findall from our own db
   var hbsObject = {
     drinks: drinkTest
   };
@@ -100,6 +103,7 @@ router.get("/drinks", function(req, res) {
   // });
   res.render("index", hbsObject)
 });
+//sends the dummy pantry data to the pantry view
 router.get("/pantry", function(req, res) {
   var hbsObject = {
     pantry: pantryTest
@@ -107,6 +111,7 @@ router.get("/pantry", function(req, res) {
   res.render("pantry", hbsObject)
 });
 
+//axios call that gets data from cocktailsDB, feel free to change or duplicate for additional calls
 router.get("/api/cocktaildb/:query", function(req, res) {
   //query is ingridient
   axios.get('https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i='+query)
