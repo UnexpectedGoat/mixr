@@ -119,8 +119,8 @@ router.get("/api/cocktaildb/:query", function(req, res) {
   })
 });
   // TODO: get cocktails from cocktailDB with axios call
-router.post("/cocktails/create", function(req, res) {
-  // TODO:saving a cocktail from axios return to favorites
+router.get("/create", function(req, res) {
+  res.render("upload",{key:"value"})
 });
 
 
