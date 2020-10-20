@@ -1,3 +1,27 @@
-{{!-- TODO: The main page is here --}}
-{{!-- Slip in the partial views? --}}
-{{!-- OR hidden based on nav bar? --}}
+<div class="container">
+    <div class="row card-wrapper">
+        {{#each drinks}}
+            <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src={{strDrinkThumb}}>
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">{{strDrink}}<i
+                            class="material-icons right">more_vert</i></span>
+                    <p><a href="#"><i class="material-icons">add</i></a></p>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">{{strDrink}}<i
+                            class="material-icons right">close</i></span>
+                    <ul>
+                        <li>{{strIngredient1}} {{strMeasure1}}</li>
+                        <li>{{strIngredient2}} {{strMeasure2}}</li>
+                        <li>{{strIngredient3}} {{strMeasure3}}</li>
+                        <li>{{strIngredient4}}</li>
+                    </ul>
+                    <p>{{strInstructions}}</p>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>

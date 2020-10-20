@@ -1,1 +1,9 @@
-/* TODO: Style here */
+/* placeholder junk for getting the cards to wrap, I think we need to use the grid */
+.card{
+    max-width: 450px;
+    min-width: 400px;
+}
+/* again, better off using the grid */
+.card-wrapper{
+    justify-content: center;
+}
