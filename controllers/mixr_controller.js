@@ -7,7 +7,7 @@ var db = require("../models");
 
 const axios = require('axios');
 
-const apiTest = [{
+const drinkTest = [{
   "idDrink": "11007",
   "strDrink": "Margarita",
   "strTags": "IBA,ContemporaryClassic",
@@ -60,12 +60,36 @@ const apiTest = [{
       "strMeasure3": "1 oz ",
       }]
 
+  const pantryTest = [
+    {
+      ingredient: "Vodka",
+    },
+    {
+      ingredient: "Gin",
+    },
+    {
+      ingredient: "Club Soda",
+    },
+    {
+      ingredient: "Lemon",
+    },
+    {
+      ingredient: "Lime",
+    },
+    {
+      ingredient: "Bitters",
+    },
+    {
+      ingredient: "Olives",
+    },
+  ];
+
 // TODO: route for getting drinks in favorites
 // TODO: route for deleting items from pantry
 // TODO: route for creating your own cocktail to favorites
-router.get("/", function(req, res) {
+router.get("/drinks", function(req, res) {
   var hbsObject = {
-    drinks: apiTest
+    drinks: drinkTest
   };
   // db.all(data => {
     // Using apiTest variable above for testing. Will swap out with handlebars variable below. as we build things out.
@@ -75,6 +99,12 @@ router.get("/", function(req, res) {
     // res.render("index", hbsObject)
   // });
   res.render("index", hbsObject)
+});
+router.get("/pantry", function(req, res) {
+  var hbsObject = {
+    pantry: pantryTest
+  };
+  res.render("pantry", hbsObject)
 });
 
 router.get("/api/cocktaildb/:query", function(req, res) {
