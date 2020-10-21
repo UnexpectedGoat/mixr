@@ -1,0 +1,66 @@
+[
+    {
+        "model": "CocktailIngredient",
+        "data": {
+            "amount": "2.00",
+            "measurement": "oz",
+            "CocktailId": "1",
+            "IngredientId":"20"
+        }
+    },
+    {
+        "model": "CocktailIngredient",
+        "data": {
+            "amount": "1.00",
+            "measurement":"full",
+            "CocktailId": "1",
+            "IngredientId":"21"
+        }
+    },
+    {
+        "model": "CocktailIngredient",
+        "data": {
+            "amount": "2.00",
+            "measurement":"tsp",
+            "CocktailId": "1",
+            "IngredientId":"34"
+        }
+    },
+    {
+        "model": "CocktailIngredient",
+        "data": {
+            "amount": "3.00",
+            "measurement":"full",
+            "CocktailId": "1",
+            "IngredientId":"24"
+        }
+    },
+    {
+        "model": "CocktailIngredient",
+        "data": {
+            "amount": "2",
+            "measurement":"oz",
+            "CocktailId": "2",
+            "IngredientId":"5"
+        }
+    },
+    {
+        "model": "CocktailIngredient",
+        "data": {
+            "amount": "2",
+            "measurement":"dashes",
+            "CocktailId": "2",
+            "IngredientId":"2"
+        }
+    },
+    {
+        "model": "CocktailIngredient",
+        "data": {
+            "amount": "2",
+            "measurement":"dashes",
+            "CocktailId": "2",
+            "IngredientId":"2"
+        }
+    }
+
+]

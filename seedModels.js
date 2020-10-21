@@ -8,3 +8,6 @@ sequelize_fixtures.loadFile("./fixtures/cocktailSeeds.json", models).then(functi
 sequelize_fixtures.loadFile("./fixtures/ingredientSeeds.json", models).then(function(){
     console.log("success")
 });
+sequelize_fixtures.loadFile("./fixtures/CocktailIngredientSeeds.json", models).then(function(){
+    console.log("success")
+});
