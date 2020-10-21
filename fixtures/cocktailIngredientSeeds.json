@@ -56,15 +56,6 @@
     {
         "model": "CocktailIngredient",
         "data": {
-            "amount": 2.00,
-            "measurement":"dashes",
-            "CocktailId": 2,
-            "IngredientId":2
-        }
-    },
-    {
-        "model": "CocktailIngredient",
-        "data": {
             "amount": 1.00,
             "measurement":"tsp",
             "CocktailId": 2,
@@ -196,15 +187,5 @@
             "CocktailId": 5,
             "IngredientId":7
         }
-    },
-    {
-        "model": "CocktailIngredient",
-        "data": {
-            "amount": 0.50,
-            "measurement":"slice",
-            "CocktailId": 5,
-            "IngredientId":15
-        }
     }
-
 ]
