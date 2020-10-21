@@ -1,0 +1,162 @@
+[
+    {
+        "model": "Cocktail",
+        "data": {
+            "name": "Mojito",
+            "instructions": "Muddle mint leaves with sugar and lime juice. Add a splash of soda water and fill the glass with cracked ice. Pour the rum and top with soda water. Garnish and serve with straw.",
+            "img_url": "https://www.thecocktaildb.com/images/media/drink/3z6xdi1589574603.jpg"
+        }
+    },
+    {
+        "model": "Cocktail",
+        "data": {
+            "name": "Old Fashioned",
+            "instructions": "Place sugar cube in old fashioned glass and saturate with bitters, add a dash of plain water. Muddle until dissolved. Fill the glass with ice cubes and add whiskey. Garnish with orange twist, and a cocktail cherry.",
+            "img_url": "https://www.thecocktaildb.com/images/media/drink/vrwquq1478252802.jpg"
+        }
+    },
+    {
+        "model": "Cocktail",
+        "data": {
+            "name": "Long Island Tea",
+            "instructions": "Combine all ingredients (except cola) and pour over ice in a highball glass. Add the splash of cola for color. Decorate with a slice of lemon and serve.",
+            "img_url": "https://www.thecocktaildb.com/images/media/drink/tppn6i1589574695.jpg"
+        }
+    },
+    {
+        "model": "Cocktail",
+        "data": {
+            "name": "Negroni",
+            "instructions": "Stir into glass over ice, garnish and serve.",
+            "img_url": "https://www.thecocktaildb.com/images/media/drink/qgdu971561574065.jpg"
+        }
+    },
+    {
+        "model": "Cocktail",
+        "data": {
+            "name": "Whiskey Sour",
+            "instructions": "Shake with ice. Strain into chilled glass, garnish and serve. If served 'On the rocks', strain ingredients into old-fashioned glass filled with ice.",
+            "img_url": "https://www.thecocktaildb.com/images/media/drink/hbkfsh1589574990.jpg"
+        }
+    },
+    {
+        "model": "Cocktail",
+        "data": {
+            "name": "Dry Martini",
+            "instructions": "Straight: Pour all ingredients into mixing glass with ice cubes. Stir well. Strain in chilled martini cocktail glass. Squeeze oil from lemon peel onto the drink, or garnish with olive.",
+            "img_url": "https://www.thecocktaildb.com/images/media/drink/6ck9yi1589574317.jpg"
+        }
+    },
+    {
+        "model": "Cocktail",
+        "data": {
+            "name": "Daiquiri",
+            "instructions": "Pour all ingredients into shaker with ice cubes. Shake well. Strain in chilled cocktail glass.",
+            "img_url": "https://www.thecocktaildb.com/images/media/drink/mrz9091589574515.jpg"
+        }
+    },
+    {
+        "model": "Cocktail",
+        "data": {
+            "name": "Margarita",
+            "instructions": "Rub the rim of the glass with the lime slice to make the salt stick to it. Take care to moisten only the outer rim and sprinkle the salt on it. The salt should present to the lips of the imbiber and never mix into the cocktail. Shake the other ingredients with ice, then carefully pour into the glass.",
+            "img_url": "https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg"
+        }
+    },
+    {
+        "model": "Cocktail",
+        "data": {
+            "name": "Manhattan",
+            "instructions": "Stirred over ice, strained into a chilled glass, garnished, and served up.",
+            "img_url": "https://www.thecocktaildb.com/images/media/drink/hz7p4t1589575281.jpg"
+        }
+    },
+    {
+        "model": "Cocktail",
+        "data": {
+            "name": "Moscow Mule",
+            "instructions": "Combine vodka and ginger beer in a highball glass filled with ice. Add lime juice. Stir gently. Garnish.",
+            "img_url": "https://www.thecocktaildb.com/images/media/drink/3pylqc1504370988.jpg"
+        }
+    },
+    {
+        "model": "Cocktail",
+        "data": {
+            "name": "After Dinner Cocktail",
+            "instructions": "Shake all ingredients (except lime wedge) with ice and strain into a cocktail glass. Add the wedge of lime and serve.",
+            "img_url": "https://www.thecocktaildb.com/images/media/drink/vtytxq1483387578.jpg"
+        }
+    },
+    {
+        "model": "Cocktail",
+        "data": {
+            "name": "After Supper Cocktail",
+            "instructions": "Shake all ingredients with ice, strain into a cocktail glass, and serve.",
+            "img_url": "https://www.thecocktaildb.com/images/media/drink/quyxwu1483387610.jpg"
+        }
+    },
+    {
+        "model": "Cocktail",
+        "data": {
+            "name": "Alabama Slammer",
+            "instructions": "Pour all ingredients (except for lemon juice) over ice in a highball glass. Stir, add a dash of lemon juice, and serve.",
+            "img_url": "https://www.thecocktaildb.com/images/media/drink/qtwxwr1483387647.jpg"
+        }
+    },
+    {
+        "model": "Cocktail",
+        "data": {
+            "name": "Alaska Cocktail",
+            "instructions": "Stir all ingredients with ice, strain contents into a cocktail glass. Drop in a twist of lemon and serve.",
+            "img_url": "https://www.thecocktaildb.com/images/media/drink/wsyryt1483387720.jpg"
+        }
+    },
+    {
+        "model": "Cocktail",
+        "data": {
+            "name": "Alexander",
+            "instructions": "Shake all ingredients with ice and strain contents into a cocktail glass. Sprinkle nutmeg on top and serve.",
+            "img_url": "https://www.thecocktaildb.com/images/media/drink/urystu1478253039.jpg"
+        }
+    },
+    {
+        "model": "Cocktail",
+        "data": {
+            "name": "Brandy Alexander",
+            "instructions": "Shake all ingredients (except nutmeg) with ice and strain contents into a cocktail glass. Sprinkle nutmeg on top and serve.",
+            "img_url": "https://www.thecocktaildb.com/images/media/drink/tvqxvr1483387746.jpg"
+        }
+    },
+    {
+        "model": "Cocktail",
+        "data": {
+            "name": "Alfie Cocktail",
+            "instructions": "Combine and shake all ingredients with ice, strain into a cocktail glass, and serve.",
+            "img_url": "https://www.thecocktaildb.com/images/media/drink/ypxsqy1483387829.jpg"
+        }
+    },
+    {
+        "model": "Cocktail",
+        "data": {
+            "name": "Algonquin",
+            "instructions": "Combine and shake all ingredients with ice, strain contents into a cocktail glass, and serve.",
+            "img_url": "https://www.thecocktaildb.com/images/media/drink/uwryxx1483387873.jpg"
+        }
+    },
+    {
+        "model": "Cocktail",
+        "data": {
+            "name": "Allegheny",
+            "instructions": "Shake all ingredients (except lemon peel) with ice and strain into a cocktail glass. Top with the twist of lemon peel and serve.",
+            "img_url": "https://www.thecocktaildb.com/images/media/drink/uwvyts1483387934.jpg"
+        }
+    },
+    {
+        "model": "Cocktail",
+        "data": {
+            "name": "Allies Cocktail",
+            "instructions": "Stir all ingredients with ice, strain contents into a cocktail glass, and serve.",
+            "img_url": "https://www.thecocktaildb.com/images/media/drink/qvprvp1483388104.jpg"
+        }
+    }
+]

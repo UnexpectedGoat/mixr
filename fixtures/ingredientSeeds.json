@@ -1,0 +1,242 @@
+[
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Amaretto"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Angosturabitters"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Apricotbrandy"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Blendedwhiskey"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Bourbon"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Campari"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Cherry"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Coca-Cola"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "CremedeCacao"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "DryVermouth"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Gin"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Gingerale"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Ice"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Kummel"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Lemon"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Lemonjuice"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Lemonpeel"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Lemonvodka"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Lightcream"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Lightrum"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Lime"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Limejuice"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Maraschinocherry"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Mint"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Nutmeg"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Olive"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Orangebitters"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Orangepeel"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Pineapplejuice"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Powderedsugar"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Salt"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Sodawater"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "SouthernComfort"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Sugar"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "SweetVermouth"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Tequila"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Triplesec"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Vodka"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "Water"
+        }
+    },
+    {
+        "model": "Ingredient",
+        "data": {
+            "name": "YellowChartreuse"
+        }
+    }
+]
