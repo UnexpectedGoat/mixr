@@ -1,19 +1,20 @@
 <div class="container">
     <div class="row">
         {{!-- Everything is inside a form currently, I think we can use this to do a post action to our relelvant route in mixr-controller --}}
+        <h3 style="font-size: 2rem; font-weight:bolder"> Let's make a Drink!</h3>
         <form action="" class="col s12">
             {{!-- drink name row --}}
             <div class="row">
                 <div class="input-field col s12 m6 l6">
-                    <input placeholder="drink name" id="drink_name" type="text" class="validate">
-                    <label for="drink_name">Drink name</label>
+                    <input placeholder="Drink name" id="drink_name" type="text" class="validate">
+                    
                 </div>
                 <div class="col s12 m6 l6"></div>
             </div>
             {{!-- photo upload button row --}}
             <div class="row">
                 <div class="col s-12">
-                    <a id="upload_widget" class="waves-effect waves-light btn">Upload Image</a>
+                    <a id="upload_widget" class="waves-effect waves-light btn grey darken-3">Upload Image</a>
                 </div>
             </div>
             {{!-- drink description and instructions row --}}
@@ -43,7 +44,7 @@
             <div class="row">
                 {{!-- Use partials here to add more ingredients https://handlebarsjs.com/guide/partials.html#basic-partials --}}
                 <div class="col s12">
-                    <a id="more-ing" class="btn-floating btn-small waves-effect waves-light red"><i
+                    <a id="more-ing" class="btn-floating btn-small waves-effect waves-light btn grey darken-3"><i
                             class="material-icons">add</i></a>
                 </div>
             </div>

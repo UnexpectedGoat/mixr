@@ -60,26 +60,26 @@ const drinkTest = [{
 }]
 
 const pantryTest = [{
-        ingredient: "Vodka",
-    },
-    {
-        ingredient: "Gin",
-    },
-    {
-        ingredient: "Club Soda",
-    },
-    {
-        ingredient: "Lemon",
-    },
-    {
-        ingredient: "Lime",
-    },
-    {
-        ingredient: "Bitters",
-    },
-    {
-        ingredient: "Olives",
-    },
+    ingredient: "Vodka",
+},
+{
+    ingredient: "Gin",
+},
+{
+    ingredient: "Club Soda",
+},
+{
+    ingredient: "Lemon",
+},
+{
+    ingredient: "Lime",
+},
+{
+    ingredient: "Bitters",
+},
+{
+    ingredient: "Olives",
+},
 ];
 
 // TODO: route for getting drinks in favorites
@@ -87,7 +87,7 @@ const pantryTest = [{
 // TODO: route for creating your own cocktail to favorites
 
 // updated the route to drinks
-router.get("/drinks", function(req, res) {
+router.get("/drinks", function (req, res) {
     // TODO: will update to either the drink api call, or the findall from our own db
     var hbsObject = {
         drinks: drinkTest
@@ -101,92 +101,97 @@ router.get("/drinks", function(req, res) {
     // });
     res.render("index", hbsObject)
 });
+
 //sends the dummy pantry data to the pantry view
-router.get("/pantry", function(req, res) {
+router.get("/pantry", function (req, res) {
     var hbsObject = {
         pantry: pantryTest
     };
     res.render("pantry", hbsObject)
 });
 
-//axios call that gets data from cocktailsDB, feel free to change or duplicate for additional calls
-
-// TODO: Switch this from cocktailDB to our sql database
-router.get("/api/cocktaildb/:query", function(req, res) {
-    //query is ingridient
-    axios.get('https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=' + query)
-        .then(function(response) {
-            res.json(response.data)
-            console.log(response);
-        })
-        .catch(function(error) {
-            throw error
-        })
+// Displays all cocktails that have ingredients matching the indicated ID
+router.get("/api/cocktaildb/:id", function (req, res) {
+    db.Ingredient.findAll({
+        where: {
+            id: req.params.id
+        },
+        include: [db.Cocktail]
+    }).then(cocktails => {
+        res.json(cocktails);
+    })
 });
+
 // TODO: get cocktails from cocktailDB with axios call
-router.get("/create", function(req, res) {
+router.get("/create", function (req, res) {
     res.render("upload", { key: "value" })
 });
 
-router.get("/login", function(req, res) {
+router.get("/login", function (req, res) {
     res.render("login")
 });
 
-router.get("/createaccount", function(req, res) {
+router.get("/createaccount", function (req, res) {
     res.render("createAccount")
 });
 
-//test route for adding drink ingredient  
-router.get("/join/:cocktailId/:ingredientId", function(req, res) {
+// Route for adding drink ingredient  
+router.get("/join/:cocktailId/:ingredientId", function (req, res) {
     db.Cocktail.findOne({
-        where:{
+        where: {
             id: req.params.cocktailId
         }
-    }).then(result=>{
+    }).then(result => {
         console.log(result)
         db.Ingredient.findOne({
-            where:{
+            where: {
                 id: req.params.ingredientId
             }
-        }).then(ingredientResult=>{
+        }).then(ingredientResult => {
             console.log(ingredientResult)
-            result.addIngredient(ingredientResult, {through:{amount:.75}})
+            result.addIngredient(ingredientResult, { through: { amount: .75 } })
             res.json(ingredientResult)
         })
-        
+
     })
-    
+
 });
 
 // Route to update cocktail on User's "My Cocktails" page
 // TODO: Associate this route with particular user ID
-router.put("/cocktails/update/:id", function(req, res) {
+router.put("/cocktails/update/:id", function (req, res) {
     db.Cocktail.update({
         name: req.body.name,
         instructions: req.body.instructions,
         img_url: req.body.img_url
     },
-    {
-        where: {
-            id: req.params.id
+        {
+            where: {
+                id: req.params.id
+            }
         }
-    }
-    ).then(dbCocktail => {
-        res.json("Cocktail Updated")
+    ).then(updatedCocktail => {
+        if (updatedCocktail.changedRows == 0) {
+            return res.status(404).end()
+        } else {
+            res.status(200).end();
+        }
     });
 });
 
-router.delete("/cocktails/delete/:id", function(req, res) {
-    db.Cocktail.destroy(req.params.id, 
-        function(result){
-            if(result.affectedRows==0){
-                return res.status(404).end();
-            }
-            else{
-                res.status(200).end();
-            }
-        })
-    
+// Route to delete selected cocktail when user chooses to do so:
+router.delete("/cocktails/delete/:id", (req, res) => {
+    db.Cocktail.destroy({
+        where: {
+            id: req.params.id
+        }
+    }).then(deletedCocktail => {
+        if (deletedCocktail.affectedRows == 0) {
+            return res.status(404).end();
+        } else {
+            res.status(200).end();
+        }
+    })
 });
 
 module.exports = router;

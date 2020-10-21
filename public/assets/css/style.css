@@ -1,57 +1,36 @@
 /* placeholder junk for getting the cards to wrap, I think we need to use the grid */
-.card{
-    max-width: 450px;
-    min-width: 400px;
-}
+
 /* again, better off using the grid */
-.card-wrapper{
-    justify-content: center;
+.card-wrapper {
+  justify-content: center;
 }
 
 video {
-    object-fit: cover;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    z-index: -1;
-    top: 0;
-    left: 0;
-  } 
-
-.viewport-header {
-    position: relative;
-    padding-top: 2rem;
-    height: auto;
-    margin: 0 auto;
-    width: 100%;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  header, main, footer {
-    padding-left: 300px;
-  }
-
-  @media only screen and (max-width : 992px) {
-    header, main, footer {
-      padding-left: 0;
-    }
-  }
-.nav-wrapper {
-  background-color:	#3a9e3d;
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
 }
+
+.nav-wrapper {
+  background-color: #3a9e3d;
+}
+
 .container {
   display: inline-block;
   cursor: pointer;
 }
 
-.bar1, .bar2, .bar3 {
+.bar1,
+.bar2,
+.bar3 {
   width: 35px;
   height: 5px;
   background-color: white;
-  margin: 6px 0;
+  margin: 10px 0px 0px 0px;
   transition: 0.4s;
 }
 
@@ -60,25 +39,66 @@ video {
   transform: rotate(-45deg) translate(-9px, 6px);
 }
 
-.change .bar2 {opacity: 0;}
+.change .bar2 {
+  opacity: 0;
+}
 
 .change .bar3 {
   -webkit-transform: rotate(45deg) translate(-8px, -8px);
   transform: rotate(45deg) translate(-8px, -8px);
 }
+
 .animation-scroll .box {
   display: inline-block;
   width: 250px;
   height: 250px;
   background-color: var(--sl-color-gray-25);
-}  
+}
+
 h1 p {
   display: inline-block;
   font-weight: bolder;
 }
+
 .box {
- padding: 1rem;
+  padding: 1rem;
 }
+
 .links {
   font-size: var(--sl-font-size-x-large);
+}
+
+.navbar-material .nav-wrapper .brand-logo img {
+  height: 64px;
+  margin-bottom: 10px;
+}
+.bigGreenLogo {
+  margin: 0 auto;
+}
+@media only screen and (max-width: 769px) {
+  .logo {
+    display: none;
+  }
+}
+@media only screen and (min-width:770px) and (max-width:1500px) {
+   .bigGreenLogo img{
+    padding-top: 2rem;
+    display: flex;
+    
+  } 
+  .brand-logo{
+    display: inline-block;
+    left: 25px;
+  }
+}
+@media only screen and (max-width: 992px) {
+
+  header,
+  main,
+  footer {
+    padding-left: 0;
+  }
+}
+.mycolor {
+  color:#424242
 }
