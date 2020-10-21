@@ -133,21 +133,22 @@ router.get("/login", function(req, res) {
 router.get("/createaccount", function(req, res) {
     res.render("createAccount")
 });
+
 //test route for adding drink ingredient  
-router.get("/join", function(req, res) {
+router.get("/join/:cocktailId/:ingredientId", function(req, res) {
     db.Cocktail.findOne({
         where:{
-            id:1
+            id: req.params.cocktailId
         }
     }).then(result=>{
         console.log(result)
         db.Ingredient.findOne({
             where:{
-                id:1
+                id: req.params.ingredientId
             }
         }).then(ingredientResult=>{
             console.log(ingredientResult)
-            result.addIngredient(ingredientResult, {through:{amount:2.0}})
+            result.addIngredient(ingredientResult, {through:{amount:.75}})
             res.json(ingredientResult)
         })
         
