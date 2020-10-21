@@ -2,8 +2,7 @@
     {
         "model": "Ingredient",
         "data": {
-            "name": "Amaretto",
-            "Cocktail": [1, 2]
+            "name": "Amaretto"
         }
     },
     {
