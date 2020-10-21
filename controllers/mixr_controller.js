@@ -110,6 +110,8 @@ router.get("/pantry", function(req, res) {
 });
 
 //axios call that gets data from cocktailsDB, feel free to change or duplicate for additional calls
+
+// TODO: Switch this from cocktailDB to our sql database
 router.get("/api/cocktaildb/:query", function(req, res) {
     //query is ingridient
     axios.get('https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=' + query)
@@ -156,8 +158,22 @@ router.get("/join/:cocktailId/:ingredientId", function(req, res) {
     
 });
 
+// Route to update cocktail on User's "My Cocktails" page
+// TODO: Associate this route with particular user ID
 router.put("/cocktails/update/:id", function(req, res) {
-    //TODO: update a cocktail in favorites
+    db.Cocktail.update({
+        name: req.body.name,
+        instructions: req.body.instructions,
+        img_url: req.body.img_url
+    },
+    {
+        where: {
+            id: req.params.id
+        }
+    }
+    ).then(dbCocktail => {
+        res.json("Cocktail Updated")
+    });
 });
 
 router.delete("/cocktails/delete/:id", function(req, res) {
