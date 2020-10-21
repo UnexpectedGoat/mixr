@@ -177,7 +177,16 @@ router.put("/cocktails/update/:id", function(req, res) {
 });
 
 router.delete("/cocktails/delete/:id", function(req, res) {
-    // TODO: remove cocktail from favorites
+    db.Cocktail.destroy(req.params.id, 
+        function(result){
+            if(result.affectedRows==0){
+                return res.status(404).end();
+            }
+            else{
+                res.status(200).end();
+            }
+        })
+    
 });
 
 module.exports = router;
