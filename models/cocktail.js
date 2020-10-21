@@ -24,8 +24,6 @@ module.exports = function (sequelize, DataTypes) {
     Cocktail.associate = models => {
         Cocktail.belongsToMany(models.Ingredient, {
             through: "CocktailIngredient",
-            // as: "Ingredient",
-            // foreignKey: "Cocktail_id"
         });
     };
 

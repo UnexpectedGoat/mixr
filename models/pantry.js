@@ -12,14 +12,11 @@ module.exports = function (sequelize, DataTypes) {
         });
     };
 
-    // Pantry.associate = models => {
-    //     Pantry.belongsToMany(models.Ingredient, {
-    //         through: "IngredientList",
-    //         as: "Pantry",
-    //         foreignKey: "List_id"
-    //     });
-    // };
-    // See question in ingredients about this configuration
+    Pantry.associate = models => {
+        Pantry.belongsToMany(models.Ingredient, {
+            through: "IngredientList",
+        });
+    };
 
     return Pantry;
 };
