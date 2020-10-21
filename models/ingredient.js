@@ -5,8 +5,8 @@ module.exports = function (sequelize, DataTypes) {
     });
 
     Ingredient.associate = models => {
-        Ingredient.belongsToMany(models.Pantry, {
-            through: "IngredientList"
+        Ingredient.belongsToMany(models.Users, {
+            through: models.Pantry
         });
     };
 

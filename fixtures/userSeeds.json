@@ -1,0 +1,17 @@
+[
+  {
+    "model": "User",
+    "data": {
+      "username": "unexpectedGoat",
+      "password":"123456789"
+    }
+  },
+  {
+    "model": "User",
+    "data": {
+      "username": "Chris",
+      "password":"123456789"
+    }
+  }
+  
+]
