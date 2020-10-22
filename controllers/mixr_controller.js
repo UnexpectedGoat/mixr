@@ -259,6 +259,24 @@ router.get("/pantry", function (req, res) {
 
 });
 // Add a cocktail to a users favorites
+router.delete("/pantry", function (req, res){
+    console.log("Removing assoc")
+    const userid = testUser.id
+    // const userid = req.seesion.user.id
+    console.log(req.body.id)
+    db.Pantry.destroy({
+        where:{
+            userId: userid,
+            ingredientId: req.body.id
+        }
+    }).then(userResult=>{
+        res.status(200).send(`${userid} no longer has ${req.body.id} in their pantry`)
+    }).catch(err =>{
+        res.status(404).send(err)
+    })
+
+   
+})
 router.post("/addcocktail", function (req, res) {
     const userid = testUser.id
     // const userid = req.seesion.user.id
