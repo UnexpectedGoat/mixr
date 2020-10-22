@@ -68,7 +68,6 @@ router.post('/signup', (req, res) => {
         res.status(500).send("server error")
     })
 })
-
 // If user logs out, nuke the req.session
 router.get('/logout', (req, res) => {
     req.session.destroy();
@@ -163,6 +162,21 @@ router.get("/pantry", function (req, res) {
         pantry: pantryTest
     };
     res.render("pantry", hbsObject)
+});
+// Add a cocktail to a users favorites
+router.post("/addcocktail/:cocktailid", function (req, res) {
+    console.log("Route Hit")
+    db.User.findOne({
+        where:{
+            id: req.params.userid
+        }
+    }).then(userResult=>{
+        console.log(userResult)
+        const joinResult = userResult.addCocktail([req.params.cocktailid])
+        res.status(200).send("Association added")
+    }).catch(err =>{
+        res.status(404).send(err)
+    })
 });
 
 // Displays all cocktails that have ingredients matching the indicated ID
