@@ -11,29 +11,29 @@
             <div class="card col s12 m6 l4 push-s1">
                 <div class="card-image waves-effect waves-block waves-light">
                     {{!-- img source field --}}
-                    <img class="activator" src={{strDrinkThumb}}>
+                    <img class="activator" src={{img_url}}>
                 </div>
                 <div class="card-content">
                     {{!-- content of the card --}}
-                    <span class="card-title activator grey-text text-darken-4">{{strDrink}}<i
+                    <span class="card-title activator grey-text text-darken-4">{{name}}<i
                             class="material-icons right">more_vert</i></span>
                     <p><a href="#"><i class="material-icons">add</i></a></p>
                 </div>
                 {{!-- items that get expanded --}}
                 <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">{{strDrink}}<i
+                    <span class="card-title grey-text text-darken-4">{{name}}<i
                             class="material-icons right">close</i></span>
                     {{!-- this section could get a little tricky, we have to assume it's--}}
                     {{!-- possible to have as few as 1 ingridient, and up to 15  --}}
                     {{!-- might be a way to handle this with a #each handlebar method --}}
                     <ul>
-                        <li>{{strIngredient1}} {{strMeasure1}}</li>
-                        <li>{{strIngredient2}} {{strMeasure2}}</li>
-                        <li>{{strIngredient3}} {{strMeasure3}}</li>
-                        <li>{{strIngredient4}}</li>
+                        {{#each Ingredients}}
+                            <li>{{CocktailIngredient.amount}} {{CocktailIngredient.measurement}} {{name}}</li>
+                        {{/each}}
+                        
                     </ul>
                     {{!-- paragraph of the instructions passed in --}}
-                    <p>{{strInstructions}}</p>
+                    <p>{{instructions}}</p>
                 </div>
             </div>
         {{/each}}

@@ -84,6 +84,8 @@ const pantryTest = [{
 // TODO: route for getting drinks in favorites
 // TODO: route for deleting items from pantry
 // TODO: route for creating your own cocktail to favorites
+
+
 // ---------------------------------USER AUTH ROUTES ---------------------------------
 //route for delivering login handlebars, if the user is already
 //need to investigate why we send user object, maybe for autofill?
@@ -106,7 +108,6 @@ router.post('/login', (req, res) => {
             //destroy the req.session for security and send back error
             req.session.destroy();
             return res.status(401).send('incorrect username or password')
-
         } 
         //else if the password in req.body matches the user hash password
         //the has password is created in the user model, and adds salt to plain test
@@ -148,21 +149,92 @@ router.post('/signup', (req, res) => {
     })
 })
 
+// If user logs out, nuke the req.session
+router.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.send('logged out')
+})
+
+
 // ---------------------------------API Routes ---------------------------------
+router.get("/api/cocktail", function (req, res) {
+    db.Cocktail.findAll({
+        include: [db.Ingredient]
+    }).then(result => {
+    res.json(result)
+    }).catch(err =>{
+        res.status(404).send(err)
+    })
+});
+router.get("/api/cocktails/:id", function (req, res) {
+    db.Cocktail.findAll({
+        where:{
+            id:req.params.id
+        },
+        include: [db.Ingredient]
+    }).then(result => {
+    res.json(result)
+    }).catch(err =>{
+        res.status(404).send(err)
+    })
+});
+router.get("/api/user", function (req, res) {
+    db.User.findAll({
+        include: [db.Ingredient]
+    }).then(result => {
+    res.json(result)
+    }).catch(err =>{
+        res.status(404).send(err)
+    })
+});
+router.get("/api/pantries/:userid", function (req, res) {
+    db.User.findOne({
+        where: {
+            id: req.params.userid
+        },
+        include: [db.Ingredient]
+    }).then(result => {
+    res.json(result.Ingredients)
+    }).catch(err =>{
+        res.status(404).send(err)
+    })
+});
+router.get("/api/ingredient", function (req, res) {
+    db.Ingredient.findAll({}).then(result =>{
+        res.json(result)
+    }).catch(err =>{
+        res.status(404).send(err)
+    })
+})
+router.get("/api/ingredients/:id", function (req, res) {
+    db.Ingredient.findAll({
+        where:{
+            id: req.params.id
+        }
+    }).then(result =>{
+        res.json(result)
+    }).catch(err =>{
+        res.status(404).send(err)
+    })
+})
 // updated the route to drinks
-router.get("/drinks", function (req, res) {
+
+router.get("/drinks", (req, res) => {
     // TODO: will update to either the drink api call, or the findall from our own db
-    var hbsObject = {
-        drinks: drinkTest
-    };
-    // db.all(data => {
-    // Using apiTest variable above for testing. Will swap out with handlebars variable below. as we build things out.
-    // const hbsObject = {
-    //   drinks: data
-    // };
-    // res.render("index", hbsObject)
-    // });
-    res.render("index", hbsObject)
+    db.Cocktail.findAll({
+        include: [db.Ingredient]
+    }).then(result => {
+        const cocktailJson = result.map(e => {
+            return e.toJSON()
+        })
+        const hbsObject = {
+            drinks: cocktailJson
+        };
+        // Can change the name of index if it makes more sense later on
+        res.render("index", hbsObject)
+    }).catch(err =>{
+        res.status(404).send(err)
+    })
 });
 
 //sends the dummy pantry data to the pantry view
