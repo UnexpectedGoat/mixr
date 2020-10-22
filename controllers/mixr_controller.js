@@ -3,7 +3,8 @@ var router = express.Router();
 var db = require("../models");
 
 const axios = require('axios');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const { Sequelize } = require("../models");
 
 const testUser = {
     username: "unexpectedGoat",
@@ -31,7 +32,7 @@ router.post('/login', (req, res) => {
             //destroy the req.session for security and send back error
             req.session.destroy();
             return res.status(401).send('incorrect username or password')
-        } 
+        }
         //else if the password in req.body matches the user hash password
         //the has password is created in the user model, and adds salt to plain test
         //bcrypt is the package doing the encryping and allowing us to decode
@@ -83,8 +84,8 @@ router.get("/api/cocktail", function (req, res) {
     db.Cocktail.findAll({
         include: [db.Ingredient]
     }).then(result => {
-    res.json(result)
-    }).catch(err =>{
+        res.json(result)
+    }).catch(err => {
         res.status(404).send(err)
     })
 });
@@ -102,13 +103,13 @@ router.get("/api/mycocktails/:userid", function (req, res) {
 });
 router.get("/api/cocktails/:id", function (req, res) {
     db.Cocktail.findAll({
-        where:{
-            id:req.params.id
+        where: {
+            id: req.params.id
         },
         include: [db.Ingredient]
     }).then(result => {
-    res.json(result)
-    }).catch(err =>{
+        res.json(result)
+    }).catch(err => {
         res.status(404).send(err)
     })
 });
@@ -116,8 +117,8 @@ router.get("/api/user", function (req, res) {
     db.User.findAll({
         include: [db.Ingredient]
     }).then(result => {
-    res.json(result)
-    }).catch(err =>{
+        res.json(result)
+    }).catch(err => {
         res.status(404).send(err)
     })
 });
@@ -128,26 +129,26 @@ router.get("/api/pantries/:userid", function (req, res) {
         },
         include: [db.Ingredient]
     }).then(result => {
-    res.json(result.Ingredients)
-    }).catch(err =>{
+        res.json(result.Ingredients)
+    }).catch(err => {
         res.status(404).send(err)
     })
 });
 router.get("/api/ingredient", function (req, res) {
-    db.Ingredient.findAll({}).then(result =>{
+    db.Ingredient.findAll({}).then(result => {
         res.json(result)
-    }).catch(err =>{
+    }).catch(err => {
         res.status(404).send(err)
     })
 })
 router.get("/api/ingredients/:id", function (req, res) {
     db.Ingredient.findAll({
-        where:{
+        where: {
             id: req.params.id
         }
-    }).then(result =>{
+    }).then(result => {
         res.json(result)
-    }).catch(err =>{
+    }).catch(err => {
         res.status(404).send(err)
     })
 })
@@ -166,7 +167,7 @@ router.get("/cocktails", (req, res) => {
         };
         // Can change the name of index if it makes more sense later on
         res.render("index", hbsObject)
-    }).catch(err =>{
+    }).catch(err => {
         res.status(404).send(err)
     })
 });
@@ -190,6 +191,45 @@ router.get("/mycocktails", (req, res) => {
         res.render("index", hbsObject)
     }).catch(err =>{
         res.status(404).send(err)
+    })
+});
+
+// Displays only the cocktails that the user is able to make based on what's in their pantry NOTE - Will also display cocktails that have no ingredients, which should be none if things are organized correctly in the database, but if you're seeing more show up than expected, check that:
+router.get("/my_cocktails", (req, res) => {
+    db.User.findOne({
+        // TODO: swap in req.session.user.id when ready for deployment
+        where: { id: 1 },
+        include: {
+            model: db.Ingredient
+        }
+    }).then(user => {
+        db.Cocktail.findAll({
+            include: [{
+                model: db.Ingredient
+            }]
+        }).then(async result => {
+            const userJson = user.toJSON()
+
+            let drinksICanMake = [];
+            for (let i = 0; i < result.length; i++) {
+                let canMake = await user.hasIngredients(result[i].Ingredients);
+                if (canMake) {
+                    drinksICanMake.push(result[i]);
+                }
+            }
+            const drinksJson = drinksICanMake.map(drink => {
+                return drink.toJSON()
+            })
+            const hbsObject = {
+                drinks: drinksJson,
+                user: userJson
+            };
+            // Can change the name of index if it makes more sense later on
+            // res.render("index", hbsObject)
+            res.json(hbsObject)
+        }).catch(err => {
+            res.status(404).send(err)
+        })
     })
 });
 
