@@ -1,43 +1,18 @@
 <!-- CREATING ACCOUNT FORM -->
-    <div class="field px-3">
-        <div class="field-body">
-            <div class="field">
-                <p class="control is-expanded has-icons-left">
-                    {{!-- id used in jqery listener --}}
-                    <input id="signup-username" class="input" type="text" placeholder="NAME">
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-user"></i>
-                    </span>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="field px-3">
-        <div class="field-body">
-            <div class="field">
-                <div class="control has-icons-left">
-                    {{!-- id used in jqery listener --}}
-                    <input id="signup-password"class="input is-danger" type="password" placeholder="PASSWORD">
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-lock"></i>
-                    </span>
-                </div>
-                <p class="help is-danger">
-                    This field is required
-                </p>
-            </div>
-        </div>
-    </div>
-    </div>
-
-<!-- BUTTON -->
-    <div class="field-body">
-        <div class="field is-grouped is-grouped-centered">
-            <div class="control">
-               <p class="control">
-            <a id="signup-button" class="waves-effect waves-light btn grey darken-3">CREATE AN ACCOUNT</a> 
-            </div>
-        </div>
-    </div>
+    <div class="loginBox">
+   <img class="greenM" src="assets/images/greenM.png">
+        <form>
+            <p>Username</p>
+            <input id="login-username" type="text" placeholder="Username">
+            <p>Password</p>
+            <input id="login-password" type="password" placeholder="******">
+            
+            <div class="field is-grouped is-grouped-centered">
+    
+    <p class="control">
+      <br>
+      <a href="/signup" class="waves-effect waves-light btn grey darken-3">CREATE AN ACCOUNT</a>
+    </p>
+  </div>
+        </form>
     </div>
