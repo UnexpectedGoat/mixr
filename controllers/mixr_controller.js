@@ -5,7 +5,10 @@ var db = require("../models");
 const axios = require('axios');
 const bcrypt = require('bcrypt')
 
-
+const testUser = {
+    username: "unexpectedGoat",
+    id: 1
+}
 // ---------------------------------USER AUTH ROUTES ---------------------------------
 //route for delivering login handlebars, if the user is already
 //need to investigate why we send user object, maybe for autofill?
@@ -68,7 +71,6 @@ router.post('/signup', (req, res) => {
         res.status(500).send("server error")
     })
 })
-
 // If user logs out, nuke the req.session
 router.get('/logout', (req, res) => {
     req.session.destroy();
@@ -163,6 +165,23 @@ router.get("/pantry", function (req, res) {
         pantry: pantryTest
     };
     res.render("pantry", hbsObject)
+});
+// Add a cocktail to a users favorites
+router.post("/addcocktail", function (req, res) {
+    const userid = testUser.id
+    // const userid = req.seesion.user.id
+    console.log("Route Hit")
+    db.User.findOne({
+        where:{
+            id: userid
+        }
+    }).then(userResult=>{
+        console.log(userResult)
+        userResult.addCocktail([req.body.id])
+        res.status(200).send("Association added")
+    }).catch(err =>{
+        res.status(404).send(err)
+    })
 });
 
 // Displays all cocktails that have ingredients matching the indicated ID

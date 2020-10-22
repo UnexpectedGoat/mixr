@@ -14,17 +14,12 @@ module.exports = function (sequelize, DataTypes) {
     });
 
     Cocktail.associate = models => {
-        Cocktail.belongsTo(models.User, {
-            foreignKey: {
-                allowNull: false
-            }
-        });
-    };
-
-    Cocktail.associate = models => {
         Cocktail.belongsToMany(models.Ingredient, {
             through: models.CocktailIngredient,
         });
+        Cocktail.belongsToMany(models.User, {
+            through: "UserCocktail"
+          });
     };
 
     return Cocktail;
