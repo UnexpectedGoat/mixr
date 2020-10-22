@@ -89,6 +89,18 @@ router.get("/api/cocktail", function (req, res) {
         res.status(404).send(err)
     })
 });
+router.get("/api/mycocktails/:userid", function (req, res) {
+    db.User.findOne({
+        where:{
+            id:req.params.userid
+        },
+        include: [db.Cocktail]
+    }).then(result => {
+    res.json(result)
+    }).catch(err =>{
+        res.status(404).send(err)
+    })
+});
 router.get("/api/cocktails/:id", function (req, res) {
     db.Cocktail.findAll({
         where: {
@@ -142,7 +154,7 @@ router.get("/api/ingredients/:id", function (req, res) {
 })
 // updated the route to drinks
 
-router.get("/drinks", (req, res) => {
+router.get("/cocktails", (req, res) => {
     // TODO: will update to either the drink api call, or the findall from our own db
     db.Cocktail.findAll({
         include: [db.Ingredient]
@@ -156,6 +168,28 @@ router.get("/drinks", (req, res) => {
         // Can change the name of index if it makes more sense later on
         res.render("index", hbsObject)
     }).catch(err => {
+        res.status(404).send(err)
+    })
+});
+router.get("/mycocktails", (req, res) => {
+    const userid = testUser.id
+    // const userid = req.seesion.user.id
+    db.User.findOne({
+        where: {
+            id: userid
+        },
+        include: [db.Cocktail]
+    }).then(result => {
+        console.log(result)
+        const cocktailJson = result.Cocktails.map(e => {
+            return e.toJSON()
+        })
+        const hbsObject = {
+            drinks: cocktailJson
+        };
+        console.log(hbsObject)
+        res.render("index", hbsObject)
+    }).catch(err =>{
         res.status(404).send(err)
     })
 });
@@ -201,10 +235,27 @@ router.get("/my_cocktails", (req, res) => {
 
 //sends the dummy pantry data to the pantry view
 router.get("/pantry", function (req, res) {
-    var hbsObject = {
-        pantry: pantryTest
-    };
-    res.render("pantry", hbsObject)
+    const userid = testUser.id
+    // const userid = req.seesion.user.id
+    db.User.findOne({
+        where: {
+            id: userid
+        },
+        include: [db.Ingredient]
+    }).then(result => {
+        const ingredientJson = result.Ingredients.map(e => {
+            return e.toJSON()
+        })
+        var hbsObject = {
+            pantry: ingredientJson
+        };
+        console.log(hbsObject)
+        res.render("pantry", hbsObject)
+    }).catch(err =>{
+        res.status(404).send(err)
+    })
+    
+    
 });
 // Add a cocktail to a users favorites
 router.post("/addcocktail", function (req, res) {
