@@ -20,26 +20,26 @@ app.use(express.json());
 
 // User session boilerplate, saves the user as logged in as a cookie
 app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-      maxAge: 2 * 60 * 60 * 1000
-  }
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 2 * 60 * 60 * 1000
+    }
 }))
 app.use(routes);
 
 //handlebars
 const exphbs = require("express-handlebars");
 
-app.engine("handlebars", exphbs({defaultLayout: "main",}));
+app.engine("handlebars", exphbs({ defaultLayout: "main", }));
 app.set("view engine", "handlebars");
 
 
 
-db.sequelize.sync({ force: false }).then(function () {
-  app.listen(PORT, function () {
-    // seedModels()
-    console.log("App now listening on port:", PORT);
-  });
+db.sequelize.sync({ force: true }).then(function() {
+    app.listen(PORT, function() {
+        seedModels()
+        console.log("App now listening on port:", PORT);
+    });
 });
