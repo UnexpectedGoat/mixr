@@ -195,7 +195,7 @@ router.get("/mycocktails", (req, res) => {
 });
 
 // Displays only the cocktails that the user is able to make based on what's in their pantry NOTE - Will also display cocktails that have no ingredients, which should be none if things are organized correctly in the database, but if you're seeing more show up than expected, check that:
-router.get("/my_cocktails", (req, res) => {
+router.get("/can_make", (req, res) => {
     db.User.findOne({
         // TODO: swap in req.session.user.id when ready for deployment
         where: { id: 1 },
