@@ -85,7 +85,29 @@ const pantryTest = [{
 // TODO: route for getting drinks in favorites
 // TODO: route for deleting items from pantry
 // TODO: route for creating your own cocktail to favorites
+// ---------------------------------USER AUTH ROUTES ---------------------------------
+router.post('/login', (req, res) => {
+    db.User.findOne({
+        where: { username: req.body.usernam }
+    }).then(user => {
+        //check if user entered password matches db password
+        if (!user) {
+            req.session.destroy();
+            return res.status(401).send('incorrect email or password')
 
+        } else if (bcrypt.compareSync(req.body.password, user.password)) {
+            req.session.user = {
+                email: user.email,
+                id: user.id
+            }
+            return res.redirect("/myprofile")
+        }
+        else {
+            req.session.destroy();
+            return res.status(401).send('incorrect email or password')
+        }
+    })
+// ---------------------------------API Routes ---------------------------------
 // updated the route to drinks
 router.get("/drinks", function (req, res) {
     // TODO: will update to either the drink api call, or the findall from our own db
