@@ -23,7 +23,9 @@ module.exports = function (sequelize, DataTypes) {
   };
 
   User.associate = models => {
-    User.hasOne(models.Pantry)
+    User.belongsToMany(models.Ingredient,{
+      through: models.Pantry,
+  });
   };
   
   User.beforeCreate(function(user){
