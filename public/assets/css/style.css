@@ -63,10 +63,74 @@ h1 p {
   font-size: var(--sl-font-size-x-large);
 }
 
+/* login/signup/upload design */
+.loginBox {
+  position: flex;
+  margin: auto;
+  width: 50%;
+  height: 30%;
+  padding: 40px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, .3);
+}
+
+.greenM {
+  padding-top: 2rem;
+  display: flex;
+  height: 10rem;
+  margin: 0 auto;
+}
+
+.loginBox p {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  color: #fff;
+}
+
+.loginBox input {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.loginBox input[type="text"],
+.loginBox input[type="password"] {
+  border: none;
+  border-bottom: 1px solid #fff;
+  background: transparent;
+  outline: none;
+  height: 40px;
+  color: #fff;
+  font-size: 16px;
+}
+
+:placeholder {
+  color: rgba(255, 255, 255, .5);
+}
+
+.loginBox a {
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
 /* MEDIA */
 @media only screen and (max-width: 769px) {
   .bigGreenLogo img {
     display: none;
+  }
+
+  .loginBox {
+    position: flex;
+    margin: auto;
+    width: 75%;
+    height: 30%;
+    padding: 40px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, .3);
   }
 }
 
@@ -76,7 +140,17 @@ h1 p {
     display: flex;
     height: 20rem;
     margin: 0 auto;
+  }
 
+  .loginBox {
+    position: flex;
+    margin: auto;
+    width: 50%;
+    height: 30%;
+    padding: 40px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, .3);
   }
 
   .brand-logo {

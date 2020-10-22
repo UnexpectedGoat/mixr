@@ -20,14 +20,26 @@
   </div>
 </div>-->
 
-
-  <div class="field is-grouped is-grouped-centered">
-    <p class="control">
+ <div class="loginBox">
+   <img class="greenM" src="assets/images/greenM.png">
+        <form>
+            <p>Username</p>
+            <input id="login-username" type="text" placeholder="Username">
+            <p>Password</p>
+            <input id="login-password" type="password" placeholder="******">
+            
+            <div class="field is-grouped is-grouped-centered">
+    <p class="control"> 
+      <br>
       {{!-- id used in jqery listener --}}
       <a id="login-button" class="waves-effect waves-light btn grey darken-3">LOGIN</a>
       </a>
     </p>
     <p class="control">
+      <br>
       <a href="/signup" class="waves-effect waves-light btn grey darken-3">CREATE AN ACCOUNT</a>
     </p>
   </div>
+        </form>
+    </div>
+  
