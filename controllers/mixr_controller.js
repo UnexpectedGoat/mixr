@@ -189,8 +189,7 @@ router.get("/mycocktails", (req, res) => {
             drinks: cocktailJson
         };
         console.log(hbsObject)
-        // res.render("index", hbsObject)
-        res.json(hbsObject)
+        res.render("index", hbsObject)
     }).catch(err => {
         res.status(404).send(err)
     })
