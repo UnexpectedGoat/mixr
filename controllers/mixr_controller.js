@@ -5,6 +5,7 @@ var router = express.Router();
 var db = require("../models");
 
 const axios = require('axios');
+const bcrypt = require('bcrypt')
 
 const drinkTest = [{
     "idDrink": "11007",
@@ -86,27 +87,34 @@ const pantryTest = [{
 // TODO: route for deleting items from pantry
 // TODO: route for creating your own cocktail to favorites
 // ---------------------------------USER AUTH ROUTES ---------------------------------
+router.get("/login", (req, res) => {
+    res.render("login", { user: req.session.user })
+})
+router.get("/signup", (req, res) => {
+    res.render("signup", { user: req.session.user })
+})
 router.post('/login', (req, res) => {
     db.User.findOne({
-        where: { username: req.body.usernam }
+        where: { username: req.body.username }
     }).then(user => {
         //check if user entered password matches db password
         if (!user) {
             req.session.destroy();
-            return res.status(401).send('incorrect email or password')
+            return res.status(401).send('incorrect username or password')
 
         } else if (bcrypt.compareSync(req.body.password, user.password)) {
             req.session.user = {
-                email: user.email,
+                username: user.userame,
                 id: user.id
             }
-            return res.redirect("/myprofile")
+            return res.redirect("/drinks")
         }
         else {
             req.session.destroy();
-            return res.status(401).send('incorrect email or password')
+            return res.status(401).send('incorrect username or password')
         }
     })
+})
 // ---------------------------------API Routes ---------------------------------
 // updated the route to drinks
 router.get("/drinks", function (req, res) {
@@ -147,14 +155,6 @@ router.get("/api/cocktaildb/:id", function (req, res) {
 // TODO: get cocktails from cocktailDB with axios call
 router.get("/create", function (req, res) {
     res.render("upload", { key: "value" })
-});
-
-router.get("/login", function (req, res) {
-    res.render("login")
-});
-
-router.get("/createaccount", function (req, res) {
-    res.render("createAccount")
 });
 
 // Route for adding drink ingredient  
