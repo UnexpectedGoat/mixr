@@ -11,7 +11,7 @@
                         {{name}} 
                         {{!-- hook this button up with an ajax call that passes in the id to a delete route in mixr --}}
                         {{!-- used to remove the pantry item from that table --}}
-                        <a><i class="material-icons right mycolor">delete</i></a>
+                        <a id={{id}} class="delete-pantry-button"><i class="material-icons right mycolor">delete</i></a>
                     </li>
                 {{/each}}
             </ul>

@@ -203,7 +203,7 @@ router.get("/pantry", function (req, res) {
         },
         include: [db.Ingredient]
     }).then(result => {
-        const ingredientJson = result.map(e => {
+        const ingredientJson = result.Ingredients.map(e => {
             return e.toJSON()
         })
         var hbsObject = {
