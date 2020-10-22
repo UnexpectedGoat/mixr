@@ -1,10 +1,3 @@
-/* placeholder junk for getting the cards to wrap, I think we need to use the grid */
-
-/* again, better off using the grid */
-.card-wrapper {
-  justify-content: center;
-}
-
 video {
   object-fit: cover;
   width: 100vw;
@@ -23,6 +16,7 @@ video {
   display: inline-block;
   cursor: pointer;
 }
+
 
 .bar1,
 .bar2,
@@ -48,11 +42,8 @@ video {
   transform: rotate(45deg) translate(-8px, -8px);
 }
 
-.animation-scroll .box {
-  display: inline-block;
-  width: 250px;
-  height: 250px;
-  background-color: var(--sl-color-gray-25);
+.card {
+  padding: 2rem;
 }
 
 h1 p {
@@ -64,33 +55,36 @@ h1 p {
   padding: 1rem;
 }
 
+.mycolor {
+  color: #424242
+}
+
 .links {
   font-size: var(--sl-font-size-x-large);
 }
 
-.navbar-material .nav-wrapper .brand-logo img {
-  height: 64px;
-  margin-bottom: 10px;
-}
-.bigGreenLogo {
-  margin: 0 auto;
-}
+/* MEDIA */
 @media only screen and (max-width: 769px) {
-  .logo {
+  .bigGreenLogo img {
     display: none;
   }
 }
-@media only screen and (min-width:770px) and (max-width:1500px) {
-   .bigGreenLogo img{
+
+@media only screen and (min-width:770px) and (max-width:2000px) {
+  .bigGreenLogo img {
     padding-top: 2rem;
     display: flex;
-    
-  } 
-  .brand-logo{
+    height: 20rem;
+    margin: 0 auto;
+
+  }
+
+  .brand-logo {
     display: inline-block;
     left: 25px;
   }
 }
+
 @media only screen and (max-width: 992px) {
 
   header,
@@ -98,7 +92,4 @@ h1 p {
   footer {
     padding-left: 0;
   }
-}
-.mycolor {
-  color:#424242
 }
