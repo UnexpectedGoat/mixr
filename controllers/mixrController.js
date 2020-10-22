@@ -25,7 +25,8 @@ router.get("/cocktails", (req, res) => {
             drinks: cocktailJson
         };
         // Can change the name of index if it makes more sense later on
-        res.render("index", hbsObject)
+        res.json(hbsObject)
+        // res.render("index", hbsObject)
     }).catch(err => {
         res.status(404).send(err)
     })
@@ -48,7 +49,7 @@ router.get("/mycocktails", (req, res) => {
         };
         console.log(hbsObject)
         res.render("index", hbsObject)
-    }).catch(err =>{
+    }).catch(err => {
         res.status(404).send(err)
     })
 });
@@ -109,11 +110,11 @@ router.get("/pantry", function (req, res) {
         };
         console.log(hbsObject)
         res.render("pantry", hbsObject)
-    }).catch(err =>{
+    }).catch(err => {
         res.status(404).send(err)
     })
-    
-    
+
+
 });
 // Add a cocktail to a users favorites
 router.delete("/pantry", function (req, res){
@@ -139,14 +140,14 @@ router.post("/addcocktail", function (req, res) {
     // const userid = req.seesion.user.id
     console.log("Route Hit")
     db.User.findOne({
-        where:{
+        where: {
             id: userid
         }
-    }).then(userResult=>{
+    }).then(userResult => {
         console.log(userResult)
         userResult.addCocktail([req.body.id])
         res.status(200).send("Association added")
-    }).catch(err =>{
+    }).catch(err => {
         res.status(404).send(err)
     })
 });
@@ -162,6 +163,34 @@ router.get("/api/cocktaildb/:id", function (req, res) {
         res.json(cocktails);
     })
 });
+
+router.get("/bartenderschoice", (req, res) => {
+    db.Cocktail.findAll({
+        include: [db.Ingredient]
+    }).then(allCocktails => {
+        let cocktailsArray = [];
+        for (let i = 0; i < allCocktails.length; i++) {
+            cocktailsArray.push(allCocktails[i])
+        }
+        let random = Math.floor(Math.random() * cocktailsArray.length);
+        let randomCocktail = cocktailsArray[random];
+        randomCocktail = randomCocktail.toJSON();
+        console.log(randomCocktail);
+        const randomObject = {
+            drinks: [randomCocktail]
+        };
+        // res.json(randomObject);
+        console.log(randomObject)
+        res.render("index", randomObject);
+    })
+
+
+    // The code below will pull a random cocktail from the Cocktail DB API:
+    // const apiKey = 9973533;
+    // axios.get(`https://www.thecocktaildb.com/api/json/v2/${apiKey}/random.php`).then(randomCocktail => {
+    //     res.json(randomCocktail.data)
+    // })
+})
 
 // TODO: get cocktails from cocktailDB with axios call
 router.get("/create", function (req, res) {
