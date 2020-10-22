@@ -15,7 +15,7 @@ $("#signup-button").on("click", function (event){
         data:user
     }).then(apiRes=>{
         //user now has a login so log them in and take them to drinks
-        window.location.href="/drinks"
+        window.location.href="/mycocktails"
     })
 })
 
@@ -35,7 +35,7 @@ $("#login-button").on("click", function (event){
         data:user
     }).then(apiRes=>{
         //user has logged in so direct to drinks page
-        window.location.href="/drinks"
+        window.location.href="/mycocktails"
     })
 })
 //listens for a add cocktail button click
@@ -54,7 +54,7 @@ $(".add-cocktail-button").on("click", function (event){
     }).then(apiRes=>{
         //user has logged in so direct to drinks page
         // TODO: Updat with mycocktails route
-        window.location.href="/drinks"
+        window.location.href="/mycocktails"
     })
 })
 

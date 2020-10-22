@@ -2,7 +2,6 @@ require("dotenv").config()
 var express = require("express");
 var db = require("./models")
 var app = express();
-var routes = require("./controllers/mixr_controller.js");
 var path = require('path');
 const seedModels = require("./seedModels.js")
 const session = require('express-session')
@@ -27,7 +26,16 @@ app.use(session({
         maxAge: 2 * 60 * 60 * 1000
     }
 }))
-app.use(routes);
+
+
+const authRoutes = require('./controllers/authController.js')
+app.use(authRoutes)
+
+const mixrRoutes = require('./controllers/mixrController.js')
+app.use(mixrRoutes)
+
+const apiRoutes = require('./controllers/apiController.js')
+app.use(apiRoutes)
 
 //handlebars
 const exphbs = require("express-handlebars");
