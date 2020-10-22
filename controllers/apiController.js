@@ -75,5 +75,15 @@ router.get("/api/ingredients/:id", function (req, res) {
         res.status(404).send(err)
     })
 })
-
+// Displays all cocktails that have ingredients matching the indicated ID
+// router.get("/api/cocktaildb/:id", function (req, res) {
+//     db.Ingredient.findAll({
+//         where: {
+//             id: req.params.id
+//         },
+//         include: [db.Cocktail]
+//     }).then(cocktails => {
+//         res.json(cocktails);
+//     })
+// });
 module.exports = router;

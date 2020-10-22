@@ -152,18 +152,6 @@ router.post("/addcocktail", function (req, res) {
     })
 });
 
-// Displays all cocktails that have ingredients matching the indicated ID
-router.get("/api/cocktaildb/:id", function (req, res) {
-    db.Ingredient.findAll({
-        where: {
-            id: req.params.id
-        },
-        include: [db.Cocktail]
-    }).then(cocktails => {
-        res.json(cocktails);
-    })
-});
-
 router.get("/bartenderschoice", (req, res) => {
     db.Cocktail.findAll({
         include: [db.Ingredient]
@@ -191,11 +179,6 @@ router.get("/bartenderschoice", (req, res) => {
     //     res.json(randomCocktail.data)
     // })
 })
-
-// TODO: get cocktails from cocktailDB with axios call
-router.get("/create", function (req, res) {
-    res.render("upload", { key: "value" })
-});
 
 // Route for adding drink ingredient  
 router.get("/join/:cocktailId/:ingredientId", function (req, res) {
