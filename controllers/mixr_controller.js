@@ -225,8 +225,7 @@ router.get("/my_cocktails", (req, res) => {
                 user: userJson
             };
             // Can change the name of index if it makes more sense later on
-            // res.render("index", hbsObject)
-            res.json(hbsObject)
+            res.render("index", hbsObject)
         }).catch(err => {
             res.status(404).send(err)
         })
