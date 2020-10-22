@@ -63,11 +63,6 @@ h1 p {
   font-size: var(--sl-font-size-x-large);
 }
 
-.navbar-material .nav-wrapper .brand-logo img {
-  height: 64px;
-  margin-bottom: 10px;
-}
-
 /* MEDIA */
 @media only screen and (max-width: 769px) {
   .bigGreenLogo img {
@@ -75,7 +70,7 @@ h1 p {
   }
 }
 
-@media only screen and (min-width:770px) and (max-width:1500px) {
+@media only screen and (min-width:770px) and (max-width:2000px) {
   .bigGreenLogo img {
     padding-top: 2rem;
     display: flex;
