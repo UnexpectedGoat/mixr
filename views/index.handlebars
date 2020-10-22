@@ -4,11 +4,11 @@
     {{!-- row containing all cards --}}
     {{!-- card-wrapper is placehodler used to apply styling for flexview --}}
     {{!-- probably a better way to do this in materialized --}}
-    <div class="row card-wrapper">
+    <div class="row">
         {{!-- for each drink object passed in through the micr-route /drinks --}}
         {{#each drinks}}
         {{!-- build a card --}}
-            <div class="card col s12 m6 l4 push-s1">
+            <div class="card col s12 m8 l4 push-s1">
                 <div class="card-image waves-effect waves-block waves-light">
                     {{!-- img source field --}}
                     <img class="activator" src={{strDrinkThumb}}>
