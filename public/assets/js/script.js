@@ -38,3 +38,22 @@ $("#login-button").on("click", function (event){
         window.location.href="/drinks"
     })
 })
+//listens for a login button click
+$(".add-cocktail-button").on("click", function (event){
+    const cocktail = {
+        id:$(this).attr("data-cocktailId")
+    }
+    
+    //ajax POST call to our server
+    $.ajax({
+        method:"POST",
+        // route being hit
+        url:"/addcocktail",
+        //data being passed
+        data:cocktail
+    }).then(apiRes=>{
+        //user has logged in so direct to drinks page
+        // TODO: Updat with mycocktails route
+        window.location.href="/drinks"
+    })
+})

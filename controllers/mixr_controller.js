@@ -5,7 +5,10 @@ var db = require("../models");
 const axios = require('axios');
 const bcrypt = require('bcrypt')
 
-
+const testUser = {
+    username: "unexpectedGoat",
+    id: 1
+}
 // ---------------------------------USER AUTH ROUTES ---------------------------------
 //route for delivering login handlebars, if the user is already
 //need to investigate why we send user object, maybe for autofill?
@@ -164,15 +167,17 @@ router.get("/pantry", function (req, res) {
     res.render("pantry", hbsObject)
 });
 // Add a cocktail to a users favorites
-router.post("/addcocktail/:cocktailid", function (req, res) {
+router.post("/addcocktail", function (req, res) {
+    const userid = testUser.id
+    // const userid = req.seesion.user.id
     console.log("Route Hit")
     db.User.findOne({
         where:{
-            id: req.params.userid
+            id: userid
         }
     }).then(userResult=>{
         console.log(userResult)
-        const joinResult = userResult.addCocktail([req.params.cocktailid])
+        userResult.addCocktail([req.body.id])
         res.status(200).send("Association added")
     }).catch(err =>{
         res.status(404).send(err)
