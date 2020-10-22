@@ -1,10 +1,3 @@
-/* placeholder junk for getting the cards to wrap, I think we need to use the grid */
-
-/* again, better off using the grid */
-.card-wrapper {
-  justify-content: center;
-}
-
 video {
   object-fit: cover;
   width: 100vw;
@@ -23,6 +16,7 @@ video {
   display: inline-block;
   cursor: pointer;
 }
+
 
 .bar1,
 .bar2,
@@ -48,11 +42,8 @@ video {
   transform: rotate(45deg) translate(-8px, -8px);
 }
 
-.animation-scroll .box {
-  display: inline-block;
-  width: 250px;
-  height: 250px;
-  background-color: var(--sl-color-gray-25);
+.card {
+  padding: 2rem;
 }
 
 h1 p {
@@ -64,33 +55,110 @@ h1 p {
   padding: 1rem;
 }
 
+.mycolor {
+  color: #424242
+}
+
 .links {
   font-size: var(--sl-font-size-x-large);
 }
 
-.navbar-material .nav-wrapper .brand-logo img {
-  height: 64px;
-  margin-bottom: 10px;
+/* login/signup/upload design */
+.loginBox {
+  position: flex;
+  margin: auto;
+  width: 50%;
+  height: 30%;
+  padding: 40px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, .3);
 }
-.bigGreenLogo {
+
+.greenM {
+  padding-top: 2rem;
+  display: flex;
+  height: 10rem;
   margin: 0 auto;
 }
+
+.loginBox p {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  color: #fff;
+}
+
+.loginBox input {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.loginBox input[type="text"],
+.loginBox input[type="password"] {
+  border: none;
+  border-bottom: 1px solid #fff;
+  background: transparent;
+  outline: none;
+  height: 40px;
+  color: #fff;
+  font-size: 16px;
+}
+
+:placeholder {
+  color: rgba(255, 255, 255, .5);
+}
+
+.loginBox a {
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* MEDIA */
 @media only screen and (max-width: 769px) {
-  .logo {
+  .bigGreenLogo img {
     display: none;
   }
+
+  .loginBox {
+    position: flex;
+    margin: auto;
+    width: 75%;
+    height: 30%;
+    padding: 40px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, .3);
+  }
 }
-@media only screen and (min-width:770px) and (max-width:1500px) {
-   .bigGreenLogo img{
+
+@media only screen and (min-width:770px) and (max-width:2000px) {
+  .bigGreenLogo img {
     padding-top: 2rem;
     display: flex;
-    
-  } 
-  .brand-logo{
+    height: 20rem;
+    margin: 0 auto;
+  }
+
+  .loginBox {
+    position: flex;
+    margin: auto;
+    width: 50%;
+    height: 30%;
+    padding: 40px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, .3);
+  }
+
+  .brand-logo {
     display: inline-block;
     left: 25px;
   }
 }
+
 @media only screen and (max-width: 992px) {
 
   header,
@@ -98,7 +166,4 @@ h1 p {
   footer {
     padding-left: 0;
   }
-}
-.mycolor {
-  color:#424242
 }

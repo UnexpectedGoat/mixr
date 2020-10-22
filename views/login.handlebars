@@ -1,31 +1,45 @@
-<!-- LOGIN FORM -->
-<div class="field px-3">
+<!-- LOGIN FORM 
+ <div class="field">
     <p class="control has-icons-left has-icons-right">
       {{!-- id used in jqery listener --}}
-      <input id="login-username"class="input" type="text" placeholder="Usernme">
+      <input id="login-username"class="input input-field col s10 m2 l4" type="text" placeholder="Username">
       <span class="icon is-small is-left">
         <i class="fas fa-envelope"></i>
       </span>
     </p>
   </div>
-  <div class="field px-3">
+  <div class="field">
     <p class="control has-icons-left">
       {{!-- id used in jqery listener --}}
-      <input id="login-password" class="input" type="password" placeholder="Password">
+      <input id="login-password" class="input input-field col s10" type="password" placeholder="Password">
       <span class="icon is-small is-left">
         <i class="fas fa-lock"></i>
       </span>
 
     </p>
   </div>
+</div>-->
 
-  <div class="field is-grouped is-grouped-centered">
-    <p class="control">
+ <div class="loginBox">
+   <img class="greenM" src="assets/images/greenM.png">
+        <form>
+            <p>Username</p>
+            <input id="login-username" type="text" placeholder="Username">
+            <p>Password</p>
+            <input id="login-password" type="password" placeholder="******">
+            
+            <div class="field is-grouped is-grouped-centered">
+    <p class="control"> 
+      <br>
       {{!-- id used in jqery listener --}}
       <a id="login-button" class="waves-effect waves-light btn grey darken-3">LOGIN</a>
       </a>
     </p>
     <p class="control">
+      <br>
       <a href="/signup" class="waves-effect waves-light btn grey darken-3">CREATE AN ACCOUNT</a>
     </p>
   </div>
+        </form>
+    </div>
+  

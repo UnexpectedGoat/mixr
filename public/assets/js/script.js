@@ -38,3 +38,42 @@ $("#login-button").on("click", function (event){
         window.location.href="/drinks"
     })
 })
+//listens for a add cocktail button click
+$(".add-cocktail-button").on("click", function (event){
+    const cocktail = {
+        id:$(this).attr("data-cocktailId")
+    }
+    
+    //ajax POST call to our server
+    $.ajax({
+        method:"POST",
+        // route being hit
+        url:"/addcocktail",
+        //data being passed
+        data:cocktail
+    }).then(apiRes=>{
+        //user has logged in so direct to drinks page
+        // TODO: Updat with mycocktails route
+        window.location.href="/drinks"
+    })
+})
+
+$(".delete-pantry-button").on("click", function (event){
+    console.log("hi-delete me")
+    const ingredientId = {
+        id:$(this).attr("id")
+    }
+    
+    //ajax POST call to our server
+    $.ajax({
+        method:"DELETE",
+        // route being hit
+        url:"/pantry",
+        //data being passed
+        data:ingredientId
+    }).then(apiRes=>{
+        //user has logged in so direct to drinks page
+        // TODO: Updat with mycocktails route
+        window.location.href="/pantry"
+    })
+})
