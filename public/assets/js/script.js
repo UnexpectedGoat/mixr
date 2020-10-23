@@ -57,6 +57,24 @@ $(".add-cocktail-button").on("click", function (event){
         window.location.href="/mycocktails"
     })
 })
+$("#add-pantry-button").on("click", function (event){
+    console.log("add Pantry")
+    const data ={
+        ingredient:$("#autocomplete-input").val()
+    } 
+    // ajax POST call to our server
+    $.ajax({
+        method:"POST",
+        // route being hit
+        url:"/pantry",
+        //data being passed
+        data:data
+    }).then(apiRes=>{
+        //user has logged in so direct to drinks page
+        // TODO: Updat with mycocktails route
+        window.location.href="/pantry"
+    })
+})
 
 $(".delete-pantry-button").on("click", function (event){
     console.log("hi-delete me")
@@ -77,6 +95,7 @@ $(".delete-pantry-button").on("click", function (event){
         window.location.href="/pantry"
     })
 })
+
 // Building the cloudinary widget for uploads on button click below
 var myWidget = cloudinary.createUploadWidget(
   {
@@ -115,3 +134,4 @@ document.addEventListener('DOMContentLoaded', function () {
   $(document).ready(function () {
     $('.sidenav').sidenav();
   });
+
