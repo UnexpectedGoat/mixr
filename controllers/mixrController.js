@@ -101,15 +101,24 @@ router.get("/pantry", function (req, res) {
             id: userid
         },
         include: [db.Ingredient]
-    }).then(result => {
-        const ingredientJson = result.Ingredients.map(e => {
-            return e.toJSON()
+    }).then(userResult => {
+        // TODO: need to figure out how to pass a straight obejct into handlebars
+        //find the ingredient
+        db.Ingredient.findAll({}).then(ingResult =>{
+            //build the pantry from the user find
+            const pantry = userResult.Ingredients.map(e => {
+                return e.toJSON()
+            })
+            let lookup = ingResult.map(e => {
+                return e.toJSON()
+            })
+            var hbsObject = {
+                pantry: pantry,
+                data: lookup
+            };
+            console.log(hbsObject)
+            res.render("pantry", hbsObject)
         })
-        var hbsObject = {
-            pantry: ingredientJson
-        };
-        console.log(hbsObject)
-        res.render("pantry", hbsObject)
     }).catch(err => {
         res.status(404).send(err)
     })

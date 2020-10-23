@@ -57,6 +57,23 @@ $(".add-cocktail-button").on("click", function (event){
         window.location.href="/mycocktails"
     })
 })
+$("#add-pantry-button").on("click", function (event){
+    console.log("add Pantry")
+    const ingredient = $("#autocomplete-input").val()
+    console.log(ingredient)
+    // ajax POST call to our server
+    $.ajax({
+        method:"POST",
+        // route being hit
+        url:"/pantry",
+        //data being passed
+        data:ingredient
+    }).then(apiRes=>{
+        //user has logged in so direct to drinks page
+        // TODO: Updat with mycocktails route
+        window.location.href="/mycocktails"
+    })
+})
 
 $(".delete-pantry-button").on("click", function (event){
     console.log("hi-delete me")
@@ -77,3 +94,4 @@ $(".delete-pantry-button").on("click", function (event){
         window.location.href="/pantry"
     })
 })
+

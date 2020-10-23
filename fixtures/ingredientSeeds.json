@@ -8,19 +8,19 @@
     {
         "model": "Ingredient",
         "data": {
-            "name": "Angosturabitters"
+            "name": "Angostura bitters"
         }
     },
     {
         "model": "Ingredient",
         "data": {
-            "name": "Apricotbrandy"
+            "name": "Apricot brandy"
         }
     },
     {
         "model": "Ingredient",
         "data": {
-            "name": "Blendedwhiskey"
+            "name": "Blended whiskey"
         }
     },
     {
@@ -50,13 +50,13 @@
     {
         "model": "Ingredient",
         "data": {
-            "name": "CremedeCacao"
+            "name": "Cremede Cacao"
         }
     },
     {
         "model": "Ingredient",
         "data": {
-            "name": "DryVermouth"
+            "name": "Dry Vermouth"
         }
     },
     {
@@ -92,31 +92,31 @@
     {
         "model": "Ingredient",
         "data": {
-            "name": "Lemonjuice"
+            "name": "Lemon juice"
         }
     },
     {
         "model": "Ingredient",
         "data": {
-            "name": "Lemonpeel"
+            "name": "Lemon peel"
         }
     },
     {
         "model": "Ingredient",
         "data": {
-            "name": "Lemonvodka"
+            "name": "Lemon vodka"
         }
     },
     {
         "model": "Ingredient",
         "data": {
-            "name": "Lightcream"
+            "name": "Light cream"
         }
     },
     {
         "model": "Ingredient",
         "data": {
-            "name": "Lightrum"
+            "name": "Light rum"
         }
     },
     {
@@ -128,13 +128,13 @@
     {
         "model": "Ingredient",
         "data": {
-            "name": "Limejuice"
+            "name": "Lime juice"
         }
     },
     {
         "model": "Ingredient",
         "data": {
-            "name": "Maraschinocherry"
+            "name": "Maraschino cherry"
         }
     },
     {
@@ -158,25 +158,25 @@
     {
         "model": "Ingredient",
         "data": {
-            "name": "Orangebitters"
+            "name": "Orange bitters"
         }
     },
     {
         "model": "Ingredient",
         "data": {
-            "name": "Orangepeel"
+            "name": "Orange peel"
         }
     },
     {
         "model": "Ingredient",
         "data": {
-            "name": "Pineapplejuice"
+            "name": "Pineapple juice"
         }
     },
     {
         "model": "Ingredient",
         "data": {
-            "name": "Powderedsugar"
+            "name": "Powdered sugar"
         }
     },
     {
@@ -188,13 +188,13 @@
     {
         "model": "Ingredient",
         "data": {
-            "name": "Sodawater"
+            "name": "Soda water"
         }
     },
     {
         "model": "Ingredient",
         "data": {
-            "name": "SouthernComfort"
+            "name": "Southern Comfort"
         }
     },
     {
@@ -206,7 +206,7 @@
     {
         "model": "Ingredient",
         "data": {
-            "name": "SweetVermouth"
+            "name": "Sweet Vermouth"
         }
     },
     {
@@ -236,7 +236,7 @@
     {
         "model": "Ingredient",
         "data": {
-            "name": "YellowChartreuse"
+            "name": "Yellow Chartreuse"
         }
     },
     {
@@ -248,13 +248,13 @@
     {
         "model": "Ingredient",
         "data": {
-            "name": "SloeGin"
+            "name": "Sloe Gin"
         }
     },
     {
         "model": "Ingredient",
         "data": {
-            "name": "BlackberryBrandy"
+            "name": "Blackberry Brandy"
         }
     }
 
