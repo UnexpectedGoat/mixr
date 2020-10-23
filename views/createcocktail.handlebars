@@ -15,14 +15,14 @@
             {{!-- photo upload button row --}}
             <div class="row">
                 <div class="col s-12">
-                    <a id="upload_widget" class="waves-effect waves-light btn grey darken-3">Upload Image</a>
+                    <a data-imgUrl="" id="upload_widget" class="waves-effect waves-light btn grey darken-3">Upload Image</a>
                 </div>
             </div>
             {{!-- drink description and instructions row --}}
             <div class="row">
                 <div class="input-field col s12">
-                    <textarea id="textarea1" class="materialize-textarea"></textarea>
-                    <label for="textarea1">Drink directions</label>
+                    <textarea id="drink_instructions" class="materialize-textarea"></textarea>
+                    <label for="drink_instructions">Drink directions</label>
                 </div>
             </div>
             {{!-- drink ingredient row, one is visible by default, use add button to make more --}}
@@ -30,31 +30,53 @@
             {{!-- onclick of add, append another partial view to it with assending id values --}}
             {{!-- we will need to match the ids the ingredients and amounts to match our models \ --}}
             <div class="row" id="ing-row">
-                <div>
-                    <div class="input-field col s12 m4">
-                        <i class="material-icons prefix">opacity</i>
-                        <input id="ing-amount" type="number" class="validate">
-                        <label for="ing-amount">e.g .75</label>
-                    </div>
-                    <div class="input-field col s12 m4">
-                        <i class="material-icons prefix">functions</i>
-                        <input id="ing-measure" type="text" class="validate">
-                        <label for="ing-measure">e.g. oz</label>
-                    </div>
-                    <div class="input-field col s12 m4">
-                        <i class="material-icons prefix">local_bar</i>
-                        <input id="ingredient" type="tel" class="validate">
-                        <label for="ingredient">e.g rum</label>
-                    </div>
+                <div id="ing1" class="col s12">
+                    {{> create/ingredient-block}}
+                <br>
                 </div>
+                <div id="ing2" class="col s12 hide">
+                    {{> create/ingredient-block}}
+                <br>
+                </div>
+                <div id="ing3" class="col s12 hide">
+                    {{> create/ingredient-block}}
+                </div>
+                <div id="ing4" class="col s12 hide">
+                    {{> create/ingredient-block}}
+                </div>
+                <div id="ing5" class="hide">
+                    {{> create/ingredient-block}}
+                </div>
+                <div id="ing6" class="hide">
+                    {{> create/ingredient-block}}
+                </div>
+                <div id="ing7" class="hide">
+                    {{> create/ingredient-block}}
+                </div>
+                <div id="ing8" class="hide">
+                    {{> create/ingredient-block}}
+                </div>
+                <div id="ing9" class="hide">
+                    {{> create/ingredient-block}}
+                </div>
+                <div id="ing10" class="hide">
+                    {{> create/ingredient-block}}
+                </div>
+                
                 
             </div>
             {{!-- Add more ingredients button --}}
             <div class="row">
                 {{!-- Use partials here to add more ingredients https://handlebarsjs.com/guide/partials.html#basic-partials --}}
                 <div class="col s12">
-                    <a id="more-ing" class="btn-floating btn-small waves-effect waves-light btn grey darken-3"><i
+                    <p>Add more ingredients</p>
+                    <a id="more-ing-button" class="btn-floating btn-small waves-effect waves-light btn grey darken-3"><i
                             class="material-icons">add</i></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <a id="create-cocktail-button" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Submit</a>
                 </div>
             </div>
             {{!-- Need to add a submit button to post the drink --}}
