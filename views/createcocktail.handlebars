@@ -29,30 +29,32 @@
             {{!-- onclick of add, append another partial view to it with assending id values --}}
             {{!-- we will need to match the ids the ingredients and amounts to match our models \ --}}
             <div class="row" id="ing-row">
-                <div>
-                    <div class="input-field col s12 m4">
-                        <i class="material-icons prefix">opacity</i>
-                        <input id="ing-amount" type="number" class="validate">
-                        <label for="ing-amount">e.g .75</label>
-                    </div>
-                    <div class="input-field col s12 m4">
-                        <i class="material-icons prefix">functions</i>
-                        <input id="ing-measure" type="text" class="validate">
-                        <label for="ing-measure">e.g. oz</label>
-                    </div>
-                    <div class="input-field col s12 m4">
-                        <i class="material-icons prefix">local_bar</i>
-                        <input id="ingredient" type="tel" class="validate">
-                        <label for="ingredient">e.g rum</label>
-                    </div>
+                <div id="ing1">
+                    {{> create/ingredient-block}}
                 </div>
+                <div id="ing2">
+                    
+                </div>
+                <div id="ing3">
+                    
+                </div>
+                <div id="ing4">
+                    
+                </div>
+                <div id="ing5">
+                    
+                </div>
+                <div id="ing1">
+                    
+                </div>
+                
                 
             </div>
             {{!-- Add more ingredients button --}}
             <div class="row">
                 {{!-- Use partials here to add more ingredients https://handlebarsjs.com/guide/partials.html#basic-partials --}}
                 <div class="col s12">
-                    <a id="more-ing" class="btn-floating btn-small waves-effect waves-light btn grey darken-3"><i
+                    <a id="more-ing-button" class="btn-floating btn-small waves-effect waves-light btn grey darken-3"><i
                             class="material-icons">add</i></a>
                 </div>
             </div>

@@ -119,6 +119,13 @@ $(document).ready(function(){
     
   });
 
+$("#more-ing-button").on("click", function (event) {
+    console.log("More clicked")
+    const mainDiv = $("<div>")
+    
+    const content = 
+    row.append(content)
+})
 
 // Building the cloudinary widget for uploads on button click below
 var myWidget = cloudinary.createUploadWidget(
