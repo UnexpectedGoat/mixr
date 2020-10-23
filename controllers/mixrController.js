@@ -109,14 +109,9 @@ router.get("/pantry", function (req, res) {
             const pantry = userResult.Ingredients.map(e => {
                 return e.toJSON()
             })
-            let lookup = ingResult.map(e => {
-                return e.toJSON()
-            })
             var hbsObject = {
-                pantry: pantry,
-                data: lookup
+                pantry: pantry
             };
-            console.log(hbsObject)
             res.render("pantry", hbsObject)
         })
     }).catch(err => {
