@@ -10,148 +10,7 @@ const testUser = {
     username: "unexpectedGoat",
     id: 1
 }
-// ---------------------------------USER AUTH ROUTES ---------------------------------
-//route for delivering login handlebars, if the user is already
-//need to investigate why we send user object, maybe for autofill?
-router.get("/login", (req, res) => {
-    res.render("login", { user: req.session.user })
-})
-//route for delivering signup handlebars
-router.get("/signup", (req, res) => {
-    res.render("signup", { user: req.session.user })
-})
-//this is the post version of login, so when we send it form data aka login creds do this
-router.post('/login', (req, res) => {
-    // finds one user based on where teh username in body matches that in the db
-    db.User.findOne({
-        where: { username: req.body.username }
-    }).then(user => {
-        //this is where the auth magic happens
-        //if no user exists in db
-        if (!user) {
-            //destroy the req.session for security and send back error
-            req.session.destroy();
-            return res.status(401).send('incorrect username or password')
-        }
-        //else if the password in req.body matches the user hash password
-        //the has password is created in the user model, and adds salt to plain test
-        //bcrypt is the package doing the encryping and allowing us to decode
-        else if (bcrypt.compareSync(req.body.password, user.password)) {
-            //if the user credentials are good, set the session equal to such so that
-            //the user can access all the data they are linked to
-            req.session.user = {
-                username: user.userame,
-                id: user.id
-            }
-            //plop them on their drinks page
-            return res.redirect("/drinks")
-        }
-        //else the password must have been wrong so reject agaain
-        else {
-            req.session.destroy();
-            return res.status(401).send('incorrect username or password')
-        }
-    })
-})
-//route for handling the actual signup request
-router.post('/signup', (req, res) => {
-    //create a new user taking in the req.body
-    db.User.create({
-        username: req.body.username,
-        password: req.body.password
-    }).then(newUser => {
-        //take that new user and set their session cookie to that info
-        req.session.user = {
-            username: newUser.username,
-            id: newUser.id
-        }
-        //plop them on their drink page
-        res.redirect("/drinks")
-    }).catch(err => {
-        console.log(err);
-        res.status(500).send("server error")
-    })
-})
-// If user logs out, nuke the req.session
-router.get('/logout', (req, res) => {
-    req.session.destroy();
-    res.send('logged out')
-})
 
-
-// ---------------------------------API Routes ---------------------------------
-router.get("/api/cocktail", function (req, res) {
-    db.Cocktail.findAll({
-        include: [db.Ingredient]
-    }).then(result => {
-        res.json(result)
-    }).catch(err => {
-        res.status(404).send(err)
-    })
-});
-router.get("/api/mycocktails/:userid", function (req, res) {
-    db.User.findOne({
-        where:{
-            id:req.params.userid
-        },
-        include: [db.Cocktail]
-    }).then(result => {
-    res.json(result)
-    }).catch(err =>{
-        res.status(404).send(err)
-    })
-});
-router.get("/api/cocktails/:id", function (req, res) {
-    db.Cocktail.findAll({
-        where: {
-            id: req.params.id
-        },
-        include: [db.Ingredient]
-    }).then(result => {
-        res.json(result)
-    }).catch(err => {
-        res.status(404).send(err)
-    })
-});
-router.get("/api/user", function (req, res) {
-    db.User.findAll({
-        include: [db.Ingredient]
-    }).then(result => {
-        res.json(result)
-    }).catch(err => {
-        res.status(404).send(err)
-    })
-});
-router.get("/api/pantries/:userid", function (req, res) {
-    db.User.findOne({
-        where: {
-            id: req.params.userid
-        },
-        include: [db.Ingredient]
-    }).then(result => {
-        res.json(result.Ingredients)
-    }).catch(err => {
-        res.status(404).send(err)
-    })
-});
-router.get("/api/ingredient", function (req, res) {
-    db.Ingredient.findAll({}).then(result => {
-        res.json(result)
-    }).catch(err => {
-        res.status(404).send(err)
-    })
-})
-router.get("/api/ingredients/:id", function (req, res) {
-    db.Ingredient.findAll({
-        where: {
-            id: req.params.id
-        }
-    }).then(result => {
-        res.json(result)
-    }).catch(err => {
-        res.status(404).send(err)
-    })
-})
 // updated the route to drinks
 
 router.get("/cocktails", (req, res) => {
@@ -166,7 +25,8 @@ router.get("/cocktails", (req, res) => {
             drinks: cocktailJson
         };
         // Can change the name of index if it makes more sense later on
-        res.render("index", hbsObject)
+        res.json(hbsObject)
+        // res.render("index", hbsObject)
     }).catch(err => {
         res.status(404).send(err)
     })
@@ -189,13 +49,13 @@ router.get("/mycocktails", (req, res) => {
         };
         console.log(hbsObject)
         res.render("index", hbsObject)
-    }).catch(err =>{
+    }).catch(err => {
         res.status(404).send(err)
     })
 });
 
 // Displays only the cocktails that the user is able to make based on what's in their pantry NOTE - Will also display cocktails that have no ingredients, which should be none if things are organized correctly in the database, but if you're seeing more show up than expected, check that:
-router.get("/my_cocktails", (req, res) => {
+router.get("/can_make", (req, res) => {
     db.User.findOne({
         // TODO: swap in req.session.user.id when ready for deployment
         where: { id: 1 },
@@ -241,21 +101,60 @@ router.get("/pantry", function (req, res) {
             id: userid
         },
         include: [db.Ingredient]
-    }).then(result => {
-        const ingredientJson = result.Ingredients.map(e => {
-            return e.toJSON()
+    }).then(userResult => {
+        // TODO: need to figure out how to pass a straight obejct into handlebars
+        //find the ingredient
+        db.Ingredient.findAll({}).then(ingResult =>{
+            //build the pantry from the user find
+            const pantry = userResult.Ingredients.map(e => {
+                return e.toJSON()
+            })
+            var hbsObject = {
+                pantry: pantry
+            };
+            res.render("pantry", hbsObject)
         })
-        var hbsObject = {
-            pantry: ingredientJson
-        };
-        console.log(hbsObject)
-        res.render("pantry", hbsObject)
-    }).catch(err =>{
+    }).catch(err => {
         res.status(404).send(err)
     })
-    
-    
+
+
 });
+// adding an item to pantry
+router.post("/pantry", function (req,res){
+    const userid = testUser.id
+    // const userid = req.seesion.user.id
+    req.body.ingredient
+    db.Ingredient.findOne({
+        where:{
+            name: req.body.ingredient
+        }
+    }).then(result =>{
+        //if no ingredient is found, we need to create that ingredient then associate it
+        if(result.length === 0){
+            // add to ingredient list
+            db.Ingredient.create({
+                name: req.body.ingredient
+            }).then(newIngredient=>{
+                //associate that ingredient to the user in the pantry table
+                db.Pantry.create({
+                    UserId: userid,
+                    IngredientId: newIngredient.id
+                })
+                res.status(200).send("Ingredident added")
+            }).catch  
+        }
+        //if an ingredient is found, we need to create an association to it
+        else{
+            result = result.toJSON()
+            db.Pantry.create({
+                UserId: userid,
+                IngredientId: result.id
+            })
+            res.status(200).send("Ingredident added")
+        }
+    })
+})
 // Add a cocktail to a users favorites
 router.delete("/pantry", function (req, res){
     console.log("Removing assoc")
@@ -280,34 +179,64 @@ router.post("/addcocktail", function (req, res) {
     // const userid = req.seesion.user.id
     console.log("Route Hit")
     db.User.findOne({
-        where:{
+        where: {
             id: userid
         }
-    }).then(userResult=>{
+    }).then(userResult => {
         console.log(userResult)
         userResult.addCocktail([req.body.id])
         res.status(200).send("Association added")
-    }).catch(err =>{
+    }).catch(err => {
+        res.status(404).send(err)
+    })
+});
+router.get("/createcocktail", function (req, res) {
+    res.render("createcocktail")
+});
+router.post("/createcocktail", function (req, res) {
+    const userid = testUser.id
+    // const userid = req.seesion.user.id
+    console.log("Route Hit")
+    db.User.findOne({
+        where: {
+            id: userid
+        }
+    }).then(userResult => {
+        console.log(userResult)
+        userResult.addCocktail([req.body.id])
+        res.status(200).send("Association added")
+    }).catch(err => {
         res.status(404).send(err)
     })
 });
 
-// Displays all cocktails that have ingredients matching the indicated ID
-router.get("/api/cocktaildb/:id", function (req, res) {
-    db.Ingredient.findAll({
-        where: {
-            id: req.params.id
-        },
-        include: [db.Cocktail]
-    }).then(cocktails => {
-        res.json(cocktails);
+router.get("/bartenderschoice", (req, res) => {
+    db.Cocktail.findAll({
+        include: [db.Ingredient]
+    }).then(allCocktails => {
+        let cocktailsArray = [];
+        for (let i = 0; i < allCocktails.length; i++) {
+            cocktailsArray.push(allCocktails[i])
+        }
+        let random = Math.floor(Math.random() * cocktailsArray.length);
+        let randomCocktail = cocktailsArray[random];
+        randomCocktail = randomCocktail.toJSON();
+        console.log(randomCocktail);
+        const randomObject = {
+            drinks: [randomCocktail]
+        };
+        // res.json(randomObject);
+        console.log(randomObject)
+        res.render("index", randomObject);
     })
-});
 
-// TODO: get cocktails from cocktailDB with axios call
-router.get("/create", function (req, res) {
-    res.render("upload", { key: "value" })
-});
+
+    // The code below will pull a random cocktail from the Cocktail DB API:
+    // const apiKey = 9973533;
+    // axios.get(`https://www.thecocktaildb.com/api/json/v2/${apiKey}/random.php`).then(randomCocktail => {
+    //     res.json(randomCocktail.data)
+    // })
+})
 
 // Route for adding drink ingredient  
 router.get("/join/:cocktailId/:ingredientId", function (req, res) {

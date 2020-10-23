@@ -2,6 +2,18 @@
 <div class="container">
     <div class="row">
         <div class="col s12">
+            <h5>Add items to pantry</h5>
+            <div class="input-field inline">
+            <input type="text" id="autocomplete-input" class="autocomplete">
+            <label for="email_inline">e.g Bourbon </label>
+            </div>
+            <a id="add-pantry-button"class="waves-effect waves-light btn"><i class="material-icons left">send</i>Add</a>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <h5>Current Pantry Items</h5>
             <ul class="collection">
                 {{!-- handlebars logic that loops over each obejct in pantry passed in via mixr_controller route /pantry --}}
                 {{#each pantry}}
@@ -17,5 +29,4 @@
             </ul>
         </div>
     </div>
-</div> 
- 
+</div>

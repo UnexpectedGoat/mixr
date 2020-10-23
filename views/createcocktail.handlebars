@@ -29,17 +29,25 @@
             {{!-- move this row into in a partial view with one partial displayed by default --}}
             {{!-- onclick of add, append another partial view to it with assending id values --}}
             {{!-- we will need to match the ids the ingredients and amounts to match our models \ --}}
-            <div class="row">
-                <div class="input-field col s12 m6">
-                    <i class="material-icons prefix">functions</i>
-                    <input id="ing-amount" type="text" class="validate">
-                    <label for="ing-amount">Measurement</label>
+            <div class="row" id="ing-row">
+                <div>
+                    <div class="input-field col s12 m4">
+                        <i class="material-icons prefix">opacity</i>
+                        <input id="ing-amount" type="number" class="validate">
+                        <label for="ing-amount">e.g .75</label>
+                    </div>
+                    <div class="input-field col s12 m4">
+                        <i class="material-icons prefix">functions</i>
+                        <input id="ing-measure" type="text" class="validate">
+                        <label for="ing-measure">e.g. oz</label>
+                    </div>
+                    <div class="input-field col s12 m4">
+                        <i class="material-icons prefix">local_bar</i>
+                        <input id="ingredient" type="tel" class="validate">
+                        <label for="ingredient">e.g rum</label>
+                    </div>
                 </div>
-                <div class="input-field col s12 m6">
-                    <i class="material-icons prefix">local_bar</i>
-                    <input id="ingredient" type="tel" class="validate">
-                    <label for="ingredient">Ingredient</label>
-                </div>
+                
             </div>
             {{!-- Add more ingredients button --}}
             <div class="row">
@@ -54,27 +62,3 @@
     </div>
 </div>
 
-
-{{!-- pulles in the js needed for the image upload via cloudinary --}}
-<script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-    //unsigned image upload widget
-    var myWidget = cloudinary.createUploadWidget({
-        //specifies to send it to jkemps account
-        cloudName: 'k3m9',
-        //the upload preset is the unsigned version
-        uploadPreset: 'ulnivdif'
-    }, (error, result) => {
-        if (!error && result && result.event === "success") {
-            //returns the login info, we will want to bring that info into a variable and send it along
-            //with our form data for the image url field
-            console.log('Done! Here is the image info: ', result.info);
-        }
-    }
-    )
-    //the event listener for the upload widget button
-    document.getElementById("upload_widget").addEventListener("click", function () {
-        myWidget.open();
-    }, false);
-</script>
