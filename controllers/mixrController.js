@@ -101,15 +101,24 @@ router.get("/pantry", function (req, res) {
             id: userid
         },
         include: [db.Ingredient]
-    }).then(result => {
-        const ingredientJson = result.Ingredients.map(e => {
-            return e.toJSON()
+    }).then(userResult => {
+        // TODO: need to figure out how to pass a straight obejct into handlebars
+        //find the ingredient
+        db.Ingredient.findAll({}).then(ingResult =>{
+            //build the pantry from the user find
+            const pantry = userResult.Ingredients.map(e => {
+                return e.toJSON()
+            })
+            let lookup = ingResult.map(e => {
+                return e.toJSON()
+            })
+            var hbsObject = {
+                pantry: pantry,
+                data: lookup
+            };
+            console.log(hbsObject)
+            res.render("pantry", hbsObject)
         })
-        var hbsObject = {
-            pantry: ingredientJson
-        };
-        console.log(hbsObject)
-        res.render("pantry", hbsObject)
     }).catch(err => {
         res.status(404).send(err)
     })
@@ -139,8 +148,8 @@ router.delete("/pantry", function (req, res){
 router.post("/pantry", function (req,res){
     const userid = testUser.id
     // const userid = req.seesion.user.id
-    req.body.ingredient
-    db.Ingredient.findOne({
+    console.log(req.body)
+    db.Ingredient.findAll({
         where:{
             name: req.body.ingredient
         }
@@ -155,6 +164,8 @@ router.post("/pantry", function (req,res){
                 db.Pantry.create({
                     UserId: userid,
                     IngredientId: newIngredient.id
+                }).then(result=>{
+                    res.status(200).send(`Added ingredient to pantry`)
                 })
             })  
         }
@@ -164,8 +175,12 @@ router.post("/pantry", function (req,res){
             db.Pantry.create({
                 UserId: userid,
                 IngredientId: result.id
+            }).then(result=>{
+                res.status(200).send(`Added ingredient to pantry`)
             })
         }
+    }).catch(err => {
+        res.status(404).send(err)
     })
 })
 
