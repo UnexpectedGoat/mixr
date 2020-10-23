@@ -38,7 +38,7 @@ $("#login-button").on("click", function (event){
         window.location.href="/drinks"
     })
 })
-//listens for a login button click
+//listens for a add cocktail button click
 $(".add-cocktail-button").on("click", function (event){
     const cocktail = {
         id:$(this).attr("data-cocktailId")
@@ -57,6 +57,7 @@ $(".add-cocktail-button").on("click", function (event){
         window.location.href="/drinks"
     })
 })
+
 $(".delete-pantry-button").on("click", function (event){
     console.log("hi-delete me")
     const ingredientId = {
