@@ -92,6 +92,21 @@ router.get("/can_make", (req, res) => {
     })
 });
 
+// Allows user to search cocktail database
+router.get("/search", (req, res) => {
+    db.Cocktail.findAll({
+        limit: 10,
+        where: {
+            // This should make it so that the user's search is not case sensitive, but I can't test it until we get the front end set up
+            name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + lookupValue + '%')
+        }
+    }).then(searchResults => {
+        return res.json(searchResults);
+    }).catch(err => {
+        console.log(err);
+    });
+})
+
 //sends the dummy pantry data to the pantry view
 router.get("/pantry", function (req, res) {
     const userid = testUser.id
@@ -104,7 +119,7 @@ router.get("/pantry", function (req, res) {
     }).then(userResult => {
         // TODO: need to figure out how to pass a straight obejct into handlebars
         //find the ingredient
-        db.Ingredient.findAll({}).then(ingResult =>{
+        db.Ingredient.findAll({}).then(ingResult => {
             //build the pantry from the user find
             const pantry = userResult.Ingredients.map(e => {
                 return e.toJSON()
@@ -121,31 +136,31 @@ router.get("/pantry", function (req, res) {
 
 });
 // adding an item to pantry
-router.post("/pantry", function (req,res){
+router.post("/pantry", function (req, res) {
     const userid = testUser.id
     // const userid = req.seesion.user.id
     req.body.ingredient
     db.Ingredient.findOne({
-        where:{
+        where: {
             name: req.body.ingredient
         }
-    }).then(result =>{
+    }).then(result => {
         //if no ingredient is found, we need to create that ingredient then associate it
-        if(result.length === 0){
+        if (result.length === 0) {
             // add to ingredient list
             db.Ingredient.create({
                 name: req.body.ingredient
-            }).then(newIngredient=>{
+            }).then(newIngredient => {
                 //associate that ingredient to the user in the pantry table
                 db.Pantry.create({
                     UserId: userid,
                     IngredientId: newIngredient.id
                 })
                 res.status(200).send("Ingredident added")
-            }).catch  
+            }).catch
         }
         //if an ingredient is found, we need to create an association to it
-        else{
+        else {
             result = result.toJSON()
             db.Pantry.create({
                 UserId: userid,
@@ -156,23 +171,23 @@ router.post("/pantry", function (req,res){
     })
 })
 // Add a cocktail to a users favorites
-router.delete("/pantry", function (req, res){
+router.delete("/pantry", function (req, res) {
     console.log("Removing assoc")
     const userid = testUser.id
     // const userid = req.seesion.user.id
     console.log(req.body.id)
     db.Pantry.destroy({
-        where:{
+        where: {
             userId: userid,
             ingredientId: req.body.id
         }
-    }).then(userResult=>{
+    }).then(userResult => {
         res.status(200).send(`${userid} no longer has ${req.body.id} in their pantry`)
-    }).catch(err =>{
+    }).catch(err => {
         res.status(404).send(err)
     })
 
-   
+
 })
 router.post("/addcocktail", function (req, res) {
     const userid = testUser.id
@@ -229,7 +244,6 @@ router.get("/bartenderschoice", (req, res) => {
         console.log(randomObject)
         res.render("index", randomObject);
     })
-
 
     // The code below will pull a random cocktail from the Cocktail DB API:
     // const apiKey = 9973533;
