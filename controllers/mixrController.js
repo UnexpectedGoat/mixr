@@ -209,40 +209,101 @@ router.get("/createcocktail", function (req, res) {
     res.render("createcocktail")
 });
 router.post("/createcocktail", function (req, res) {
+    try{
+        
+    }
+    catch{
+
+    }
     const userid = testUser.id
     // const userid = req.seesion.user.id
     console.log("Route Hit")
-    console.log(req.body.ingredients)
-    req.body.ingredients.forEach(element => {
-        db.Ingredient.findOne({
-            where: {
-                name: req.body.ingredient
-            }
-        }).then(result => {
-            //if no ingredient is found, we need to create that ingredient then associate it
-            if (result.length === 0) {
-                // add to ingredient list
-                db.Ingredient.create({
-                    name: req.body.ingredient
-                }).then(newIngredient => {
-                    //associate that ingredient to the user in the pantry table
-                    db.Pantry.create({
-                        UserId: userid,
-                        IngredientId: newIngredient.id
+    db.Cocktail.findOne({
+        where:{
+            name:req.body.name
+        }
+    }).then(cocktailResult=>{
+        let cocktailId = 0
+        if(!cocktailResult){
+            console.log("Creating cocktail")
+            db.Cocktail.create({
+                name: req.body.name,
+                instructions: req.body.instructions,
+                img_url: req.body.img_url
+            }).then(newCocktail=>{
+                newCocktail.addUser([userid])
+                cocktailId = newCocktail.id
+                console.log("Cocktail created and associated")
+            })
+            // result.addIngredient(ingredientResult, { through: { amount: .75 } })
+        }else{
+            console.log("Cocktail exists, associating")
+            cocktailResult.addUser([userid])
+            cocktailId=cocktailResult.id
+        }
+    }).then((cocktailId)=>{
+        
+        console.log("And then...")
+        req.body.ingredients.forEach(e => {
+            console.log(e.ingredient)
+            db.Ingredient.findOne({
+                where: {
+                    name: e.ingredient
+                }
+            }).then(result => {
+                //if no ingredient is found, we need to create that ingredient then associate it
+                if (!result) {
+                    console.log("new ingredient")
+                    db.Ingredient.create({
+                        name: e.ingredient
+                    }).then(newIngredient => {
+    
+                        //associate that ingredient to the user in the pantry table
+                        db.CocktailIngredient.create({
+                            amount: parseFloat(e.amount),
+                            measurement:e.measure,
+                            CocktailId: 1,
+                            IngredientId: parseInt(newIngredient.id)
+                        })
+                        // res.status(200).send("Ingredient added")
                     })
-                    res.status(200).send("Ingredident added")
-                }).catch
-            }
-            //if an ingredient is found, we need to create an association to it
-            else {
-                result = result.toJSON()
-                db.Pantry.create({
-                    UserId: userid,
-                    IngredientId: result.id
-                })
-                res.status(200).send("Ingredident added")
-            }
-        }) 
+                }
+                //if an ingredient is found, we need to create an association to it
+                else {
+                    db.CocktailIngredient.findOne({
+                        where:{
+                            CocktailId: 1,
+                            IngredientId: parseInt(result.id)
+                        }
+                    }).then(cocktailIngredientResult =>{
+                        if(cocktailIngredientResult){
+                            db.CocktailIngredient.update({
+                                amount:  parseFloat(e.amount),
+                                measurement: e.measure,
+                            },{
+                                where:{
+                                    CocktailId: 1,
+                                    IngredientId: parseInt(result.id)
+                                } 
+                            }).then(finalResult=>{
+                                console.log(finalResult)
+                                res.json(finalResult)
+                            })
+                        }else{
+                            db.CocktailIngredient.create({
+                                amount:  parseFloat(e.amount),
+                                measurement: e.measure,
+                                CocktailId: 1,
+                                IngredientId: parseInt(result.id)
+                            }).then(finalResult=>{
+                                console.log(finalResult)
+                                res.json(finalResult)
+                            })
+                        }                        
+                    })
+                }
+            }) 
+        })
     })
 });
 
