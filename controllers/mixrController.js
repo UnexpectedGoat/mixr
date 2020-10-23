@@ -212,14 +212,37 @@ router.post("/createcocktail", function (req, res) {
     const userid = testUser.id
     // const userid = req.seesion.user.id
     console.log("Route Hit")
-    db.User.findOne({
-        where: {
-            id: userid
-        }
-    }).then(userResult => {
-        res.status(200).send("Association added")
-    }).catch(err => {
-        res.status(404).send(err)
+    console.log(req.body.ingredients)
+    req.body.ingredients.forEach(element => {
+        db.Ingredient.findOne({
+            where: {
+                name: req.body.ingredient
+            }
+        }).then(result => {
+            //if no ingredient is found, we need to create that ingredient then associate it
+            if (result.length === 0) {
+                // add to ingredient list
+                db.Ingredient.create({
+                    name: req.body.ingredient
+                }).then(newIngredient => {
+                    //associate that ingredient to the user in the pantry table
+                    db.Pantry.create({
+                        UserId: userid,
+                        IngredientId: newIngredient.id
+                    })
+                    res.status(200).send("Ingredident added")
+                }).catch
+            }
+            //if an ingredient is found, we need to create an association to it
+            else {
+                result = result.toJSON()
+                db.Pantry.create({
+                    UserId: userid,
+                    IngredientId: result.id
+                })
+                res.status(200).send("Ingredident added")
+            }
+        }) 
     })
 });
 
