@@ -144,47 +144,26 @@ router.delete("/pantry", function (req, res){
 
    
 })
-// adding an item to pantry
-router.post("/pantry", function (req,res){
+router.post("/addcocktail", function (req, res) {
     const userid = testUser.id
     // const userid = req.seesion.user.id
-    console.log(req.body)
-    db.Ingredient.findAll({
-        where:{
-            name: req.body.ingredient
+    console.log("Route Hit")
+    db.User.findOne({
+        where: {
+            id: userid
         }
-    }).then(result =>{
-        //if no ingredient is found, we need to create that ingredient then associate it
-        if(result.length === 0){
-            // add to ingredient list
-            db.Ingredient.create({
-                name: req.body.ingredient
-            }).then(newIngredient=>{
-                //associate that ingredient to the user in the pantry table
-                db.Pantry.create({
-                    UserId: userid,
-                    IngredientId: newIngredient.id
-                }).then(result=>{
-                    res.status(200).send(`Added ingredient to pantry`)
-                })
-            })  
-        }
-        //if an ingredient is found, we need to create an association to it
-        else{
-            result = result.toJSON()
-            db.Pantry.create({
-                UserId: userid,
-                IngredientId: result.id
-            }).then(result=>{
-                res.status(200).send(`Added ingredient to pantry`)
-            })
-        }
+    }).then(userResult => {
+        console.log(userResult)
+        userResult.addCocktail([req.body.id])
+        res.status(200).send("Association added")
     }).catch(err => {
         res.status(404).send(err)
     })
-})
-
-router.post("/addcocktail", function (req, res) {
+});
+router.get("/createcocktail", function (req, res) {
+    res.render("createcocktail")
+});
+router.post("/createcocktail", function (req, res) {
     const userid = testUser.id
     // const userid = req.seesion.user.id
     console.log("Route Hit")

@@ -96,3 +96,30 @@ $(".delete-pantry-button").on("click", function (event){
     })
 })
 
+
+// Building the cloudinary widget for uploads on button click below
+var myWidget = cloudinary.createUploadWidget(
+  {
+    //specifies to send it to jkemps account
+    cloudName: "k3m9",
+    //the upload preset is the unsigned version
+    uploadPreset: "ulnivdif",
+  },
+  (error, result) => {
+    if (!error && result && result.event === "success") {
+      //returns the login info, we will want to bring that info into a variable and send it along
+      //with our form data for the image url field
+      console.log("Done! Here is the image info: ", result.info);
+    }
+  }
+);
+
+//the event listener for the upload widget button
+document.getElementById("upload_widget").addEventListener(
+  "click",
+  function () {
+    myWidget.open();
+  },
+  false
+);
+
