@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,7 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.21/dist/shoelace/shoelace.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <title>🍸 MIXR - Your Guide to Drinks</title>
 </head>
 
@@ -22,14 +23,14 @@
 
   <!--LARGO LOGO AT TOP OF PAGE -->
   <div class="bigGreenLogo">
-  <img src="assets/images/MixrLogo.png" alt="Mixr Logo" href="/mycocktails"/> </div>
+    <img src="assets/images/MixrLogo.png" alt="Mixr Logo" href="/mycocktails" /> </div>
 
 
   <!-- NAVBAR -->
   <nav>
     <div class="nav-wrapper">
-       <a href="/mycocktails" class="brand-logo"><img class="responsive-img" id="logo" style="height: 64px;"
-src="assets/images/MixrLogoNAME.png"/></a>
+      <a href="/mycocktails" class="brand-logo"><img class="responsive-img" id="logo" style="height: 64px;"
+          src="assets/images/MixrLogoNAME.png" /></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="/mycocktails">My Cocktails</a></li>
         <li><a href="/pantry">My Pantry</a></li>
@@ -63,10 +64,10 @@ src="assets/images/MixrLogoNAME.png"/></a>
     <li><a href="/signup" class="waves-effect waves-light btn grey darken-3">Create an Account</a></li>
     <li><a href="/login" class="waves-effect waves-light btn grey darken-3">Login</a></li>
   </ul>
-<br>
+  <br>
 
-  {{{ body }}} 
-    {{!-- These script files are for getting the image upload to work --}}
+  {{{ body }}}
+  {{!-- These script files are for getting the image upload to work --}}
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   {{!-- // the following files only need to be included in order to support client-side uploading --}}
   <script src="/scripts/blueimp-file-upload/js/vendor/jquery.ui.widget.js" type="text/javascript"></script>
@@ -74,19 +75,8 @@ src="assets/images/MixrLogoNAME.png"/></a>
   <script src="/scripts/blueimp-file-upload/js/jquery.fileupload.js" type="text/javascript"></script>
   <script src="/scripts/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.js" type="text/javascript"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var elems = document.querySelectorAll('.sidenav');
-      var instance = M.Sidenav.getInstance(elems);
-    });
-    // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
-    // var collapsibleElem = document.querySelector('.collapsible');
-    // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
-    // Or with jQuery
-    $(document).ready(function () {
-      $('.sidenav').sidenav();
-    });
-  </script>
+  {{!-- pulles in the js needed for the image upload via cloudinary --}}
+  <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="assets/js/script.js"></script>

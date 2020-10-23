@@ -77,3 +77,41 @@ $(".delete-pantry-button").on("click", function (event){
         window.location.href="/pantry"
     })
 })
+// Building the cloudinary widget for uploads on button click below
+var myWidget = cloudinary.createUploadWidget(
+  {
+    //specifies to send it to jkemps account
+    cloudName: "k3m9",
+    //the upload preset is the unsigned version
+    uploadPreset: "ulnivdif",
+  },
+  (error, result) => {
+    if (!error && result && result.event === "success") {
+      //returns the login info, we will want to bring that info into a variable and send it along
+      //with our form data for the image url field
+      console.log("Done! Here is the image info: ", result.info);
+    }
+  }
+);
+
+//the event listener for the upload widget button
+document.getElementById("upload_widget").addEventListener(
+  "click",
+  function () {
+    myWidget.open();
+  },
+  false
+);
+
+// Side Nav bar
+document.addEventListener('DOMContentLoaded', function () {
+    var elems = document.querySelectorAll('.sidenav');
+    var instance = M.Sidenav.getInstance(elems);
+  });
+  // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
+  // var collapsibleElem = document.querySelector('.collapsible');
+  // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
+  // Or with jQuery
+  $(document).ready(function () {
+    $('.sidenav').sidenav();
+  });
