@@ -144,6 +144,40 @@ router.delete("/pantry", function (req, res){
 
    
 })
+// adding an item to pantry
+router.post("/pantry", function (req,res){
+    const userid = testUser.id
+    // const userid = req.seesion.user.id
+    req.body.ingredient
+    db.Ingredient.findOne({
+        where:{
+            name: req.body.ingredient
+        }
+    }).then(result =>{
+        //if no ingredient is found, we need to create that ingredient then associate it
+        if(result.length === 0){
+            // add to ingredient list
+            db.Ingredient.create({
+                name: req.body.ingredient
+            }).then(newIngredient=>{
+                //associate that ingredient to the user in the pantry table
+                db.Pantry.create({
+                    UserId: userid,
+                    IngredientId: newIngredient.id
+                })
+            })  
+        }
+        //if an ingredient is found, we need to create an association to it
+        else{
+            result = result.toJSON()
+            db.Pantry.create({
+                UserId: userid,
+                IngredientId: result.id
+            })
+        }
+    })
+})
+
 router.post("/addcocktail", function (req, res) {
     const userid = testUser.id
     // const userid = req.seesion.user.id
