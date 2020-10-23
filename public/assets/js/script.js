@@ -96,6 +96,29 @@ $(".delete-pantry-button").on("click", function (event){
     })
 })
 
+//AUtocomplete function for ingredients
+$(document).ready(function(){
+    //first get teh data in our igredients table
+    $.ajax({
+        method:"GET",
+        // route being hit
+        url:"/api/ingredient",
+    }).then(apiRes=>{
+        //create the object we will use in our lookup, "lookupvalue":null
+        let data = {}
+        //map over our response (array of objs)
+        const ingredientList = apiRes.map(e=>{
+            //for each obejct set the name value as the key in data, and set value to null
+            data[e.name] = null
+        })
+        //put that data into our autocomplete method provided by materialize attached ot input.autocompplete items
+        $('input.autocomplete').autocomplete({
+            data
+          });
+    })
+    
+  });
+
 
 // Building the cloudinary widget for uploads on button click below
 var myWidget = cloudinary.createUploadWidget(
