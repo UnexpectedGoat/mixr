@@ -96,6 +96,49 @@ $(".delete-pantry-button").on("click", function (event){
     })
 })
 
+//liseten for the create cocktail button to be clicked
+$("#create-cocktail-button").on("click", function (event){
+    console.log("hi-create me")
+    // create an obejct that we will pass in as response body
+    const cocktail = {
+        // load the keys with the values off the input page
+      name: $("#drink_name").val(),
+      instructions: $("#drink_instructions").val(),
+      img_url: $("#upload_widget").attr("data-imgUrl"),
+      ingredients: [
+      ],
+    };
+    // this for loop is for parsing through the ingredient inputs
+    for (let i = 1; i < 11; i++) {
+        // if it hits a value that is null, so the user hasn't added it break the loop
+       if($(`#ing${i} > .col > .ingredient`).val().length === 0){
+           break;
+       }
+    //    otherwise build and ingredient object out of those ingredient items
+        const ingredients ={
+            ingredient: $(`#ing${i} > .col > .ingredient`).val(),
+            amount: $(`#ing${i} > .col > .amount`).val(),
+            measure: $(`#ing${i} > .col > .measurement`).val(),
+        }
+        // push that object into our cocktail obejct
+        cocktail.ingredients.push(ingredients)
+        
+    }
+    
+    //ajax POST call to our server
+    $.ajax({
+        method:"POST",
+        // route being hit
+        url:"/createcocktail",
+        //data being passed
+        data:cocktail
+    }).then(apiRes=>{
+        //user has logged in so direct to drinks page
+        // TODO: Updat with mycocktails route
+        window.location.href="/mycocktails"
+    })
+})
+
 //AUtocomplete function for ingredients
 $(document).ready(function(){
     //first get teh data in our igredients table
@@ -118,7 +161,11 @@ $(document).ready(function(){
     })
     
   });
-
+let ingIndex = 2
+$("#more-ing-button").on("click", function (event) {
+    $(`#ing${ingIndex}`).removeClass("hide")
+    ingIndex++
+})
 
 // Building the cloudinary widget for uploads on button click below
 var myWidget = cloudinary.createUploadWidget(
@@ -132,7 +179,8 @@ var myWidget = cloudinary.createUploadWidget(
     if (!error && result && result.event === "success") {
       //returns the login info, we will want to bring that info into a variable and send it along
       //with our form data for the image url field
-      console.log("Done! Here is the image info: ", result.info);
+      console.log("Done! Here is the image info: ", result.info.url);
+      $("#upload_widget").attr("data-imgUrl",result.info.url)
     }
   }
 );

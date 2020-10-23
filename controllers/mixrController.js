@@ -217,8 +217,6 @@ router.post("/createcocktail", function (req, res) {
             id: userid
         }
     }).then(userResult => {
-        console.log(userResult)
-        userResult.addCocktail([req.body.id])
         res.status(200).send("Association added")
     }).catch(err => {
         res.status(404).send(err)
