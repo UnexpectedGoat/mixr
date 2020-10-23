@@ -148,8 +148,8 @@ router.delete("/pantry", function (req, res){
 router.post("/pantry", function (req,res){
     const userid = testUser.id
     // const userid = req.seesion.user.id
-    req.body.ingredient
-    db.Ingredient.findOne({
+    console.log(req.body)
+    db.Ingredient.findAll({
         where:{
             name: req.body.ingredient
         }
@@ -164,6 +164,8 @@ router.post("/pantry", function (req,res){
                 db.Pantry.create({
                     UserId: userid,
                     IngredientId: newIngredient.id
+                }).then(result=>{
+                    res.status(200).send(`Added ingredient to pantry`)
                 })
             })  
         }
@@ -173,8 +175,12 @@ router.post("/pantry", function (req,res){
             db.Pantry.create({
                 UserId: userid,
                 IngredientId: result.id
+            }).then(result=>{
+                res.status(200).send(`Added ingredient to pantry`)
             })
         }
+    }).catch(err => {
+        res.status(404).send(err)
     })
 })
 

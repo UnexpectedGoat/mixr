@@ -59,19 +59,20 @@ $(".add-cocktail-button").on("click", function (event){
 })
 $("#add-pantry-button").on("click", function (event){
     console.log("add Pantry")
-    const ingredient = $("#autocomplete-input").val()
-    console.log(ingredient)
+    const data ={
+        ingredient:$("#autocomplete-input").val()
+    } 
     // ajax POST call to our server
     $.ajax({
         method:"POST",
         // route being hit
         url:"/pantry",
         //data being passed
-        data:ingredient
+        data:data
     }).then(apiRes=>{
         //user has logged in so direct to drinks page
         // TODO: Updat with mycocktails route
-        window.location.href="/mycocktails"
+        window.location.href="/pantry"
     })
 })
 
