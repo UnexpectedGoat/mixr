@@ -196,8 +196,9 @@ var myWidget = cloudinary.createUploadWidget(
     if (!error && result && result.event === "success") {
       //returns the login info, we will want to bring that info into a variable and send it along
       //with our form data for the image url field
-      console.log("Done! Here is the image info: ", result.info.url);
+      console.log("Done! Here is the image info: ", result.info);
       $("#upload_widget").attr("data-imgUrl",result.info.url)
+      $("#upload-img").attr("src", result.info.url)
     }
   }
 );
