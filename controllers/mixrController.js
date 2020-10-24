@@ -134,7 +134,9 @@ router.get("/can_make", (req, res) => {
 //         res.status(404).send(err)
 //     })
 // });
-
+router.get("/", (req, res) => {
+    res.render("login", { user: req.session.user })
+})
 //sends the dummy pantry data to the pantry view
 router.get("/pantry", function (req, res) {
     const userid = req.session.user.id
