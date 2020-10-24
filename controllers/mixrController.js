@@ -135,7 +135,7 @@ router.get("/can_make", (req, res) => {
 //     })
 // });
 router.get("/", (req, res) => {
-    res.render("login", { user: req.session.user })
+    res.render("login")
 })
 //sends the dummy pantry data to the pantry view
 router.get("/pantry", function (req, res) {
