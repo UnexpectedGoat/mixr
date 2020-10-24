@@ -6,7 +6,7 @@ var path = require('path');
 const seedModels = require("./seedModels.js")
 const session = require('express-session')
 
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 3002;
 
 
 
