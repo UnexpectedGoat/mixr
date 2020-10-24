@@ -1,141 +1,57 @@
-<!-- JONNY 
-<div class="container">
-    <div class="row">
-        {{!-- Everything is inside a form currently, I think we can use this to do a post action to our relelvant route in mixr-controller --}}
-        
-        <h3 style="font-size: 2rem; font-weight:bolder"> Let's make a Drink!</h3>
-        <form action="" class="col s12">
-            {{!-- drink name row --}}
-            <div class="row">
-                <div class="input-field col s12 m6 l6">
-                    <input placeholder="Drink name" id="drink_name" type="text" class="validate">
-                    
-                </div>
-                <div class="col s12 m6 l6"></div>
-            </div>
-            {{!-- photo upload button row --}}
-            <div class="row">
-                <div class="col s-12">
-                    <a data-imgUrl="" id="upload_widget" class="waves-effect waves-light btn grey darken-3">Upload Image</a>
-                </div>
-            </div>
-            {{!-- drink description and instructions row --}}
-            <div class="row">
-                <div class="input-field col s12">
-                    <textarea id="drink_instructions" class="materialize-textarea"></textarea>
-                    <label for="drink_instructions">Drink directions</label>
-                </div>
-            </div>
-            {{!-- drink ingredient row, one is visible by default, use add button to make more --}}
-            {{!-- move this row into in a partial view with one partial displayed by default --}}
-            {{!-- onclick of add, append another partial view to it with assending id values --}}
-            {{!-- we will need to match the ids the ingredients and amounts to match our models \ --}}
-            <div class="row" id="ing-row">
-                <div id="ing1" class="col s12">
-                    {{> create/ingredient-block}}
-                <br>
-                </div>
-                <div id="ing2" class="col s12 hide">
-                    {{> create/ingredient-block}}
-                <br>
-                </div>
-                <div id="ing3" class="col s12 hide">
-                    {{> create/ingredient-block}}
-                </div>
-                <div id="ing4" class="col s12 hide">
-                    {{> create/ingredient-block}}
-                </div>
-                <div id="ing5" class="hide">
-                    {{> create/ingredient-block}}
-                </div>
-                <div id="ing6" class="hide">
-                    {{> create/ingredient-block}}
-                </div>
-                <div id="ing7" class="hide">
-                    {{> create/ingredient-block}}
-                </div>
-                <div id="ing8" class="hide">
-                    {{> create/ingredient-block}}
-                </div>
-                <div id="ing9" class="hide">
-                    {{> create/ingredient-block}}
-                </div>
-                <div id="ing10" class="hide">
-                    {{> create/ingredient-block}}
-                </div>
-                
-                
-            </div>
-            {{!-- Add more ingredients button --}}
-            <div class="row">
-                {{!-- Use partials here to add more ingredients https://handlebarsjs.com/guide/partials.html#basic-partials --}}
-                <div class="col s12">
-                    <p>Add more ingredients</p>
-                    <a id="more-ing-button" class="btn-floating btn-small waves-effect waves-light btn grey darken-3"><i
-                            class="material-icons">add</i></a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12">
-                    <a id="create-cocktail-button" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Submit</a>
-                </div>
-            </div>
-            {{!-- Need to add a submit button to post the drink --}}
-        </form>
-    </div>
-</div> -->
-
-<!-- ********************   HILARY    *********************-->
 <div class="loginBox">
-  <form>
-    <h3 style="font-weight: 900; color: white; text-align:center">Let's Make a Drink!</h3>
-    <p>Drink Name</p><input class="validate" id="drink_name" placeholder="Long Island Iced Tea" type="text">
-    <div class="field is-grouped is-grouped-centered">
-      <p class="control"><br>
-        <a class="waves-effect waves-light btn grey darken-3" id="add-pantry-button"><i
-            class="material-icons left">send</i>Add</a> <a class="waves-effect waves-light btn grey darken-3"
-          data-imgurl="" id="upload_widget">Upload Image</a></p>
-    </div><br>
-    <p>Drink Instructions</p><input class="materialize-textarea" id="drink_instructions" placeholder="Instructions"><br>
-    <div class="row" id="ing-row">
-      <div class="col s12" id="ing1">
-        {{&gt; create/ingredient-block}}<br>
-      </div>
-      <div class="col s12 hide" id="ing2">
-        {{&gt; create/ingredient-block}}<br>
-      </div>
-      <div class="col s12 hide" id="ing3">
-        {{&gt; create/ingredient-block}}
-      </div>
-      <div class="col s12 hide" id="ing4">
-        {{&gt; create/ingredient-block}}
-      </div>
-      <div class="hide" id="ing5">
-        {{&gt; create/ingredient-block}}
-      </div>
-      <div class="hide" id="ing6">
-        {{&gt; create/ingredient-block}}
-      </div>
-      <div class="hide" id="ing7">
-        {{&gt; create/ingredient-block}}
-      </div>
-      <div class="hide" id="ing8">
-        {{&gt; create/ingredient-block}}
-      </div>
-      <div class="hide" id="ing9">
-        {{&gt; create/ingredient-block}}
-      </div>
-      <div class="hide" id="ing10">
-        {{&gt; create/ingredient-block}}
-      </div>
-    </div>
-    <div class="field is-grouped is-grouped-centered">
-      <a class="btn-floating btn-small waves-effect waves-light green" id="more-ing-button"><i
-          class="material-icons">add</i></a>
-    </div><br>
-    <p style="text-align: center;">Ready to Submit Your Drink? Click the Submit Button Below:</p><br>
-    <div class="field is-grouped is-grouped-centered">
-      <a class="waves-effect waves-light btn btn grey darken-3" id="create-cocktail-button">Submit</a>
-    </div>
-  </form>
+    <form>
+        <h3 style="font-weight: 900; color: white; text-align:center">Let's Make a Drink!</h3>
+        <p>Drink Name</p><input class="validate" id="drink_name" placeholder="Long Island Iced Tea" type="text">
+        <div class="field is-grouped is-grouped-centered">
+            <p class="control"><br>
+                <a class="waves-effect waves-light btn grey darken-3" data-imgurl="" id="upload_widget">Upload Image</a>
+            </p>
+        </div><br>
+        <div>
+            <img id="upload-img" class="materialboxed" width="650" src="">
+        </div>
+        <br>
+        <p>Drink Instructions</p><input class="materialize-textarea" id="drink_instructions"
+            placeholder="Instructions"><br>
+        <div class="row" id="ing-row">
+            <div class="col s12" id="ing1">
+                {{> create/ingredient-block}}<br>
+            </div>
+            <div class="col s12 hide" id="ing2">
+                {{> create/ingredient-block}}<br>
+            </div>
+            <div class="col s12 hide" id="ing3">
+                {{> create/ingredient-block}}
+            </div>
+            <div class="col s12 hide" id="ing4">
+                {{> create/ingredient-block}}
+            </div>
+            <div class="hide" id="ing5">
+                {{> create/ingredient-block}}
+            </div>
+            <div class="hide" id="ing6">
+                {{> create/ingredient-block}}
+            </div>
+            <div class="hide" id="ing7">
+                {{> create/ingredient-block}}
+            </div>
+            <div class="hide" id="ing8">
+                {{> create/ingredient-block}}
+            </div>
+            <div class="hide" id="ing9">
+                {{> create/ingredient-block}}
+            </div>
+            <div class="hide" id="ing10">
+                {{> create/ingredient-block}}
+            </div>
+        </div>
+        <div class="field is-grouped is-grouped-centered">
+            <a class="btn-floating btn-small waves-effect waves-light green" id="more-ing-button"><i
+                    class="material-icons">add</i></a>
+        </div><br>
+        <p style="text-align: center;">Ready to Submit Your Drink? Click the Submit Button Below:</p><br>
+        <div class="field is-grouped is-grouped-centered">
+            <a class="waves-effect waves-light btn btn grey darken-3" id="create-cocktail-button">Submit</a>
+        </div>
+    </form>
 </div>
