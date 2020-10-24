@@ -1,0 +1,51 @@
+<div class="loginBox">
+   
+        <form>
+            <p>SEARCH</p>
+            <input id="searchBarDB" type="text" placeholder="Not finding anything exciting? Search the database here">
+            <div class="field is-grouped is-grouped-centered">
+    <p class="control"> 
+      <br>
+      {{!-- id used in jqery listener --}}
+      <a id="search" class="waves-effect waves-light btn grey darken-3">Search</a>
+      </a>
+    </p>
+  </div>
+        </form>
+    </div>
+
+<div class="container">
+    <div class="row card-wrapper">
+        {{#each drinks}}
+        {{!-- build a card --}}
+        <div class="col s12 m6 l4">
+            <div class="card push-s1">
+                <div class="card-image waves-effect waves-block waves-light">
+                    {{!-- img source field --}}
+                    <img class="activator" src={{img_url}}>
+                </div>
+                <div class="card-content">
+                    {{!-- content of the card --}}
+                    <span class="card-title activator grey-text text-darken-4">{{name}}<i
+                            class="material-icons right">more_vert</i></span>
+                    <p><a data-cocktailId={{id}} class="add-cocktail-button"><i class="material-icons">add</i></a></p>
+                </div>
+                {{!-- items that get expanded --}}
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">{{name}}<i
+                            class="material-icons right">close</i></span>
+                    <ul>
+                        {{#each Ingredients}}
+                        <li>{{CocktailIngredient.amount}} {{CocktailIngredient.measurement}} {{name}}</li>
+                        {{/each}}
+
+                    </ul>
+                    {{!-- paragraph of the instructions passed in --}}
+                    <p>{{instructions}}</p>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+    

@@ -93,20 +93,46 @@ router.get("/can_make", (req, res) => {
     })
 });
 
+router.get("/drinksearch", function (req, res) {
+    const userid = testUser.id
+    // const userid = req.seesion.user.id
+    db.User.findOne({
+        where: {
+            id: userid
+        },
+        include: [db.Ingredient]
+    }).then(userResult => {
+            res.render("drinksearch", userResult)
+    }).catch(err => {
+        res.status(404).send(err)
+    })
+
+
+});
+
 // Allows user to search cocktail database
-router.get("/search", (req, res) => {
+router.post("/drinksearch", (req, res) => {
+    console.log(req.body.name)
     db.Cocktail.findAll({
         limit: 10,
         where: {
-            // This should make it so that the user's search is not case sensitive, but I can't test it until we get the front end set up
-            name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + lookupValue + '%')
+            name: req.body.name
         }
-    }).then(searchResults => {
-        return res.json(searchResults);
+    }).then(result => {
+        // const jsonResult = result.Cocktail.toJSON()
+        // console.log(jsonResult)
+        const drinkJson = result.map(drink => {
+            return drink.toJSON()
+        })
+        const hbsObject = {
+            drinks: drinkJson
+        };
+        console.log(hbsObject);
+        res.render("index", hbsObject);
     }).catch(err => {
-        console.log(err);
-    });
-})
+        res.status(404).send(err)
+    })
+});
 
 //sends the dummy pantry data to the pantry view
 router.get("/pantry", function (req, res) {

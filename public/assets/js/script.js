@@ -137,7 +137,24 @@ $("#create-cocktail-button").on("click", function (event){
         // TODO: Updat with mycocktails route
         window.location.href="/mycocktails"
     })
-})
+});
+
+// Click Event for Database Search
+$("#search").on("click", event => {
+    event.preventDefault();
+    const search = {
+        name: $("#searchBarDB").val()
+    };
+    console.log(search);
+    $.ajax({
+        method: "POST",
+        url: "/drinksearch",
+        data: search
+    }).then(searchResult => {
+        console.log(searchResult);
+        window.location.href="/index"
+    })
+});
 
 //AUtocomplete function for ingredients
 $(document).ready(function(){
