@@ -1,16 +1,19 @@
 {{!-- all styling is far game for this, all placeholder --}}
-<div class="container">
-    <div class="row">
-        <div class="col s12">
-            <h5>Add items to pantry</h5>
-            <div class="input-field inline">
-            <input type="text" id="autocomplete-input" class="autocomplete">
-            <label for="email_inline">e.g Bourbon </label>
-            </div>
-            <a id="add-pantry-button"class="waves-effect waves-light btn"><i class="material-icons left">send</i>Add</a>
+<div class="loginBox">
+        <form>
+            <p>Add Items to Pantry</p>
+            <input id="autocomplete-input" type="text" placeholder="eg. Bourbon" class="autocomplete">
+        
+            <div class="field is-grouped is-grouped-centered">
+    <p class="control"> 
+      <br>
+      {{!-- id used in jqery listener --}} <a id="add-pantry-button"class="waves-effect waves-light btn grey darken-3"><i class="material-icons left">send</i>Add</a>
+    
+    </p>
           </div>
         </div>
     </div>
+    <br>
     <div class="row">
         <div class="col s12">
             <h5>Current Pantry Items</h5>

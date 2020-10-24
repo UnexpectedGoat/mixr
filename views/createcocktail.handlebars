@@ -1,3 +1,4 @@
+<!-- JONNY 
 <div class="container">
     <div class="row">
         {{!-- Everything is inside a form currently, I think we can use this to do a post action to our relelvant route in mixr-controller --}}
@@ -82,5 +83,59 @@
             {{!-- Need to add a submit button to post the drink --}}
         </form>
     </div>
-</div>
+</div> -->
 
+<!-- ********************   HILARY    *********************-->
+<div class="loginBox">
+  <form>
+    <h3 style="font-weight: 900; color: white; text-align:center">Let's Make a Drink!</h3>
+    <p>Drink Name</p><input class="validate" id="drink_name" placeholder="Long Island Iced Tea" type="text">
+    <div class="field is-grouped is-grouped-centered">
+      <p class="control"><br>
+        <a class="waves-effect waves-light btn grey darken-3" id="add-pantry-button"><i
+            class="material-icons left">send</i>Add</a> <a class="waves-effect waves-light btn grey darken-3"
+          data-imgurl="" id="upload_widget">Upload Image</a></p>
+    </div><br>
+    <p>Drink Instructions</p><input class="materialize-textarea" id="drink_instructions" placeholder="Instructions"><br>
+    <div class="row" id="ing-row">
+      <div class="col s12" id="ing1">
+        {{&gt; create/ingredient-block}}<br>
+      </div>
+      <div class="col s12 hide" id="ing2">
+        {{&gt; create/ingredient-block}}<br>
+      </div>
+      <div class="col s12 hide" id="ing3">
+        {{&gt; create/ingredient-block}}
+      </div>
+      <div class="col s12 hide" id="ing4">
+        {{&gt; create/ingredient-block}}
+      </div>
+      <div class="hide" id="ing5">
+        {{&gt; create/ingredient-block}}
+      </div>
+      <div class="hide" id="ing6">
+        {{&gt; create/ingredient-block}}
+      </div>
+      <div class="hide" id="ing7">
+        {{&gt; create/ingredient-block}}
+      </div>
+      <div class="hide" id="ing8">
+        {{&gt; create/ingredient-block}}
+      </div>
+      <div class="hide" id="ing9">
+        {{&gt; create/ingredient-block}}
+      </div>
+      <div class="hide" id="ing10">
+        {{&gt; create/ingredient-block}}
+      </div>
+    </div>
+    <div class="field is-grouped is-grouped-centered">
+      <a class="btn-floating btn-small waves-effect waves-light green" id="more-ing-button"><i
+          class="material-icons">add</i></a>
+    </div><br>
+    <p style="text-align: center;">Ready to Submit Your Drink? Click the Submit Button Below:</p><br>
+    <div class="field is-grouped is-grouped-centered">
+      <a class="waves-effect waves-light btn btn grey darken-3" id="create-cocktail-button">Submit</a>
+    </div>
+  </form>
+</div>
