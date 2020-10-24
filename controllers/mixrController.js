@@ -5,6 +5,7 @@ var db = require("../models");
 const axios = require('axios');
 const bcrypt = require('bcrypt');
 const { Sequelize } = require("../models");
+const cocktail = require("../models/cocktail");
 
 const testUser = {
     username: "unexpectedGoat",
@@ -208,103 +209,55 @@ router.post("/addcocktail", function (req, res) {
 router.get("/createcocktail", function (req, res) {
     res.render("createcocktail")
 });
-router.post("/createcocktail", function (req, res) {
+router.post("/createcocktail", async (req, res) => {
     try{
-        
-    }
-    catch{
-
-    }
-    const userid = testUser.id
-    // const userid = req.seesion.user.id
-    console.log("Route Hit")
-    db.Cocktail.findOne({
-        where:{
-            name:req.body.name
-        }
-    }).then(cocktailResult=>{
-        let cocktailId = 0
-        if(!cocktailResult){
-            console.log("Creating cocktail")
-            db.Cocktail.create({
-                name: req.body.name,
-                instructions: req.body.instructions,
-                img_url: req.body.img_url
-            }).then(newCocktail=>{
-                newCocktail.addUser([userid])
-                cocktailId = newCocktail.id
-                console.log("Cocktail created and associated")
-            })
-            // result.addIngredient(ingredientResult, { through: { amount: .75 } })
-        }else{
-            console.log("Cocktail exists, associating")
-            cocktailResult.addUser([userid])
-            cocktailId=cocktailResult.id
-        }
-    }).then((cocktailId)=>{
-        
-        console.log("And then...")
-        req.body.ingredients.forEach(e => {
-            console.log(e.ingredient)
-            db.Ingredient.findOne({
+        //setup the test userId
+        const userid = testUser.id
+        //Create a new cocktail with the req.body
+        const newCocktail = await db.Cocktail.create({
+            name: req.body.name,
+            instructions: req.body.instructions,
+            img_url: req.body.img_url
+        })
+        //associate that new cockdtail with a user
+        await newCocktail.addUser([userid])
+        //we need to parse through the ingredients to see if its in our table or new
+        req.body.ingredients.forEach(async e => {
+            //search to see if the ingredient item e is in the database
+            const ingredientSearch = await db.Ingredient.findOne({
                 where: {
                     name: e.ingredient
                 }
-            }).then(result => {
-                //if no ingredient is found, we need to create that ingredient then associate it
-                if (!result) {
-                    console.log("new ingredient")
-                    db.Ingredient.create({
-                        name: e.ingredient
-                    }).then(newIngredient => {
-    
-                        //associate that ingredient to the user in the pantry table
-                        db.CocktailIngredient.create({
-                            amount: parseFloat(e.amount),
-                            measurement:e.measure,
-                            CocktailId: 1,
-                            IngredientId: parseInt(newIngredient.id)
-                        })
-                        // res.status(200).send("Ingredient added")
-                    })
-                }
-                //if an ingredient is found, we need to create an association to it
-                else {
-                    db.CocktailIngredient.findOne({
-                        where:{
-                            CocktailId: 1,
-                            IngredientId: parseInt(result.id)
-                        }
-                    }).then(cocktailIngredientResult =>{
-                        if(cocktailIngredientResult){
-                            db.CocktailIngredient.update({
-                                amount:  parseFloat(e.amount),
-                                measurement: e.measure,
-                            },{
-                                where:{
-                                    CocktailId: 1,
-                                    IngredientId: parseInt(result.id)
-                                } 
-                            }).then(finalResult=>{
-                                console.log(finalResult)
-                                res.json(finalResult)
-                            })
-                        }else{
-                            db.CocktailIngredient.create({
-                                amount:  parseFloat(e.amount),
-                                measurement: e.measure,
-                                CocktailId: 1,
-                                IngredientId: parseInt(result.id)
-                            }).then(finalResult=>{
-                                console.log(finalResult)
-                                res.json(finalResult)
-                            })
-                        }                        
-                    })
-                }
-            }) 
+            })
+            // if it's not in the database
+            if (!ingredientSearch) {
+                // make a new ingredient
+                const newIngredient = await db.Ingredient.create({
+                    name: e.ingredient
+                })
+                // associate that new ingredient to the newCocktail
+                db.CocktailIngredient.create({
+                    amount: parseFloat(e.amount),
+                    measurement:e.measure,
+                    CocktailId: newCocktail.id,
+                    IngredientId: newIngredient.id
+                })
+                res.status(200).send("Ingredient created for new cocktail")
+            }else{
+                // otherwise if the ingredient is in the db, just associate that ingredient to newCocktail
+                db.CocktailIngredient.create({
+                    amount: parseFloat(e.amount),
+                    measurement:e.measure,
+                    CocktailId: newCocktail.id,
+                    IngredientId: ingredientSearch.id
+                })
+                res.status(200).send("Ingredient assocaited to new cocktail")
+            } 
         })
-    })
+    }
+    catch (err) {
+        console.log(err)
+    }      
 });
 
 router.get("/bartenderschoice", (req, res) => {
