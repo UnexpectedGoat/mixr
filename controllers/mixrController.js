@@ -92,22 +92,42 @@ router.get("/can_make", (req, res) => {
     })
 });
 
+router.get("/drinksearch", function (req, res) {
+    const userid = testUser.id
+    // const userid = req.seesion.user.id
+    db.User.findOne({
+        where: {
+            id: userid
+        },
+        include: [db.Ingredient]
+    }).then(userResult => {
+            res.render("drinksearch", userResult)
+    }).catch(err => {
+        res.status(404).send(err)
+    })
+
+
+});
+
 // Allows user to search cocktail database
-router.post("/search", (req, res) => {
+router.post("/drinksearch", (req, res) => {
+    console.log(req.body.name)
     db.Cocktail.findAll({
         limit: 10,
         where: {
             name: req.body.name
         }
     }).then(result => {
+        // const jsonResult = result.Cocktail.toJSON()
+        // console.log(jsonResult)
         const drinkJson = result.map(drink => {
             return drink.toJSON()
         })
         const hbsObject = {
-            searchDrinks: drinkJson
+            drinks: drinkJson
         };
         console.log(hbsObject);
-        res.send(hbsObject);
+        res.render("index", hbsObject);
     }).catch(err => {
         res.status(404).send(err)
     })
