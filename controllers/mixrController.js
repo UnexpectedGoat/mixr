@@ -33,7 +33,8 @@ router.get("/cocktails", (req, res) => {
     })
 });
 router.get("/mycocktails", (req, res) => {
-    const userid = testUser.id
+    
+    const userid = req.session.user.id
     // const userid = req.seesion.user.id
     db.User.findOne({
         where: {
@@ -59,7 +60,7 @@ router.get("/mycocktails", (req, res) => {
 router.get("/can_make", (req, res) => {
     db.User.findOne({
         // TODO: swap in req.session.user.id when ready for deployment
-        where: { id: 1 },
+        where: { id: req.session.user.id },
         include: {
             model: db.Ingredient
         }
@@ -136,7 +137,7 @@ router.get("/can_make", (req, res) => {
 
 //sends the dummy pantry data to the pantry view
 router.get("/pantry", function (req, res) {
-    const userid = testUser.id
+    const userid = req.session.user.id
     // const userid = req.seesion.user.id
     db.User.findOne({
         where: {
@@ -164,7 +165,7 @@ router.get("/pantry", function (req, res) {
 });
 // adding an item to pantry
 router.post("/pantry", function (req, res) {
-    const userid = testUser.id
+    const userid = req.session.user.id
     // const userid = req.seesion.user.id
     req.body.ingredient
     db.Ingredient.findOne({
@@ -200,7 +201,7 @@ router.post("/pantry", function (req, res) {
 // Add a cocktail to a users favorites
 router.delete("/pantry", function (req, res) {
     console.log("Removing assoc")
-    const userid = testUser.id
+    const userid = req.session.user.id
     // const userid = req.seesion.user.id
     console.log(req.body.id)
     db.Pantry.destroy({
@@ -217,7 +218,7 @@ router.delete("/pantry", function (req, res) {
 
 })
 router.post("/addcocktail", function (req, res) {
-    const userid = testUser.id
+    const userid = req.session.user.id
     // const userid = req.seesion.user.id
     console.log("Route Hit")
     db.User.findOne({
