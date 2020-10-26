@@ -17,6 +17,7 @@ router.get("/", (req, res) => {
     res.render("login")
 })
 
+
 router.get("/cocktails", (req, res) => {
     // TODO: will update to either the drink api call, or the findall from our own db
     db.Cocktail.findAll({
@@ -99,46 +100,34 @@ router.get("/can_make", (req, res) => {
     }
 });
 
-// router.get("/drinksearch", function (req, res) {
-//     const userid = testUser.id
-//     // const userid = req.seesion.user.id
-//     db.User.findOne({
-//         where: {
-//             id: userid
-//         },
-//         include: [db.Ingredient]
-//     }).then(userResult => {
-//             res.render("drinksearch", userResult)
-//     }).catch(err => {
-//         res.status(404).send(err)
-//     })
+
+router.get("/drinksearch", function (req, res) {
+    const hbsObject = req.session.search
+    res.render("drinksearch", hbsObject)
+});
+// Allows user to search cocktail database
+router.post("/drinksearch", (req, res) => {
+    console.log("POST")
+    db.Cocktail.findAll({
+        where: {
+            name: req.body.name
+        },
+        include:[db.Ingredient]
+    }).then(result => {
+        const drinkJson = result.map(drink => {
+            return drink.toJSON()
+        })
+        const hbsObject = {
+            drinks: drinkJson
+        };
+        req.session.search = hbsObject
+        res.status(200).send("Found a drink")
+    }).catch(err => {
+        res.status(404).send(err)
+    })
+});
 
 
-// });
-
-// // Allows user to search cocktail database
-// router.post("/drinksearch", (req, res) => {
-//     console.log(req.body.name)
-//     db.Cocktail.findAll({
-//         limit: 10,
-//         where: {
-//             name: req.body.name
-//         }
-//     }).then(result => {
-//         // const jsonResult = result.Cocktail.toJSON()
-//         // console.log(jsonResult)
-//         const drinkJson = result.map(drink => {
-//             return drink.toJSON()
-//         })
-//         const hbsObject = {
-//             drinks: drinkJson
-//         };
-//         console.log(hbsObject);
-//         res.render("index", hbsObject);
-//     }).catch(err => {
-//         res.status(404).send(err)
-//     })
-// });
 
 //sends the dummy pantry data to the pantry view
 router.get("/pantry", function (req, res) {
