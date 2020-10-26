@@ -2,6 +2,7 @@ console.log("WOOOOO");
 // listens for signup button click
 $("#signup-button").on("click", function (event){
     // create user object based off values entered in input
+    event.preventDefault()
     const user = {
         username: $("#signup-username").val(),
         password: $("#signup-password").val(),
@@ -15,13 +16,13 @@ $("#signup-button").on("click", function (event){
         data:user
     }).then(apiRes=>{
         //user now has a login so log them in and take them to drinks
-        window.location.href="/mycocktails"
+        window.location.href="/pantry"
     })
 })
 
 //listens for a login button click
 $("#login-button").on("click", function (event){
-    //builds a user obeject based on the values entered
+   event.preventDefault()
     const user = {
         username: $("#login-username").val(),
         password: $("#login-password").val(),
