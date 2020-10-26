@@ -50,7 +50,7 @@ router.get("/mycocktails", (req, res) => {
             const hbsObject = {
                 drinks: cocktailJson
             };
-            res.render("index", hbsObject)
+            res.render("mycocktails", hbsObject)
         }).catch(err => {
             res.status(404).send(err)
         })
@@ -108,31 +108,31 @@ router.get("/drinksearch", function (req, res) {
 // Allows user to search cocktail database
 router.post("/drinksearch", async (req, res) => {
     console.log("POST")
-    try{
+    try {
         //first search the db by cocktail name
         const nameSearch = await db.Cocktail.findAll({
             where: {
                 name: {
                     [Op.like]: `%${req.body.name}%`
-                  }
+                }
             },
-            include:[db.Ingredient] 
-        
-        
+            include: [db.Ingredient]
+
+
         })
         //then search by the ingredients
         // TODO: Bug in this search, it only passes the 1 matchin ingredient to card
         const ingSearch = await db.Cocktail.findAll({
-          include: [
-            {
-              model: db.Ingredient,
-              where:{
-                name: {
-                    [Op.like]: `%${req.body.name}%`
-                  },
-              }
-            },
-          ],
+            include: [
+                {
+                    model: db.Ingredient,
+                    where: {
+                        name: {
+                            [Op.like]: `%${req.body.name}%`
+                        },
+                    }
+                },
+            ],
         });
         //then combine the two results
         const drinks = () => {
@@ -157,7 +157,7 @@ router.post("/drinksearch", async (req, res) => {
         req.session.search = hbsObject
         res.status(200).send("Found a drink")
     }
-    catch{
+    catch {
         res.status(404).send(err)
     }
 });
@@ -229,7 +229,8 @@ router.post("/pantry", function (req, res) {
         res.render("login")
     }
 })
-// Add a cocktail to a users favorites
+
+// Remove a pantry item from your pantry
 router.delete("/pantry", function (req, res) {
     if (req.session.user) {
         const userid = req.session.user.id
@@ -267,6 +268,26 @@ router.post("/addcocktail", function (req, res) {
         res.render("login")
     }
 });
+
+router.delete("/removecocktail", (req, res) => {
+    if (req.session.user) {
+        const userid = req.session.user.id;
+        console.log(req.body.id)
+        db.UserCocktail.destroy({
+            where: {
+                userId: userid,
+                cocktailId: req.body.id
+            }
+        }).then(removedCocktail => {
+            res.status(200).send(`${userid} no longer has ${req.body.id} on their My Cocktails List`)
+        }).catch(err => {
+            res.status(404).send(err)
+        })
+    } else {
+        res.render("login")
+    }
+})
+
 router.get("/createcocktail", function (req, res) {
     if (req.session.user) {
         res.render("createcocktail")
