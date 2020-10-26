@@ -36,37 +36,32 @@ router.get("/cocktails", (req, res) => {
     })
 });
 router.get("/mycocktails", (req, res) => {
-    if(req.session.user){
-        const userid = req.session.user.id
-        // const userid = req.seesion.user.id
-        db.User.findOne({
-            where: {
-                id: userid
-            },
-            include: [db.Cocktail]
-        }).then(result => {
-            const cocktailJson = result.Cocktails.map(e => {
+    // if(req.session.user){
+        // const userid = req.session.user.id
+        const userid = 1
+        db.Cocktail.findAll({
+            include: [{model: db.Ingredient}, {model: db.User, where:{
+                id:userid
+            }}]
+        }).then(result=>{
+            const cocktailJson = result.map(e => {
                 return e.toJSON()
             })
             const hbsObject = {
                 drinks: cocktailJson
             };
-            console.log(hbsObject)
+            // Can change the name of index if it makes more sense later on
+            // res.json(hbsObject)
             res.render("index", hbsObject)
         }).catch(err => {
             res.status(404).send(err)
-        })
-    }else{
-        res.render("login")
-    }
-   
+        }) 
 });
 
 // Displays only the cocktails that the user is able to make based on what's in their pantry NOTE - Will also display cocktails that have no ingredients, which should be none if things are organized correctly in the database, but if you're seeing more show up than expected, check that:
 router.get("/can_make", (req, res) => {
     if(req.session.user){
         db.User.findOne({
-            // TODO: swap in req.session.user.id when ready for deployment
             where: { id: req.session.user.id },
             include: {
                 model: db.Ingredient
