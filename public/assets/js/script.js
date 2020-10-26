@@ -140,7 +140,7 @@ $("#create-cocktail-button").on("click", function (event) {
 
 // Click Event for Database Search
 $("#search").on("click", event => {
-    event.preventDefault();
+    console.log("Search")
     const search = {
         name: $("#searchBarDB").val()
     };
@@ -150,8 +150,8 @@ $("#search").on("click", event => {
         url: "/drinksearch",
         data: search
     }).then(searchResult => {
-        console.log(searchResult);
-        window.location.href = "/index"
+        // console.log(searchResult);
+        window.location.href = "/drinksearch"
     })
 });
 

@@ -17,7 +17,6 @@ router.get("/", (req, res) => {
     res.render("login")
 })
 
-// Displays all cocktails in the database
 router.get("/cocktails", (req, res) => {
     db.Cocktail.findAll({
         include: [db.Ingredient]
@@ -36,25 +35,30 @@ router.get("/cocktails", (req, res) => {
 
 // Displays Cocktails the user has added to their list or created
 router.get("/mycocktails", (req, res) => {
-    const userid = req.session.user.id
-    db.User.findOne({
-        where: {
-            id: userid
-        },
-        include: [db.Cocktail]
-    }).then(result => {
-        console.log(result)
-        const cocktailJson = result.Cocktails.map(e => {
-            return e.toJSON()
-        })
-        const hbsObject = {
-            drinks: cocktailJson
-        };
-        console.log(hbsObject)
-        res.render("mycocktails", hbsObject)
+    if (req.session.user) {
+        const userid = req.session.user.id
+        db.User.findOne({
+            where: {
+                id: userid
+            },
+            include: [db.Cocktail]
+        }).then(result => {
+            console.log(result)
+            const cocktailJson = result.Cocktails.map(e => {
+                return e.toJSON()
+            })
+            const hbsObject = {
+                drinks: cocktailJson
+            };
+            console.log(hbsObject)
+            res.render("mycocktails", hbsObject)
     }).catch(err => {
         res.status(404).send(err)
     })
+    } else {
+        res.render("login")
+    }
+    
 });
 
 // Displays only the cocktails that the user is able to make based on what's in their pantry NOTE - Will also display cocktails that have no ingredients, which should be none if things are organized correctly in the database, but if you're seeing more show up than expected, check that:
@@ -98,46 +102,34 @@ router.get("/can_make", (req, res) => {
     }
 });
 
-// router.get("/drinksearch", function (req, res) {
-//     const userid = testUser.id
-//     // const userid = req.seesion.user.id
-//     db.User.findOne({
-//         where: {
-//             id: userid
-//         },
-//         include: [db.Ingredient]
-//     }).then(userResult => {
-//             res.render("drinksearch", userResult)
-//     }).catch(err => {
-//         res.status(404).send(err)
-//     })
+
+router.get("/drinksearch", function (req, res) {
+    const hbsObject = req.session.search
+    res.render("drinksearch", hbsObject)
+});
+// Allows user to search cocktail database
+router.post("/drinksearch", (req, res) => {
+    console.log("POST")
+    db.Cocktail.findAll({
+        where: {
+            name: req.body.name
+        },
+        include:[db.Ingredient]
+    }).then(result => {
+        const drinkJson = result.map(drink => {
+            return drink.toJSON()
+        })
+        const hbsObject = {
+            drinks: drinkJson
+        };
+        req.session.search = hbsObject
+        res.status(200).send("Found a drink")
+    }).catch(err => {
+        res.status(404).send(err)
+    })
+});
 
 
-// });
-
-// // Allows user to search cocktail database
-// router.post("/drinksearch", (req, res) => {
-//     console.log(req.body.name)
-//     db.Cocktail.findAll({
-//         limit: 10,
-//         where: {
-//             name: req.body.name
-//         }
-//     }).then(result => {
-//         // const jsonResult = result.Cocktail.toJSON()
-//         // console.log(jsonResult)
-//         const drinkJson = result.map(drink => {
-//             return drink.toJSON()
-//         })
-//         const hbsObject = {
-//             drinks: drinkJson
-//         };
-//         console.log(hbsObject);
-//         res.render("index", hbsObject);
-//     }).catch(err => {
-//         res.status(404).send(err)
-//     })
-// });
 
 //sends the dummy pantry data to the pantry view
 router.get("/pantry", function (req, res) {
