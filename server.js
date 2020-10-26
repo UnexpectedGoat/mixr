@@ -45,9 +45,9 @@ app.set("view engine", "handlebars");
 
 
 
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync({ force: false }).then(function() {
     app.listen(PORT, function() {
-        seedModels()
+        // seedModels()
         console.log("App now listening on port:", PORT);
     });
 });
