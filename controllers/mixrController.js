@@ -86,10 +86,12 @@ router.get("/can_make", (req, res) => {
                 const drinksJson = drinksICanMake.map(drink => {
                     return drink.toJSON()
                 })
+                
                 const hbsObject = {
                     drinks: drinksJson,
                     user: userJson
                 };
+                console.log(hbsObject)
                 res.render("canMake", hbsObject)
             }).catch(err => {
                 res.status(404).send(err)
