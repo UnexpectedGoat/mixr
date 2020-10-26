@@ -34,11 +34,17 @@
                     <span class="card-title activator grey-text text-darken-4">{{name}}<i
                             class="material-icons right">more_vert</i></span>
                     <p><a data-cocktailId={{id}} class="add-cocktail-button"><i class="material-icons">add</i></a></p>
+                    <a data-cocktailId={{id}} class="delete-cocktail-button"><i class="material-icons">delete</i></a></p>
+                    
+                    
+                    
+                    
                 </div>
                 {{!-- items that get expanded --}}
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">{{name}}<i
                             class="material-icons right">close</i></span>
+                            
                     <ul>
                         {{#each Ingredients}}
                         <li>{{Ingredient.amount}} {{Ingredient.measurement}} {{name}}</li>
