@@ -1,20 +1,20 @@
-<div class="loginBox">
-   
-        <form>
-            <p>SEARCH</p>
-            <input id="searchBarDB" type="text" placeholder="Not finding anything exciting? Search the database here">
-            <div class="field is-grouped is-grouped-centered">
-    <p class="control"> 
-      <br>
-      {{!-- id used in jqery listener --}}
-      <a id="search" class="waves-effect waves-light btn grey darken-3">Search</a>
-      </a>
-    </p>
-  </div>
-        </form>
-    </div>
 
-<div class="container">
+<div class="loginBox">
+        <p>SEARCH</p>
+        <input id="searchBarDB" type="text" placeholder="Not finding anything exciting? Search the database here">
+        <div class="field is-grouped is-grouped-centered">
+
+        <p class="control">
+            <br>
+            {{!-- id used in jqery listener --}}
+            <a id="search" class="waves-effect waves-light btn grey darken-3">Search</a>
+            </a>
+        </p>
+    </div>
+    </form>
+</div>
+
+
     <div class="row card-wrapper">
         {{#each drinks}}
         {{!-- build a card --}}
@@ -47,5 +47,3 @@
         </div>
         {{/each}}
     </div>
-</div>
-    
