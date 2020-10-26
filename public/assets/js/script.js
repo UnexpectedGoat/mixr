@@ -155,6 +155,23 @@ $("#search").on("click", event => {
     })
 });
 
+// Click Event for Remove Cocktail
+$(".delete-cocktail-button").on("click", event => {
+    console.log("hi-delete me")
+    const cocktail = {
+        id: $(this).attr("id")
+    }
+    $.ajax({
+        method: "DELETE",
+        // route being hit
+        url: "/removecocktail",
+        //data being passed
+        data: cocktail
+    }).then(result => {
+        window.location.href = "/mycocktails"
+    })
+})
+
 //AUtocomplete function for ingredients
 $(document).ready(function () {
     // Enable Dropdown in Large Nav Bar
