@@ -27,7 +27,7 @@ router.get("/cocktails", (req, res) => {
         };
         // Can change the name of index if it makes more sense later on
         // res.json(hbsObject)
-        res.render("index", hbsObject)
+        res.render("alldrinks", hbsObject)
     }).catch(err => {
         res.status(404).send(err)
     })
@@ -50,7 +50,7 @@ router.get("/mycocktails", (req, res) => {
             drinks: cocktailJson
         };
         console.log(hbsObject)
-        res.render("index", hbsObject)
+        res.render("mycocktails", hbsObject)
     }).catch(err => {
         res.status(404).send(err)
     })
@@ -87,7 +87,7 @@ router.get("/can_make", (req, res) => {
                 user: userJson
             };
             // Can change the name of index if it makes more sense later on
-            res.render("index", hbsObject)
+            res.render("canmake", hbsObject)
         }).catch(err => {
             res.status(404).send(err)
         })
@@ -304,7 +304,7 @@ router.get("/bartenderschoice", (req, res) => {
         };
         // res.json(randomObject);
         console.log(randomObject)
-        res.render("index", randomObject);
+        res.render("bartenderschoice", randomObject);
     })
 
     // The code below will pull a random cocktail from the Cocktail DB API:
