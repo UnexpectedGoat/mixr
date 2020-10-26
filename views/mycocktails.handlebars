@@ -8,8 +8,8 @@
           <p>These are the cocktails you've added to your list, as well as ones you've created yourself.</p>
         </div>
         <div class="card-action">
-          <a href="/createcocktail">Create a Cocktail</a>
-          <a href="/cocktails">Browse the Database</a>
+          <a class="white-text btn-small waves-effect waves-light green" href="/createcocktail">Create a Cocktail</a>
+          <a class="white-text btn-small waves-effect waves-light green" href="/cocktails">Browse the Database</a>
         </div>
       </div>
     </div>
@@ -33,8 +33,8 @@
                     {{!-- content of the card --}}
                     <span class="card-title activator grey-text text-darken-4">{{name}}<i
                             class="material-icons right">more_vert</i></span>
-                    <p><a data-cocktailId={{id}} class="add-cocktail-button"><i class="material-icons">add</i></a></p>
-                    <a data-cocktailId={{id}} class="delete-cocktail-button"><i class="material-icons">delete</i></a></p>
+                    <p><a data-cocktailId={{id}} class="add-cocktail-button"><i class="material-icons mycolor">add</i></a></p>
+                    <a data-cocktailId={{id}} class="delete-cocktail-button"><i class="material-icons mycolor">delete</i></a></p>
                     
                     
                     
@@ -43,7 +43,7 @@
                 {{!-- items that get expanded --}}
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">{{name}}<i
-                            class="material-icons right">close</i></span>
+                            class="material-icons right mycolor">close</i></span>
                             
                     <ul>
                         {{#each Ingredients}}
