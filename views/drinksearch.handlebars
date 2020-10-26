@@ -28,12 +28,12 @@
                     {{!-- content of the card --}}
                     <span class="card-title activator grey-text text-darken-4">{{name}}<i
                             class="material-icons right">more_vert</i></span>
-                    <p><a data-cocktailId={{id}} class="add-cocktail-button"><i class="material-icons">add</i></a></p>
+                    <p><a data-cocktailId={{id}} class="add-cocktail-button"><i class="material-icons mycolor">add</i></a></p>
                 </div>
                 {{!-- items that get expanded --}}
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">{{name}}<i
-                            class="material-icons right">close</i></span>
+                            class="material-icons right mycolor">close</i></span>
                     <ul>
                         {{#each Ingredients}}
                         <li>{{CocktailIngredient.amount}} {{CocktailIngredient.measurement}} {{name}}</li>
