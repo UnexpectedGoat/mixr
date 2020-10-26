@@ -26,6 +26,7 @@ router.post('/login', (req, res) => {
             //destroy the req.session for security and send back error
             req.session.destroy();
             return res.status(401).send('incorrect username or password')
+            
         }
         //else if the password in req.body matches the user hash password
         //the has password is created in the user model, and adds salt to plain test
@@ -38,7 +39,7 @@ router.post('/login', (req, res) => {
                 id: user.id
             }
             //plop them on their drinks page
-            return res.redirect("/drinks")
+            return res.redirect("/mycocktails")
         }
         //else the password must have been wrong so reject agaain
         else {
@@ -60,7 +61,7 @@ router.post('/signup', (req, res) => {
             id: newUser.id
         }
         //plop them on their drink page
-        res.redirect("/drinks")
+        return res.redirect("/pantry")
     }).catch(err => {
         console.log(err);
         res.status(500).send("server error")
@@ -69,7 +70,7 @@ router.post('/signup', (req, res) => {
 // If user logs out, nuke the req.session
 router.get('/logout', (req, res) => {
     req.session.destroy();
-    res.send('logged out')
+    res.redirect("/login");
 })
 
 module.exports = router;

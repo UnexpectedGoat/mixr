@@ -1,21 +1,23 @@
-<div class="loginBox">
-   
-        <form>
-            <p>SEARCH</p>
-            <input id="searchBarDB" type="text" placeholder="Not finding anything exciting? Search the database here">
-            <div class="field is-grouped is-grouped-centered">
-    <p class="control"> 
-      <br>
-      {{!-- id used in jqery listener --}}
-      <a id="search" class="waves-effect waves-light btn grey darken-3">Search</a>
-      </a>
-    </p>
-  </div>
-        </form>
+{{!-- Title and instructions card --}}
+<div class="container">
+    <div class="row">
+        <div class="col s12 m12 l12">
+            <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                    <span class="card-title">All Cocktails</span>
+                    <p>Browse the full cocktail database below. Click the + button on a drink to add it to your My
+                        Cocktails List.</p>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
 <div class="container">
+    {{!-- row containing all cards --}}
+    {{!-- card-wrapper is placehodler used to apply styling for flexview --}}
     <div class="row card-wrapper">
+        {{!-- for each drink object passed in through the micr-route /drinks --}}
         {{#each drinks}}
         {{!-- build a card --}}
         <div class="col s12 m6 l4">
@@ -38,7 +40,6 @@
                         {{#each Ingredients}}
                         <li>{{CocktailIngredient.amount}} {{CocktailIngredient.measurement}} {{name}}</li>
                         {{/each}}
-
                     </ul>
                     {{!-- paragraph of the instructions passed in --}}
                     <p>{{instructions}}</p>
@@ -48,4 +49,3 @@
         {{/each}}
     </div>
 </div>
-    
