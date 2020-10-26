@@ -13,9 +13,11 @@ video {
 }
 
 .container {
-  display: inline-block;
+  display: flexbox;
+  justify-content: space-around;
   cursor: pointer;
 }
+
 
 
 .bar1,
