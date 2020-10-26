@@ -82,7 +82,7 @@ router.get("/can_make", (req, res) => {
                 drinks: cocktailJson
             };
             // Can change the name of index if it makes more sense later on
-            res.render("canmake", hbsObject)
+            res.render("canMake", hbsObject)
         }).catch(err => {
             res.status(404).send(err)
         })
