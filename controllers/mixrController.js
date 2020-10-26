@@ -301,7 +301,7 @@ router.post("/createcocktail", async (req, res) => {
     if (req.session.user) {
         try {
             //setup the test userId
-            const userid = testUser.id
+            const userid = req.session.user.id
             //Create a new cocktail with the req.body
             const newCocktail = await db.Cocktail.create({
                 name: req.body.name,
