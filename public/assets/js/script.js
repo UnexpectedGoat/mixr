@@ -156,11 +156,12 @@ $("#search").on("click", event => {
 });
 
 // Click Event for Remove Cocktail
-$(".delete-cocktail-button").on("click", event => {
+$(".delete-cocktail-button").on("click", function (event) {
     console.log("hi-delete me")
     const cocktail = {
-        id: $(this).attr("id")
+        id: $(this).attr("data-cocktailId")
     }
+    console.log(cocktail)
     $.ajax({
         method: "DELETE",
         // route being hit
