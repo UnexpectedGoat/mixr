@@ -13,6 +13,9 @@ const testUser = {
 }
 
 // updated the route to drinks
+router.get("/", (req, res) => {
+    res.render("login")
+})
 
 router.get("/cocktails", (req, res) => {
     // TODO: will update to either the drink api call, or the findall from our own db
@@ -134,9 +137,7 @@ router.get("/can_make", (req, res) => {
 //         res.status(404).send(err)
 //     })
 // });
-router.get("/", (req, res) => {
-    res.render("login")
-})
+
 //sends the dummy pantry data to the pantry view
 router.get("/pantry", function (req, res) {
     const userid = req.session.user.id
