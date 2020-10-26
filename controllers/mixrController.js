@@ -12,13 +12,13 @@ const testUser = {
     id: 1
 }
 
-// updated the route to drinks
+// Updated the route to drinks
 router.get("/", (req, res) => {
     res.render("login")
 })
 
+// Displays all cocktails in the database
 router.get("/cocktails", (req, res) => {
-    // TODO: will update to either the drink api call, or the findall from our own db
     db.Cocktail.findAll({
         include: [db.Ingredient]
     }).then(result => {
@@ -28,17 +28,15 @@ router.get("/cocktails", (req, res) => {
         const hbsObject = {
             drinks: cocktailJson
         };
-        // Can change the name of index if it makes more sense later on
-        // res.json(hbsObject)
         res.render("alldrinks", hbsObject)
     }).catch(err => {
         res.status(404).send(err)
     })
 });
-router.get("/mycocktails", (req, res) => {
 
+// Displays Cocktails the user has added to their list or created
+router.get("/mycocktails", (req, res) => {
     const userid = req.session.user.id
-    // const userid = req.seesion.user.id
     db.User.findOne({
         where: {
             id: userid
@@ -61,32 +59,43 @@ router.get("/mycocktails", (req, res) => {
 
 // Displays only the cocktails that the user is able to make based on what's in their pantry NOTE - Will also display cocktails that have no ingredients, which should be none if things are organized correctly in the database, but if you're seeing more show up than expected, check that:
 router.get("/can_make", (req, res) => {
-    db.User.findOne({
-        // TODO: swap in req.session.user.id when ready for deployment
-        where: { id: req.session.user.id },
-        include: {
-            model: db.Ingredient
-        }
-    }).then(user => {
-        db.Cocktail.findAll({
-            include: [{ model: db.Ingredient }, {
-                model: db.User, where: {
-                    id: userid
+    if(req.session.user){
+        db.User.findOne({
+            where: { id: req.session.user.id },
+            include: {
+                model: db.Ingredient
+            }
+        }).then(user => {
+            db.Cocktail.findAll({
+                include: [{
+                    model: db.Ingredient
+                }]
+            }).then(async result => {
+                const userJson = user.toJSON()
+    
+                let drinksICanMake = [];
+                for (let i = 0; i < result.length; i++) {
+                    let canMake = await user.hasIngredients(result[i].Ingredients);
+                    if (canMake) {
+                        drinksICanMake.push(result[i]);
+                    }
                 }
-            }]
-        }).then(result => {
-            const cocktailJson = result.map(e => {
-                return e.toJSON()
+                const drinksJson = drinksICanMake.map(drink => {
+                    return drink.toJSON()
+                })
+                const hbsObject = {
+                    drinks: drinksJson,
+                    user: userJson
+                };
+                // Can change the name of index if it makes more sense later on
+                res.render("canMake", hbsObject)
+            }).catch(err => {
+                res.status(404).send(err)
             })
-            const hbsObject = {
-                drinks: cocktailJson
-            };
-            // Can change the name of index if it makes more sense later on
-            res.render("canMake", hbsObject)
-        }).catch(err => {
-            res.status(404).send(err)
         })
-    });
+    }else{
+        res.render("login")
+    }
 });
 
 // router.get("/drinksearch", function (req, res) {
