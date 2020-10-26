@@ -157,7 +157,9 @@ $("#search").on("click", event => {
 
 //AUtocomplete function for ingredients
 $(document).ready(function () {
-    //first get teh data in our igredients table
+    // Enable Dropdown in Large Nav Bar
+    $(".dropdown-trigger").dropdown();
+    //first get the data in our ingredients table
     $.ajax({
         method: "GET",
         // route being hit

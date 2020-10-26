@@ -27,20 +27,30 @@
 
 
   <!-- NAVBAR -->
+  <ul id="dropdown1" class="dropdown-content">
+    <li><a href="/signup">Create an Account</a></li>
+    <li><a href="/login">Log In</a></li>
+    <li><a href="/logout">Log Out</a></li>
+  </ul>
+  <ul id="dropdown2" class="dropdown-content">
+    <li><a href="/can_make">Drinks I Can Make</a></li>
+    <li><a href="/mycocktails">My Cocktails</a></li>
+    <li><a href="/pantry">My Pantry</a></li>
+  </ul>
   <nav>
     <div class="nav-wrapper">
       <a href="/mycocktails" class="brand-logo"><img class="responsive-img" id="logo" style="height: 64px;"
           src="assets/images/MixrLogoNAME.png" /></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="/cocktails">Browse All Cocktails</a></li>
-        <li><a href="/can_make">Drinks I Can Make</a></li>
         <li><a href="/createcocktail">Create a Cocktail</a></li>
-        <li><a href="/mycocktails">My Cocktails</a></li>
-        <li><a href="/pantry">My Pantry</a></li>
         <li><a href="/bartenderschoice">Bartender's Choice</a></li>
-        <li><a href="/signup" class="waves-effect waves-light btn grey darken-3">Create an Account</a></li>
-        <li><a href="/login" class="waves-effect waves-light btn grey darken-3">Log In</a></li>
-        <li><a href="/logout" class="waves-effect waves-light btn grey darken-3">Log Out</a></li>
+                <!-- My Bar Dropdown Trigger -->
+        <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">My Bar<i
+              class="material-icons right">arrow_drop_down</i></a></li>
+        <!-- My Account Dropdown Trigger -->
+        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">My Account<i
+              class="material-icons right">arrow_drop_down</i></a></li>
       </ul>
       <a href="#" data-target="slide-out" class="sidenav-trigger"><i>
           <div class="container" onclick="myFunction(this)">
@@ -62,15 +72,15 @@
 
       </div>
     </li>
-        <li><a href="/cocktails">Browse All Cocktails</a></li>
-        <li><a href="/can_make">Drinks I Can Make</a></li>
-        <li><a href="/createcocktail">Create a Cocktail</a></li>
-        <li><a href="/mycocktails">My Cocktails</a></li>
-        <li><a href="/pantry">My Pantry</a></li>
-        <li><a href="/bartenderschoice">Bartender's Choice</a></li>
-        <li><a href="/signup" class="waves-effect waves-light btn grey darken-3">Create an Account</a></li>
-        <li><a href="/login" class="waves-effect waves-light btn grey darken-3">Log In</a></li>
-        <li><a href="/logout" class="waves-effect waves-light btn grey darken-3">Log Out</a></li>
+    <li><a href="/cocktails">Browse All Cocktails</a></li>
+    <li><a href="/can_make">Drinks I Can Make</a></li>
+    <li><a href="/createcocktail">Create a Cocktail</a></li>
+    <li><a href="/mycocktails">My Cocktails</a></li>
+    <li><a href="/pantry">My Pantry</a></li>
+    <li><a href="/bartenderschoice">Bartender's Choice</a></li>
+    <li><a href="/signup" class="waves-effect waves-light btn grey darken-3">Create an Account</a></li>
+    <li><a href="/login" class="waves-effect waves-light btn grey darken-3">Log In</a></li>
+    <li><a href="/logout" class="waves-effect waves-light btn grey darken-3">Log Out</a></li>
   </ul>
   <br>
 
