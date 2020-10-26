@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var db = require("../models");
-
+const { Op } = require("sequelize");
 const axios = require('axios');
 const bcrypt = require('bcrypt');
 const { Sequelize } = require("../models");
@@ -106,25 +106,60 @@ router.get("/drinksearch", function (req, res) {
     res.render("drinksearch", hbsObject)
 });
 // Allows user to search cocktail database
-router.post("/drinksearch", (req, res) => {
+router.post("/drinksearch", async (req, res) => {
     console.log("POST")
-    db.Cocktail.findAll({
-        where: {
-            name: req.body.name
-        },
-        include: [db.Ingredient]
-    }).then(result => {
-        const drinkJson = result.map(drink => {
-            return drink.toJSON()
+    try{
+        //first search the db by cocktail name
+        const nameSearch = await db.Cocktail.findAll({
+            where: {
+                name: {
+                    [Op.like]: `%${req.body.name}%`
+                  }
+            },
+            include:[db.Ingredient] 
+        
+        
         })
+        //then search by the ingredients
+        // TODO: Bug in this search, it only passes the 1 matchin ingredient to card
+        const ingSearch = await db.Cocktail.findAll({
+          include: [
+            {
+              model: db.Ingredient,
+              where:{
+                name: {
+                    [Op.like]: `%${req.body.name}%`
+                  },
+              }
+            },
+          ],
+        });
+        //then combine the two results
+        const drinks = () => {
+            // first map the name results to json
+            const nameJson = nameSearch.map(drink => {
+                return drink.toJSON()
+            })
+            // map the ingredient results to json
+            const ingJson = ingSearch.map(drink => {
+                return drink.toJSON()
+            })
+            // combine the two and return it
+            return nameJson.concat(ingJson)
+        }
+        // await the resulsts from the combination
+        const drinkData = await drinks();
+        // create teh hbs object
         const hbsObject = {
-            drinks: drinkJson
+            drinks: drinkData
         };
+        // send the hbs object to session.search to be used in the get render
         req.session.search = hbsObject
         res.status(200).send("Found a drink")
-    }).catch(err => {
+    }
+    catch{
         res.status(404).send(err)
-    })
+    }
 });
 
 
