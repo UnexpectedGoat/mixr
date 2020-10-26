@@ -120,32 +120,40 @@ router.post("/drinksearch", async (req, res) => {
         
         
         })
-        //then
+        //then search by the ingredients
+        // TODO: Bug in this search, it only passes the 1 matchin ingredient to card
         const ingSearch = await db.Cocktail.findAll({
-            include: [{
-                model: db.Ingredient, 
-                through:{
-                    attributes: ['Ingredient.name'],
-                    where: {[Op.like]: `%${req.body.name}%`}
-                    
-                  }
-            }]
-        })
+          include: [
+            {
+              model: db.Ingredient,
+              where:{
+                name: {
+                    [Op.like]: `%${req.body.name}%`
+                  },
+              }
+            },
+          ],
+        });
+        //then combine the two results
         const drinks = () => {
+            // first map the name results to json
             const nameJson = nameSearch.map(drink => {
                 return drink.toJSON()
             })
+            // map the ingredient results to json
             const ingJson = ingSearch.map(drink => {
                 return drink.toJSON()
             })
-            console.log(ingJson)
+            // combine the two and return it
             return nameJson.concat(ingJson)
         }
+        // await the resulsts from the combination
         const drinkData = await drinks();
-        console.log(drinks)
+        // create teh hbs object
         const hbsObject = {
             drinks: drinkData
         };
+        // send the hbs object to session.search to be used in the get render
         req.session.search = hbsObject
         res.status(200).send("Found a drink")
     }
