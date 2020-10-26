@@ -91,7 +91,6 @@ router.get("/can_make", (req, res) => {
                     drinks: drinksJson,
                     user: userJson
                 };
-                console.log(hbsObject)
                 res.render("canMake", hbsObject)
             }).catch(err => {
                 res.status(404).send(err)
