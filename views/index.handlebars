@@ -1,9 +1,4 @@
-{{!-- will probably want to move this into a different handlebars file called drinks or somthing --}}
-{{!-- index could be where we store the login info page --}}
-<div class="container">
-    {{!-- row containing all cards --}}
-    {{!-- card-wrapper is placehodler used to apply styling for flexview --}}
-    {{!-- probably a better way to do this in materialized --}}
+
     <div class="row card-wrapper">
         {{!-- for each drink object passed in through the micr-route /drinks --}}
         {{#each drinks}}
@@ -25,9 +20,6 @@
                     <span class="card-title grey-text text-darken-4">{{name}}<i
                             class="material-icons right">close</i></span>
 
-                    {{!-- this section could get a little tricky, we have to assume it's--}}
-                    {{!-- possible to have as few as 1 ingridient, and up to 15  --}}
-                    {{!-- might be a way to handle this with a #each handlebar method --}}
                     <ul>
                         {{#each Ingredients}}
                         <li>{{CocktailIngredient.amount}} {{CocktailIngredient.measurement}} {{name}}</li>
@@ -41,4 +33,3 @@
         </div>
         {{/each}}
     </div>
-</div>

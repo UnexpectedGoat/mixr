@@ -42,6 +42,7 @@
       <a href="/mycocktails" class="brand-logo"><img class="responsive-img" id="logo" style="height: 64px;"
           src="assets/images/MixrLogoNAME.png" /></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/drinksearch">Find a Cocktail</a></li>
         <li><a href="/cocktails">Browse All Cocktails</a></li>
         <li><a href="/createcocktail">Create a Cocktail</a></li>
         <li><a href="/bartenderschoice">Bartender's Choice</a></li>
@@ -72,6 +73,7 @@
 
       </div>
     </li>
+    <li><a href="/drinksearch">Find a Cocktail</a></li>
     <li><a href="/cocktails">Browse All Cocktails</a></li>
     <li><a href="/can_make">Drinks I Can Make</a></li>
     <li><a href="/createcocktail">Create a Cocktail</a></li>
@@ -83,8 +85,10 @@
     <li><a href="/logout" class="waves-effect waves-light btn grey darken-3">Log Out</a></li>
   </ul>
   <br>
-
-  {{{ body }}}
+  <div class="container">
+    {{{ body }}}
+  </div>
+  
   {{!-- These script files are for getting the image upload to work --}}
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   {{!-- // the following files only need to be included in order to support client-side uploading --}}
@@ -103,10 +107,6 @@
       var elems = document.querySelectorAll('.sidenav');
       var instance = M.Sidenav.getInstance(elems);
     });
-    // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
-    // var collapsibleElem = document.querySelector('.collapsible');
-    // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
-    // Or with jQuery
     $(document).ready(function () {
       $('.sidenav').sidenav(); 
     });
