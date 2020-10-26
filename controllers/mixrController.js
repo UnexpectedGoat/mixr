@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var db = require("../models");
-
+const { Op } = require("sequelize");
 const axios = require('axios');
 const bcrypt = require('bcrypt');
 const { Sequelize } = require("../models");
@@ -107,25 +107,52 @@ router.get("/drinksearch", function (req, res) {
     res.render("drinksearch", hbsObject)
 });
 // Allows user to search cocktail database
-router.post("/drinksearch", (req, res) => {
+router.post("/drinksearch", async (req, res) => {
     console.log("POST")
-    db.Cocktail.findAll({
-        where: {
-            name: req.body.name
-        },
-        include:[db.Ingredient]
-    }).then(result => {
-        const drinkJson = result.map(drink => {
-            return drink.toJSON()
+    try{
+        //first search the db by cocktail name
+        const nameSearch = await db.Cocktail.findAll({
+            where: {
+                name: {
+                    [Op.like]: `%${req.body.name}%`
+                  }
+            },
+            include:[db.Ingredient] 
+        
+        
         })
+        //then
+        const ingSearch = await db.Cocktail.findAll({
+            include: [{
+                model: db.Ingredient, 
+                through:{
+                    attributes: ['Ingredient.name'],
+                    where: {[Op.like]: `%${req.body.name}%`}
+                    
+                  }
+            }]
+        })
+        const drinks = () => {
+            const nameJson = nameSearch.map(drink => {
+                return drink.toJSON()
+            })
+            const ingJson = ingSearch.map(drink => {
+                return drink.toJSON()
+            })
+            console.log(ingJson)
+            return nameJson.concat(ingJson)
+        }
+        const drinkData = await drinks();
+        console.log(drinks)
         const hbsObject = {
-            drinks: drinkJson
+            drinks: drinkData
         };
         req.session.search = hbsObject
         res.status(200).send("Found a drink")
-    }).catch(err => {
+    }
+    catch{
         res.status(404).send(err)
-    })
+    }
 });
 
 
