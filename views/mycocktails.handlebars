@@ -7,7 +7,6 @@
           <p>These are the cocktails you've added to your list, as well as ones you've created yourself.</p>
         </div>
         <div class="card-action">
-
           <a class="white-text btn-small waves-effect waves-light green" href="/createcocktail">Create a Cocktail</a>
           <a class="white-text btn-small waves-effect waves-light green" href="/cocktails">Browse the Database</a>
 
@@ -17,7 +16,6 @@
   </div>
 
     {{!-- row containing all cards --}}
-    {{!-- card-wrapper is placehodler used to apply styling for flexview --}}
     <div class="row card-wrapper">
         {{!-- for each drink object passed in through the micr-route /drinks --}}
         {{#each drinks}}
@@ -36,7 +34,6 @@
                     <p>
                       <a data-cocktailId={{id}} class="delete-cocktail-button"><i class="material-icons">delete</i></a>
                     </p>
-
                 </div>
                 {{!-- items that get expanded --}}
                 <div class="card-reveal">

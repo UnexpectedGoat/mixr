@@ -1,4 +1,4 @@
-{{!-- all styling is far game for this, all placeholder --}}
+
 <div class="loginBox">
     <div class="input-field col s12 m4">
         <p>Add Items to Pantry</p>
@@ -20,13 +20,9 @@
     <div class="col s12">
         <h5>Current Pantry Items</h5>
         <ul class="collection">
-            {{!-- handlebars logic that loops over each obejct in pantry passed in via mixr_controller route /pantry --}}
             {{#each pantry}}
-            {{!-- for each item, build an li item --}}
-            {{!-- will probably need to add an id, that way we can use it to delete later --}}
             <li class="collection-item">
                 {{name}}
-                {{!-- hook this button up with an ajax call that passes in the id to a delete route in mixr --}}
                 {{!-- used to remove the pantry item from that table --}}
                 <a id={{id}} class="delete-pantry-button"><i class="material-icons right mycolor">delete</i></a>
             </li>
