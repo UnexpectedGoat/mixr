@@ -30,20 +30,51 @@ router.get("/cocktails", (req, res) => {
         };
         // Can change the name of index if it makes more sense later on
         // res.json(hbsObject)
-        res.render("index", hbsObject)
+        res.render("alldrinks", hbsObject)
     }).catch(err => {
         res.status(404).send(err)
     })
 });
 router.get("/mycocktails", (req, res) => {
-    // if(req.session.user){
-        // const userid = req.session.user.id
-        const userid = 1
+
+    const userid = req.session.user.id
+    // const userid = req.seesion.user.id
+    db.User.findOne({
+        where: {
+            id: userid
+        },
+        include: [db.Cocktail]
+    }).then(result => {
+        console.log(result)
+        const cocktailJson = result.Cocktails.map(e => {
+            return e.toJSON()
+        })
+        const hbsObject = {
+            drinks: cocktailJson
+        };
+        console.log(hbsObject)
+        res.render("mycocktails", hbsObject)
+    }).catch(err => {
+        res.status(404).send(err)
+    })
+});
+
+// Displays only the cocktails that the user is able to make based on what's in their pantry NOTE - Will also display cocktails that have no ingredients, which should be none if things are organized correctly in the database, but if you're seeing more show up than expected, check that:
+router.get("/can_make", (req, res) => {
+    db.User.findOne({
+        // TODO: swap in req.session.user.id when ready for deployment
+        where: { id: req.session.user.id },
+        include: {
+            model: db.Ingredient
+        }
+    }).then(user => {
         db.Cocktail.findAll({
-            include: [{model: db.Ingredient}, {model: db.User, where:{
-                id:userid
-            }}]
-        }).then(result=>{
+            include: [{ model: db.Ingredient }, {
+                model: db.User, where: {
+                    id: userid
+                }
+            }]
+        }).then(result => {
             const cocktailJson = result.map(e => {
                 return e.toJSON()
             })
@@ -51,16 +82,16 @@ router.get("/mycocktails", (req, res) => {
                 drinks: cocktailJson
             };
             // Can change the name of index if it makes more sense later on
-            // res.json(hbsObject)
-            res.render("index", hbsObject)
+            res.render("canmake", hbsObject)
         }).catch(err => {
             res.status(404).send(err)
-        }) 
+        })
+    });
 });
 
 // Displays only the cocktails that the user is able to make based on what's in their pantry NOTE - Will also display cocktails that have no ingredients, which should be none if things are organized correctly in the database, but if you're seeing more show up than expected, check that:
 router.get("/can_make", (req, res) => {
-    if(req.session.user){
+    if (req.session.user) {
         db.User.findOne({
             where: { id: req.session.user.id },
             include: {
@@ -73,7 +104,7 @@ router.get("/can_make", (req, res) => {
                 }]
             }).then(async result => {
                 const userJson = user.toJSON()
-    
+
                 let drinksICanMake = [];
                 for (let i = 0; i < result.length; i++) {
                     let canMake = await user.hasIngredients(result[i].Ingredients);
@@ -94,7 +125,7 @@ router.get("/can_make", (req, res) => {
                 res.status(404).send(err)
             })
         })
-    }else{
+    } else {
         res.render("login")
     }
 });
@@ -142,7 +173,7 @@ router.get("/can_make", (req, res) => {
 
 //sends the dummy pantry data to the pantry view
 router.get("/pantry", function (req, res) {
-    if(req.session.user){
+    if (req.session.user) {
         const userid = req.session.user.id
         db.User.findOne({
             where: {
@@ -164,14 +195,14 @@ router.get("/pantry", function (req, res) {
             })
         }).catch(err => {
             res.status(404).send(err)
-        })  
-    }else{
+        })
+    } else {
         res.render("login")
     }
 });
 // adding an item to pantry
 router.post("/pantry", function (req, res) {
-    if(req.session.user){
+    if (req.session.user) {
         const userid = req.session.user.id
         req.body.ingredient
         db.Ingredient.findOne({
@@ -202,16 +233,16 @@ router.post("/pantry", function (req, res) {
                 })
                 res.status(200).send("Ingredident added")
             }
-        }) 
-    }else{
+        })
+    } else {
         res.render("login")
     }
 })
 // Add a cocktail to a users favorites
 router.delete("/pantry", function (req, res) {
-    if(req.session.user){
+    if (req.session.user) {
         const userid = req.session.user.id
-    // const userid = req.seesion.user.id
+        // const userid = req.seesion.user.id
         console.log(req.body.id)
         db.Pantry.destroy({
             where: {
@@ -223,13 +254,13 @@ router.delete("/pantry", function (req, res) {
         }).catch(err => {
             res.status(404).send(err)
         })
-    }else{
+    } else {
         res.render("login")
     }
 })
 
 router.post("/addcocktail", function (req, res) {
-    if(req.session.user){
+    if (req.session.user) {
         const userid = req.session.user.id
         // const userid = req.seesion.user.id
         console.log("Route Hit")
@@ -243,21 +274,21 @@ router.post("/addcocktail", function (req, res) {
         }).catch(err => {
             res.status(404).send(err)
         })
-    }else{
+    } else {
         res.render("login")
     }
 });
 router.get("/createcocktail", function (req, res) {
-    if(req.session.user){
+    if (req.session.user) {
         res.render("createcocktail")
-    }else{
+    } else {
         res.render("login")
     }
-   
+
 });
 router.post("/createcocktail", async (req, res) => {
-    if(req.session.user){
-        try{
+    if (req.session.user) {
+        try {
             //setup the test userId
             const userid = testUser.id
             //Create a new cocktail with the req.body
@@ -285,30 +316,30 @@ router.post("/createcocktail", async (req, res) => {
                     // associate that new ingredient to the newCocktail
                     db.CocktailIngredient.create({
                         amount: parseFloat(e.amount),
-                        measurement:e.measure,
+                        measurement: e.measure,
                         CocktailId: newCocktail.id,
                         IngredientId: newIngredient.id
                     })
                     res.status(200).send("Ingredient created for new cocktail")
-                }else{
+                } else {
                     // otherwise if the ingredient is in the db, just associate that ingredient to newCocktail
                     db.CocktailIngredient.create({
                         amount: parseFloat(e.amount),
-                        measurement:e.measure,
+                        measurement: e.measure,
                         CocktailId: newCocktail.id,
                         IngredientId: ingredientSearch.id
                     })
                     res.status(200).send("Ingredient assocaited to new cocktail")
-                } 
+                }
             })
         }
         catch (err) {
             console.log(err)
-        }      
-    }else{
+        }
+    } else {
         res.render("login")
     }
-    
+
 });
 
 router.get("/bartenderschoice", (req, res) => {
@@ -328,7 +359,7 @@ router.get("/bartenderschoice", (req, res) => {
         };
         // res.json(randomObject);
         console.log(randomObject)
-        res.render("index", randomObject);
+        res.render("bartenderschoice", randomObject);
     })
 
     // The code below will pull a random cocktail from the Cocktail DB API:
