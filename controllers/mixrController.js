@@ -35,25 +35,30 @@ router.get("/cocktails", (req, res) => {
 
 // Displays Cocktails the user has added to their list or created
 router.get("/mycocktails", (req, res) => {
-    const userid = req.session.user.id
-    db.User.findOne({
-        where: {
-            id: userid
-        },
-        include: [db.Cocktail]
-    }).then(result => {
-        console.log(result)
-        const cocktailJson = result.Cocktails.map(e => {
-            return e.toJSON()
-        })
-        const hbsObject = {
-            drinks: cocktailJson
-        };
-        console.log(hbsObject)
-        res.render("mycocktails", hbsObject)
+    if (req.session.user) {
+        const userid = req.session.user.id
+        db.User.findOne({
+            where: {
+                id: userid
+            },
+            include: [db.Cocktail]
+        }).then(result => {
+            console.log(result)
+            const cocktailJson = result.Cocktails.map(e => {
+                return e.toJSON()
+            })
+            const hbsObject = {
+                drinks: cocktailJson
+            };
+            console.log(hbsObject)
+            res.render("mycocktails", hbsObject)
     }).catch(err => {
         res.status(404).send(err)
     })
+    } else {
+        res.render("login")
+    }
+    
 });
 
 // Displays only the cocktails that the user is able to make based on what's in their pantry NOTE - Will also display cocktails that have no ingredients, which should be none if things are organized correctly in the database, but if you're seeing more show up than expected, check that:
