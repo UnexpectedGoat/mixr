@@ -29,8 +29,8 @@ router.get("/cocktails", (req, res) => {
             drinks: cocktailJson
         };
         // Can change the name of index if it makes more sense later on
-        res.json(hbsObject)
-        // res.render("index", hbsObject)
+        // res.json(hbsObject)
+        res.render("index", hbsObject)
     }).catch(err => {
         res.status(404).send(err)
     })
@@ -45,7 +45,6 @@ router.get("/mycocktails", (req, res) => {
             },
             include: [db.Cocktail]
         }).then(result => {
-            console.log(result)
             const cocktailJson = result.Cocktails.map(e => {
                 return e.toJSON()
             })
@@ -244,7 +243,6 @@ router.post("/addcocktail", function (req, res) {
                 id: userid
             }
         }).then(userResult => {
-            console.log(userResult)
             userResult.addCocktail([req.body.id])
             res.status(200).send("Association added")
         }).catch(err => {
@@ -253,7 +251,6 @@ router.post("/addcocktail", function (req, res) {
     }else{
         res.render("login")
     }
-    
 });
 router.get("/createcocktail", function (req, res) {
     if(req.session.user){

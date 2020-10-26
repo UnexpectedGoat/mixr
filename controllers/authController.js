@@ -72,7 +72,7 @@ router.post('/signup', (req, res) => {
 // If user logs out, nuke the req.session
 router.get('/logout', (req, res) => {
     req.session.destroy();
-    res.render("login")
+    res.redirect("/login");
 })
 
 module.exports = router;
