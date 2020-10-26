@@ -38,9 +38,8 @@
                             class="material-icons right">close</i></span>
                     <ul>
                         {{#each Ingredients}}
-                        <li>{{Ingredient.amount}} {{Ingredient.measurement}} {{name}}</li>
+                        <li>{{CocktailIngredient.amount}} {{CocktailIngredient.measurement}} {{name}}</li>
                         {{/each}}
-
                     </ul>
                     {{!-- paragraph of the instructions passed in --}}
                     <p>{{instructions}}</p>
