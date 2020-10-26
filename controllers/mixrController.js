@@ -35,27 +35,26 @@ router.get("/cocktails", (req, res) => {
 
 // Displays Cocktails the user has added to their list or created
 router.get("/mycocktails", (req, res) => {
-    if (req.session.user) {
+    if(req.session.user){
         const userid = req.session.user.id
-        db.User.findOne({
-            where: {
-                id: userid
-            },
-            include: [db.Cocktail]
-        }).then(result => {
-            console.log(result)
-            const cocktailJson = result.Cocktails.map(e => {
+        db.Cocktail.findAll({
+            include: [{model: db.Ingredient}, {model: db.User, where:{
+                id:userid
+            }}]
+        }).then(result=>{
+            const cocktailJson = result.map(e => {
                 return e.toJSON()
             })
             const hbsObject = {
                 drinks: cocktailJson
             };
-            console.log(hbsObject)
-            res.render("mycocktails", hbsObject)
-    }).catch(err => {
-        res.status(404).send(err)
-    })
-    } else {
+            // Can change the name of index if it makes more sense later on
+            // res.json(hbsObject)
+            res.render("index", hbsObject)
+        }).catch(err => {
+            res.status(404).send(err)
+        }) 
+    }else{
         res.render("login")
     }
     
