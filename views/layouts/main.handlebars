@@ -27,15 +27,15 @@
 
 
   <!-- NAVBAR -->
-  <ul id="dropdown1" class="dropdown-content">
-    <li><a href="/signup">Create an Account</a></li>
-    <li><a href="/login">Log In</a></li>
-    <li><a href="/logout">Log Out</a></li>
+  <ul id="dropdown1" class="dropdown-content grey darken-3">
+    <li class = "white-text"><a class = "white-text" href="/signup">Create an Account</a></li>
+    <li><a class = "white-text" href="/login">Log In</a></li>
+    <li><a class = "white-text" href="/logout">Log Out</a></li>
   </ul>
-  <ul id="dropdown2" class="dropdown-content">
-    <li><a href="/can_make">Drinks I Can Make</a></li>
-    <li><a href="/mycocktails">My Cocktails</a></li>
-    <li><a href="/pantry">My Pantry</a></li>
+  <ul id="dropdown2" class="dropdown-content grey darken-3 white-text">
+    <li><a class = "white-text" href="/can_make">Drinks I Can Make</a></li>
+    <li><a class = "white-text" href="/mycocktails">My Cocktails</a></li>
+    <li><a class = "white-text" href="/pantry">My Pantry</a></li>
   </ul>
   <nav>
     <div class="nav-wrapper">
@@ -85,8 +85,10 @@
     <li><a href="/logout" class="waves-effect waves-light btn grey darken-3">Log Out</a></li>
   </ul>
   <br>
-
-  {{{ body }}}
+  <div class="container">
+    {{{ body }}}
+  </div>
+  
   {{!-- These script files are for getting the image upload to work --}}
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   {{!-- // the following files only need to be included in order to support client-side uploading --}}
@@ -105,13 +107,10 @@
       var elems = document.querySelectorAll('.sidenav');
       var instance = M.Sidenav.getInstance(elems);
     });
-    // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
-    // var collapsibleElem = document.querySelector('.collapsible');
-    // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
-    // Or with jQuery
     $(document).ready(function () {
-      $('.sidenav').sidenav();
+      $('.sidenav').sidenav(); 
     });
+    
   </script>
   <script src="assets/js/script.js"></script>
 </body>

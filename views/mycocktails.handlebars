@@ -1,24 +1,21 @@
 {{!-- Title and instructions card --}}
-<div class="container">
   <div class="row">
     <div class="col s12 m12 l12">
-      <div class="card blue-grey darken-1">
+      <div class="card grey darken-3">
         <div class="card-content white-text">
           <span class="card-title">My Cocktails</span>
           <p>These are the cocktails you've added to your list, as well as ones you've created yourself.</p>
         </div>
         <div class="card-action">
-          <a href="/createcocktail">Create a Cocktail</a>
-          <a href="/cocktails">Browse the Database</a>
+          <a class="white-text btn-small waves-effect waves-light green" href="/createcocktail">Create a Cocktail</a>
+          <a class="white-text btn-small waves-effect waves-light green" href="/cocktails">Browse the Database</a>
+
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="container">
     {{!-- row containing all cards --}}
-    {{!-- card-wrapper is placehodler used to apply styling for flexview --}}
     <div class="row card-wrapper">
         {{!-- for each drink object passed in through the micr-route /drinks --}}
         {{#each drinks}}
@@ -33,12 +30,16 @@
                     {{!-- content of the card --}}
                     <span class="card-title activator grey-text text-darken-4">{{name}}<i
                             class="material-icons right">more_vert</i></span>
-                    <p><a data-cocktailId={{id}} class="add-cocktail-button"><i class="material-icons">add</i></a></p>
+
+                    <p>
+                      <a data-cocktailId={{id}} class="delete-cocktail-button"><i class="material-icons">delete</i></a>
+                    </p>
                 </div>
                 {{!-- items that get expanded --}}
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">{{name}}<i
-                            class="material-icons right">close</i></span>
+                            class="material-icons right mycolor">close</i></span>
+                            
                     <ul>
                         {{#each Ingredients}}
                         <li>{{Ingredient.amount}} {{Ingredient.measurement}} {{name}}</li>
@@ -52,4 +53,3 @@
         </div>
         {{/each}}
     </div>
-</div>

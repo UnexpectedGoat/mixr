@@ -13,9 +13,11 @@ video {
 }
 
 .container {
-  display: inline-block;
+  display: flexbox;
+  justify-content: space-around;
   cursor: pointer;
 }
+
 
 
 .bar1,
@@ -159,7 +161,7 @@ h1 p {
   }
 }
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 800px) {
 
   header,
   main,
