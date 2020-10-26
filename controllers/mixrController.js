@@ -270,16 +270,17 @@ router.post("/addcocktail", function (req, res) {
 });
 
 router.delete("/removecocktail", (req, res) => {
+    console.log("routed")
     if (req.session.user) {
         const userid = req.session.user.id;
         console.log(req.body.id)
-        db.UserCocktail.destroy({
+        db.User.findOne({
             where: {
-                userId: userid,
-                cocktailId: req.body.id
+                id: userid,
             }
-        }).then(removedCocktail => {
-            res.status(200).send(`${userid} no longer has ${req.body.id} on their My Cocktails List`)
+        }).then(result => {
+            result.removeCocktail(req.body.id)
+            res.json(true)
         }).catch(err => {
             res.status(404).send(err)
         })
