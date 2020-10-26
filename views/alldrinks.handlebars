@@ -1,5 +1,4 @@
 {{!-- Title and instructions card --}}
-<div class="container">
     <div class="row">
         <div class="col s12 m12 l12">
             <div class="card grey darken-3">
@@ -8,44 +7,45 @@
                     <p>Browse the full cocktail database below. Click the + button on a drink to add it to your My
                         Cocktails List.</p>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
 
-<div class="container">
-    {{!-- row containing all cards --}}
-    {{!-- card-wrapper is placehodler used to apply styling for flexview --}}
-    <div class="row card-wrapper">
-        {{!-- for each drink object passed in through the micr-route /drinks --}}
-        {{#each drinks}}
-        {{!-- build a card --}}
-        <div class="col s12 m6 l4">
-            <div class="card push-s1">
-                <div class="card-image waves-effect waves-block waves-light">
-                    {{!-- img source field --}}
-                    <img class="activator" src={{img_url}}>
-                </div>
-                <div class="card-content">
-                    {{!-- content of the card --}}
-                    <span class="card-title activator grey-text text-darken-4">{{name}}<i
-                            class="material-icons right">more_vert</i></span>
-                    <p><a data-cocktailId={{id}} class="add-cocktail-button"><i class="material-icons">add</i></a></p>
-                </div>
-                {{!-- items that get expanded --}}
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">{{name}}<i
-                            class="material-icons right">close</i></span>
-                    <ul>
-                        {{#each Ingredients}}
-                        <li>{{CocktailIngredient.amount}} {{CocktailIngredient.measurement}} {{name}}</li>
-                        {{/each}}
-                    </ul>
-                    {{!-- paragraph of the instructions passed in --}}
-                    <p>{{instructions}}</p>
-                </div>
+
+
+{{!-- row containing all cards --}}
+{{!-- card-wrapper is placehodler used to apply styling for flexview --}}
+<div class="row card-wrapper">
+    {{!-- for each drink object passed in through the micr-route /drinks --}}
+    {{#each drinks}}
+    {{!-- build a card --}}
+    <div class="col s12 m6 l4">
+        <div class="card push-s1">
+            <div class="card-image waves-effect waves-block waves-light">
+                {{!-- img source field --}}
+                <img class="activator" src={{img_url}}>
+            </div>
+            <div class="card-content">
+                {{!-- content of the card --}}
+                <span class="card-title activator grey-text text-darken-4">{{name}}<i
+                        class="material-icons right">more_vert</i></span>
+                <p><a data-cocktailId={{id}} class="add-cocktail-button"><i class="material-icons">add</i></a></p>
+            </div>
+            {{!-- items that get expanded --}}
+            <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">{{name}}<i
+                        class="material-icons right">close</i></span>
+                <ul>
+                    {{#each Ingredients}}
+                    <li>{{CocktailIngredient.amount}} {{CocktailIngredient.measurement}} {{name}}</li>
+                    {{/each}}
+                </ul>
+                {{!-- paragraph of the instructions passed in --}}
+                <p>{{instructions}}</p>
             </div>
         </div>
-        {{/each}}
     </div>
+    {{/each}}
 </div>
