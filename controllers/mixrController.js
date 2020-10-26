@@ -26,8 +26,8 @@ router.get("/cocktails", (req, res) => {
             drinks: cocktailJson
         };
         // Can change the name of index if it makes more sense later on
-        res.json(hbsObject)
-        // res.render("index", hbsObject)
+        // res.json(hbsObject)
+        res.render("index", hbsObject)
     }).catch(err => {
         res.status(404).send(err)
     })
@@ -221,14 +221,12 @@ router.delete("/pantry", function (req, res) {
 })
 router.post("/addcocktail", function (req, res) {
     const userid = req.session.user.id
-    // const userid = req.seesion.user.id
     console.log("Route Hit")
     db.User.findOne({
         where: {
             id: userid
         }
     }).then(userResult => {
-        console.log(userResult)
         userResult.addCocktail([req.body.id])
         res.status(200).send("Association added")
     }).catch(err => {

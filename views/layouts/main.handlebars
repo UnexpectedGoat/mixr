@@ -32,13 +32,15 @@
       <a href="/mycocktails" class="brand-logo"><img class="responsive-img" id="logo" style="height: 64px;"
           src="assets/images/MixrLogoNAME.png" /></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/cocktails">Browse All Cocktails</a></li>
         <li><a href="/can_make">Drinks I Can Make</a></li>
         <li><a href="/createcocktail">Create a Cocktail</a></li>
         <li><a href="/mycocktails">My Cocktails</a></li>
         <li><a href="/pantry">My Pantry</a></li>
         <li><a href="/bartenderschoice">Bartender's Choice</a></li>
         <li><a href="/signup" class="waves-effect waves-light btn grey darken-3">Create an Account</a></li>
-        <li><a href="/login" class="waves-effect waves-light btn grey darken-3">Login</a></li>
+        <li><a href="/login" class="waves-effect waves-light btn grey darken-3">Log In</a></li>
+        <li><a href="/logout" class="waves-effect waves-light btn grey darken-3">Log Out</a></li>
       </ul>
       <a href="#" data-target="slide-out" class="sidenav-trigger"><i>
           <div class="container" onclick="myFunction(this)">
@@ -60,12 +62,15 @@
 
       </div>
     </li>
-    <li><a href="/can_make">Create a Drink</a></li>
-    <li><a href="/mycocktails">My Cocktails</a></li>
-    <li><a href="/pantry">My Pantry</a></li>
-    <li><a href="/bartenderschoice">Bartender's Choice</a></li>
-    <li><a href="/signup" class="waves-effect waves-light btn grey darken-3">Create an Account</a></li>
-    <li><a href="/login" class="waves-effect waves-light btn grey darken-3">Login</a></li>
+        <li><a href="/cocktails">Browse All Cocktails</a></li>
+        <li><a href="/can_make">Drinks I Can Make</a></li>
+        <li><a href="/createcocktail">Create a Cocktail</a></li>
+        <li><a href="/mycocktails">My Cocktails</a></li>
+        <li><a href="/pantry">My Pantry</a></li>
+        <li><a href="/bartenderschoice">Bartender's Choice</a></li>
+        <li><a href="/signup" class="waves-effect waves-light btn grey darken-3">Create an Account</a></li>
+        <li><a href="/login" class="waves-effect waves-light btn grey darken-3">Log In</a></li>
+        <li><a href="/logout" class="waves-effect waves-light btn grey darken-3">Log Out</a></li>
   </ul>
   <br>
 
@@ -85,16 +90,16 @@
   <script>
     // Side Nav bar
     document.addEventListener('DOMContentLoaded', function () {
-        var elems = document.querySelectorAll('.sidenav');
-        var instance = M.Sidenav.getInstance(elems);
-      });
-      // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
-      // var collapsibleElem = document.querySelector('.collapsible');
-      // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
-      // Or with jQuery
-      $(document).ready(function () {
-        $('.sidenav').sidenav();
-      });
+      var elems = document.querySelectorAll('.sidenav');
+      var instance = M.Sidenav.getInstance(elems);
+    });
+    // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
+    // var collapsibleElem = document.querySelector('.collapsible');
+    // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
+    // Or with jQuery
+    $(document).ready(function () {
+      $('.sidenav').sidenav();
+    });
   </script>
   <script src="assets/js/script.js"></script>
 </body>
